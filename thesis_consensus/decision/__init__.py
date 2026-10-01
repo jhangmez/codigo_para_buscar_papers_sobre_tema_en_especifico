@@ -8,6 +8,8 @@ from thesis_consensus.decision.unsloth_laya import UnslothLayaJudge
 from thesis_consensus.decision.openai_judge import OpenAILikeJudge
 from thesis_consensus.decision.heuristic import HeuristicAcademicJudge
 
+from thesis_consensus.constants import DEFAULT_DECISION_ENGINE
+
 __all__ = [
     "BaseDecisionJudge",
     "UnslothLayaJudge",
@@ -18,30 +20,31 @@ __all__ = [
 
 
 def create_decision_judge(
-    preferred_engine: Optional[str] = None,
+    preferred_engine: Optional[str] = DEFAULT_DECISION_ENGINE,
     unsloth_url: Optional[str] = None,
     unsloth_key: Optional[str] = None,
 ) -> BaseDecisionJudge:
     """
     Fábrica inteligente de evaluadores de decisión.
-    Si se solicita 'laya' o si Unsloth Desktop está disponible en localhost:8888,
-    utiliza UnslothLayaJudge.
-    Si no, recurre de forma transparente al evaluador heurístico o al configurado.
+    Prioriza por defecto el modelo de decisión neuronal Unsloth Laya ejecutado localmente en GPU.
+    Si el servidor local no estuviera en ejecución, recurre de forma segura al evaluador semántico.
     """
-    if preferred_engine == "laya" or preferred_engine == "unsloth":
-        laya_judge = UnslothLayaJudge(base_url=unsloth_url, api_key=unsloth_key)
-        if laya_judge.is_available():
-            return laya_judge
-        # Si explícitamente se pidió pero no responde, retornamos la instancia para que reporte diagnóstico
-        return laya_judge
+    engine_choice = (preferred_engine or DEFAULT_DECISION_ENGINE).lower().strip()
 
-    if preferred_engine == "openai" or preferred_engine == "ollama":
+    if engine_choice in ("heuristic", "heuristic_academic"):
+        return HeuristicAcademicJudge()
+
+    if engine_choice in ("openai", "ollama"):
         return OpenAILikeJudge()
 
-    # Detección automática: verificar si Unsloth está levantado
-    auto_laya = UnslothLayaJudge(base_url=unsloth_url, api_key=unsloth_key)
-    if auto_laya.is_available():
-        return auto_laya
+    # Por defecto ('unsloth_laya', 'laya', 'auto'): usar Unsloth Laya
+    laya_judge = UnslothLayaJudge(base_url=unsloth_url, api_key=unsloth_key)
+    if laya_judge.is_available():
+        return laya_judge
+
+    # Si se especificó explícitamente pero no responde, se retorna para reportar el diagnóstico en la CLI
+    if engine_choice in ("unsloth_laya", "laya"):
+        return laya_judge
 
     # Respaldo automático sin dependencias externas
     return HeuristicAcademicJudge()

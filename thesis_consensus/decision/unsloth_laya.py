@@ -55,7 +55,7 @@ class UnslothLayaJudge(BaseDecisionJudge):
         y listo para servir inferencias de Laya.
         """
         try:
-            with httpx.Client(timeout=2.0) as client:
+            with httpx.Client(timeout=5.0) as client:
                 headers: Dict[str, str] = {"Content-Type": "application/json"}
                 if self._api_key:
                     headers["Authorization"] = f"Bearer {self._api_key}"
@@ -97,11 +97,15 @@ class UnslothLayaJudge(BaseDecisionJudge):
 
         questions_payload: Dict[str, object] = {
             "is_relevant": {
-                "type": "noul",
+                "type": "choice",
                 "instructions": (
                     f"Does this academic paper provide direct empirical evidence, theoretical models, "
                     f"or actionable insights directly answering: '{topic_or_claim}'?"
                 ),
+                "criteria": {
+                    "yes_relevant": "Yes, directly addresses the research question with empirical evidence, methodology, or theoretical foundations",
+                    "no_irrelevant": "No, off-topic, unrelated domain, or lacks substantive relevance to the research question",
+                },
             },
             "evidence_type": {
                 "type": "choice",
@@ -117,10 +121,10 @@ class UnslothLayaJudge(BaseDecisionJudge):
                 "type": "score",
                 "instructions": "How strong and valuable is this paper to be cited as a theoretical foundation in an undergraduate thesis?",
                 "criteria": [
-                    "0: Low relevance or insufficient substance",
-                    "1: Acceptable contextual background",
-                    "2: Solid empirical or theoretical contribution",
-                    "3: High impact, authoritative reference",
+                    "insufficient substance or off topic",
+                    "acceptable contextual background",
+                    "solid empirical or theoretical contribution",
+                    "high impact authoritative reference",
                 ],
             },
         }
@@ -143,10 +147,17 @@ class UnslothLayaJudge(BaseDecisionJudge):
                     return self._fallback_error_evaluation("Respuesta sin campo 'answers'", threshold)
 
                 relevance_prob = 0.5
-                raw_noul = answers_dict.get("is_relevant")
-                if isinstance(raw_noul, dict):
-                    parsed_noul = LayaNoulResponse.model_validate(raw_noul)
-                    relevance_prob = parsed_noul.noul
+                raw_rel = answers_dict.get("is_relevant")
+                if isinstance(raw_rel, dict):
+                    if raw_rel.get("type") == "choice":
+                        raw_probs = raw_rel.get("probabilities")
+                        if isinstance(raw_probs, dict):
+                            raw_val = raw_probs.get("yes_relevant", 0.0)
+                            if isinstance(raw_val, (int, float)):
+                                relevance_prob = float(raw_val)
+                    elif raw_rel.get("type") == "noul":
+                        parsed_noul = LayaNoulResponse.model_validate(raw_rel)
+                        relevance_prob = parsed_noul.noul
 
                 evidence_choice = "theoretical"
                 raw_choice = answers_dict.get("evidence_type")

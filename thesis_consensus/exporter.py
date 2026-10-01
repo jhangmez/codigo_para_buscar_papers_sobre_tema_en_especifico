@@ -231,3 +231,75 @@ class ThesisExporter:
         content = "\n\n".join(bibtex_entries) + "\n"
         path.write_text(content, encoding="utf-8")
         return str(path.resolve())
+
+    @staticmethod
+    def to_batch_json(
+        batch: TopicResearchBatch,
+        output_filepath: str,
+    ) -> str:
+        """Exporta los datos estructurados de investigación a un archivo JSON."""
+        path = Path(output_filepath)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        data = batch.model_dump(mode="json")
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+        return str(path.resolve())
+
+    @classmethod
+    def export_batch_grouped_by_topic(
+        cls,
+        batch: TopicResearchBatch,
+        base_output_dir: str = "outputs",
+        master_md_filename: str = "fundamentos_teoricos_tesis.md",
+        master_bib_filename: str = "referencias_tesis.bib",
+    ) -> Dict[str, str]:
+        """
+        Organiza y exporta todos los resultados ordenados en subcarpetas por cada pregunta/tema.
+        Además genera el reporte consolidado maestro y la bibliografía unificada en la raíz de outputs/.
+        """
+        base_dir = Path(base_output_dir)
+        base_dir.mkdir(parents=True, exist_ok=True)
+        created_paths: Dict[str, str] = {}
+
+        # 1. Exportar subcarpeta individual por cada tema
+        for idx, topic in enumerate(batch.topics, start=1):
+            topic_slug = cls._slugify(topic)[:40]
+            folder_name = f"tema_{idx:02d}_{topic_slug}".rstrip("-")
+            topic_dir = base_dir / folder_name
+            topic_dir.mkdir(parents=True, exist_ok=True)
+
+            conserved = batch.conserved_by_topic.get(topic, [])
+            discarded = batch.discarded_by_topic.get(topic, [])
+            synthesis = batch.syntheses_by_topic.get(topic)
+
+            single_batch = TopicResearchBatch(
+                topics=[topic],
+                conserved_by_topic={topic: conserved},
+                discarded_by_topic={topic: discarded},
+                syntheses_by_topic={topic: synthesis} if synthesis else {},
+                all_conserved_items=conserved,
+            )
+
+            topic_md = str(topic_dir / "fundamentos_teoricos.md")
+            topic_bib = str(topic_dir / "referencias.bib")
+            topic_json = str(topic_dir / "evidencia.json")
+
+            cls.to_batch_markdown(single_batch, topic_md)
+            cls.to_batch_bibtex(single_batch, topic_bib)
+            cls.to_batch_json(single_batch, topic_json)
+
+            created_paths[f"tema_{idx}"] = str(topic_dir.resolve())
+
+        # 2. Exportar reporte consolidado maestro en la raíz de outputs/
+        master_md = str(base_dir / master_md_filename)
+        master_bib = str(base_dir / master_bib_filename)
+        master_json = str(base_dir / "evidencia_academica.json")
+
+        cls.to_batch_markdown(batch, master_md)
+        cls.to_batch_bibtex(batch, master_bib)
+        cls.to_batch_json(batch, master_json)
+
+        created_paths["master_md"] = master_md
+        created_paths["master_bib"] = master_bib
+        created_paths["master_json"] = master_json
+
+        return created_paths

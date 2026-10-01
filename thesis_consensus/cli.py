@@ -18,12 +18,15 @@ from thesis_consensus.exporter import ThesisExporter
 from thesis_consensus.models import TopicResearchBatch
 from thesis_consensus.constants import (
     DEFAULT_LANGUAGE,
+    DEFAULT_DECISION_ENGINE,
     DEFAULT_RELEVANCE_THRESHOLD,
     STRICT_RELEVANCE_THRESHOLD,
     DEFAULT_SEARCH_LIMIT,
     DEFAULT_MIN_PUBLICATION_YEAR,
+    DEFAULT_OUTPUT_DIR,
     DEFAULT_OUTPUT_MD,
     DEFAULT_OUTPUT_BIB,
+    EVIDENCE_TYPE_NAMES,
 )
 
 console = Console()
@@ -46,7 +49,7 @@ def process_topics_batch(
     topics: List[str],
     limit: int = DEFAULT_SEARCH_LIMIT,
     min_year: int = DEFAULT_MIN_PUBLICATION_YEAR,
-    engine: str = "auto",
+    engine: str = DEFAULT_DECISION_ENGINE,
     threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
     language: str = DEFAULT_LANGUAGE,
     out_md: str = DEFAULT_OUTPUT_MD,
@@ -104,11 +107,12 @@ def process_topics_batch(
         for it in conserved:
             author_str = it.paper.authors[0].family_name if it.paper.authors else "Anónimo"
             year_str = str(it.paper.year) if it.paper.year else "s.f."
+            ev_label = EVIDENCE_TYPE_NAMES.get(it.decision.evidence_type, it.decision.evidence_type)
             table.add_row(
                 "[green]CONSERVAR[/green]",
                 f"{author_str} ({year_str})",
                 f"[bold green]{it.decision.relevance_score:.1%}[/bold green]",
-                it.decision.evidence_type,
+                ev_label,
                 f"{it.decision.quality_score:.1f}/3.0",
                 it.decision.verdict_reason,
             )
@@ -137,13 +141,26 @@ def process_topics_batch(
                 border_style="yellow",
             ))
 
-    # Exportar resultados estructurados
-    md_path = ThesisExporter.to_batch_markdown(batch, out_md)
-    bib_path = ThesisExporter.to_batch_bibtex(batch, out_bib)
+    # Exportar resultados estructurados agrupados por cada pregunta
+    export_paths = ThesisExporter.export_batch_grouped_by_topic(
+        batch=batch,
+        base_output_dir=DEFAULT_OUTPUT_DIR,
+        master_md_filename=Path(out_md).name,
+        master_bib_filename=Path(out_bib).name,
+    )
 
     console.print("\n" + "#" * 80)
-    console.print(f"[bold green]✔ Reporte maestro de fundamentos teóricos generado en:[/bold green]\n👉 [underline]{md_path}[/underline]")
-    console.print(f"[bold green]✔ Bibliografía consolidada y deduplicada (BibTeX) en:[/bold green]\n👉 [underline]{bib_path}[/underline]")
+    console.print("[bold green]✔ Resultados organizados y agrupados por pregunta:[/bold green]")
+    for idx, topic in enumerate(batch.topics, start=1):
+        topic_folder = export_paths.get(f"tema_{idx}")
+        if topic_folder:
+            console.print(f"  📂 [cyan]{topic_folder}[/cyan]")
+            console.print("     ├── [white]fundamentos_teoricos.md[/white] (Marco teórico específico)")
+            console.print("     ├── [white]referencias.bib[/white] (BibTeX específico del tema)")
+            console.print("     └── [white]evidencia.json[/white] (JSON estructurado)")
+
+    console.print(f"\n[bold green]✔ Reporte maestro consolidado de tesis:[/bold green]\n👉 [underline]{export_paths.get('master_md')}[/underline]")
+    console.print(f"[bold green]✔ Bibliografía general consolidada y deduplicada (BibTeX):[/bold green]\n👉 [underline]{export_paths.get('master_bib')}[/underline]")
     console.print("#" * 80 + "\n")
 
     return batch
@@ -211,7 +228,13 @@ def main() -> None:
     parser.add_argument("--file", "-f", type=str, help="Archivo .txt con temas (uno por línea)")
     parser.add_argument("--limit", "-l", type=int, default=DEFAULT_SEARCH_LIMIT, help="Papers por tema (default: 15)")
     parser.add_argument("--min-year", "-y", type=int, default=DEFAULT_MIN_PUBLICATION_YEAR, help="Año mínimo de publicación")
-    parser.add_argument("--engine", "-e", choices=["auto", "laya", "openai", "heuristic"], default="auto", help="Motor de decisión")
+    parser.add_argument(
+        "--engine",
+        "-e",
+        choices=["unsloth_laya", "laya", "heuristic", "openai", "auto"],
+        default=DEFAULT_DECISION_ENGINE,
+        help=f"Motor de decisión (default: {DEFAULT_DECISION_ENGINE})",
+    )
     parser.add_argument("--threshold", "-th", type=float, default=DEFAULT_RELEVANCE_THRESHOLD, help="Umbral de decisión (0.80 - 0.85)")
     parser.add_argument("--lang", type=str, default=DEFAULT_LANGUAGE, help="Idioma de redacción (default: es)")
     parser.add_argument("--out-md", "-o", type=str, default=DEFAULT_OUTPUT_MD, help="Ruta de exportación Markdown")

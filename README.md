@@ -151,26 +151,33 @@ Todas las opciones globales se configuran en [`thesis_consensus/constants.py`](f
 
 | Variable | Valor por Defecto | Propósito |
 | :--- | :--- | :--- |
+| `DEFAULT_DECISION_ENGINE` | `"unsloth_laya"` | Motor de decisión predeterminado (Unsloth Desktop GPU) |
 | `DEFAULT_LANGUAGE` | `"es"` | Idioma de redacción de los párrafos y reportes |
 | `DEFAULT_RELEVANCE_THRESHOLD` | `0.80` (80%) | Umbral de aprobación estándar del modelo de decisión |
 | `STRICT_RELEVANCE_THRESHOLD` | `0.85` (85%) | Umbral estricto para máxima rigurosidad |
 | `MINIMUM_RIGOR_SCORE` | `1.6 / 3.0` | Calidad metodológica mínima exigida |
-| `UNSLOTH_DEFAULT_URL` | `http://localhost:8888/v1/systemone` | Endpoint del modelo de decisión Laya |
+| `UNSLOTH_DEFAULT_URL` | `http://localhost:8888/v1/systemone` | Endpoint del modelo de decisión Laya en GPU |
 | `DEFAULT_MIN_PUBLICATION_YEAR`| `2015` | Garantiza literatura actualizada de los últimos años |
 | `DEFAULT_SEARCH_LIMIT` | `15` | Cantidad de papers candidatos a explorar por tema |
+
+### Autenticación Local Segura (`.env`)
+Unsloth Desktop protege su API local con un Bearer token para evitar accesos indebidos de otras aplicaciones en tu máquina.
+Crea tu archivo `.env` en la raíz (está incluido en `.gitignore` para no subirse a GitHub):
+```bash
+UNSLOTH_API_KEY=sk-unsloth-tu_clave_aqui
+UNSLOTH_URL=http://localhost:8888/v1/systemone
+```
 
 ---
 
 ## 7. Modos de Uso y Ejecución por Lote (Batch)
 
-### A. Evaluar Múltiples Preguntas de Tesis en un Solo Comando
+### A. Evaluar Múltiples Preguntas de Tesis en un Solo Comando (Motor Laya por Defecto)
 ```bash
 python main.py --topic \
   "How is IT Service Management (ITSM) or ITIL implemented in higher education institutions and university help desks?" \
   "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?" \
-  --threshold 0.80 \
-  --out-md "fundamentos_teoricos_tesis.md" \
-  --out-bib "referencias_tesis.bib"
+  --threshold 0.80
 ```
 
 ### B. Cargar Preguntas desde un Archivo (`preguntas.txt`)
@@ -190,35 +197,42 @@ python main.py --file preguntas.txt --threshold 0.85
 python main.py --interactive
 ```
 
-### D. Usando Unsloth Desktop (Laya)
-1. Abre la aplicación **Unsloth Desktop**.
-2. Ve a **Settings → API → Decision API** y activa **Serve requests**.
-3. Ejecuta el comando agregando `--engine laya`:
-   ```bash
-   python main.py --topic "Tu tema" --engine laya --threshold 0.80
-   ```
+---
+
+## 8. Organización Estructurada de Salidas (`outputs/`)
+
+Para evitar cualquier desorden al formular múltiples preguntas de tesis en lote, los resultados se organizan **automáticamente en subcarpetas por cada pregunta** dentro de `outputs/`:
+
+```
+outputs/
+├── tema_01_how-is-it-service-management-itsm-or-iti/
+│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría de la pregunta 1
+│   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 1
+│   └── evidencia.json           # Datos JSON estructurados y decisiones de la pregunta 1
+│
+├── tema_02_what-are-the-challenges-ticket-volume-ov/
+│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría de la pregunta 2
+│   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 2
+│   └── evidencia.json           # Datos JSON estructurados y decisiones de la pregunta 2
+│
+├── fundamentos_teoricos_tesis.md  # Reporte maestro consolidado con índice interactivo y todos los temas
+├── referencias_tesis.bib          # Bibliografía general consolidada y deduplicada para toda la tesis
+└── evidencia_academica.json       # Base de datos global en JSON de toda la revisión bibliográfica
+```
 
 ---
 
-## 8. Tipado Estricto (Cero Any) y Pruebas Unitarias
+## 9. Tipado Estricto (Cero Any) y Pruebas Unitarias
 
 El código fue diseñado bajo las mejores prácticas de ingeniería de software en Python:
 - **Cero uso de `Any`:** Cada estructura, diccionario y parámetro posee tipos concretos (`str`, `int`, `float`, `Author`, `PaperMetadata`, `DecisionEvaluation`, etc.).
 - **Validación con Mypy:**
   ```bash
   mypy thesis_consensus
-  # Resultado: Success: no issues found in 19 source files
+  # Resultado: Success: no issues found in 20 source files
   ```
 - **Pruebas Unitarias Automatizadas:**
   ```bash
   python -m unittest discover tests
   # Resultado: Ran 7 tests in 0.002s - OK
   ```
-
----
-
-## 📄 Archivos Generados Listos para tu Tesis
-
-Al finalizar la ejecución, encontrarás:
-1. **[`fundamentos_teoricos_tesis.md`](file:///Users/jhan/Documents/Proyectos/codigo_para_buscar_papers_sobre_tema_en_especifico/fundamentos_teoricos_tesis.md):** Documento estructurado con tabla de contenidos, párrafos redactados con citas narrativas y parentéticas, tablas de decisión que justifican cada elección y bibliografía general unificada sin duplicados.
-2. **[`referencias_tesis.bib`](file:///Users/jhan/Documents/Proyectos/codigo_para_buscar_papers_sobre_tema_en_especifico/referencias_tesis.bib):** Archivo BibTeX unificado listo para importar en **Zotero**, **Mendeley** o tu proyecto en **Overleaf / LaTeX**.

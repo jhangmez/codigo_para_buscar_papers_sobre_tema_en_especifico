@@ -3,12 +3,38 @@ Constantes centrales para el sistema Thesis Consensus.
 Centraliza configuraciones de red, umbrales de decisión, reglas lingüísticas y plantillas.
 """
 
+import os
+from pathlib import Path
 from typing import Tuple, Dict
 
+
+def _load_env_file(filepath: str = ".env") -> None:
+    """Carga variables desde .env a os.environ si no existen en el entorno."""
+    p = Path(filepath)
+    if not p.is_file():
+        return
+    try:
+        with open(p, "r", encoding="utf-8") as f:
+            for line in f:
+                stripped = line.strip()
+                if not stripped or stripped.startswith("#") or "=" not in stripped:
+                    continue
+                k, v = stripped.split("=", 1)
+                k = k.strip()
+                v = v.strip().strip("'\"")
+                if k and k not in os.environ:
+                    os.environ[k] = v
+    except Exception:
+        pass
+
+
+_load_env_file()
+
 # ==============================================================================
-# CONFIGURACIÓN DE IDIOMA Y LOCALIZACIÓN
+# CONFIGURACIÓN DE IDIOMA Y MOTOR DE DECISIÓN POR DEFECTO
 # ==============================================================================
 DEFAULT_LANGUAGE: str = "es"
+DEFAULT_DECISION_ENGINE: str = "unsloth_laya"
 
 # ==============================================================================
 # UMBRALES DEL MODELO DE DECISIÓN (Alta exigencia para tesis)
