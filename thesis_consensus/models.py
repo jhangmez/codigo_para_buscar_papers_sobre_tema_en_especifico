@@ -50,7 +50,7 @@ class PaperMetadata(BaseModel):
     """Metadatos completos de un artículo de investigación."""
     paper_id: str
     title: str
-    authors: List[Author]
+    authors: List[Author] = Field(default_factory=list)
     year: Optional[int] = None
     venue: Optional[str] = None
     volume: Optional[str] = None
@@ -110,24 +110,25 @@ class Apa7Citation(BaseModel):
 
 
 class ThesisEvidenceItem(BaseModel):
-    """Elemento final procesado y fundamentado para la sección de Fundamentos Teóricos."""
+    """Elemento de evidencia científica procesado y fundamentado para marco teórico."""
     paper: PaperMetadata
     decision: DecisionEvaluation
     apa7: Apa7Citation
-    key_findings_es: str          # Hallazgo o evidencia clave traducido y sintetizado al español
     exact_source_quote: str       # Fragmento textual EXACTO y literal del paper en inglés (Cero alucinación)
     source_location: str          # Procedencia del fragmento (PDF Resultados, HTML Open Access, Abstract Oficial)
-    narrative_paragraph: str      # Párrafo individual redactado en español listo para el marco teórico
+    content_excerpt: str = ""     # Texto sustantivo de hallazgos o resumen completo
+    key_findings_es: str = ""     # Hallazgo retrospectivo opcional
+    narrative_paragraph: str = "" # Párrafo opcional
 
 
 class MultiPaperSynthesis(BaseModel):
-    """Síntesis teórica integrada que combina múltiples autores en párrafos coherentes."""
+    """Síntesis teórica estructurada opcional."""
     topic_or_claim: str
-    integrated_narrative: str     # Párrafo dialéctico conectando varios autores (Según X... mientras que Y...)
-    complementary_narrative: str  # Párrafo acumulativo de evidencia
-    parenthetical_synthesis: str  # Afirmación con citas parentéticas agrupadas: (A, 2020; B, 2022)
-    papers_used_count: int
-    consensus_verdict: str        # Conclusión teórica sobre si la literatura apoya o refuta la afirmación
+    integrated_narrative: str = ""
+    complementary_narrative: str = ""
+    parenthetical_synthesis: str = ""
+    papers_used_count: int = 0
+    consensus_verdict: str = ""
 
 
 class TopicResearchBatch(BaseModel):
@@ -135,5 +136,5 @@ class TopicResearchBatch(BaseModel):
     topics: List[str]
     conserved_by_topic: Dict[str, List[ThesisEvidenceItem]]
     discarded_by_topic: Dict[str, List[PaperMetadata]]
-    syntheses_by_topic: Dict[str, MultiPaperSynthesis]
+    syntheses_by_topic: Dict[str, MultiPaperSynthesis] = Field(default_factory=dict)
     all_conserved_items: List[ThesisEvidenceItem]

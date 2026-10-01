@@ -6,9 +6,11 @@ archivos BibTeX deduplicados y JSON estructurado.
 
 import json
 import re
+import shutil
 from pathlib import Path
-from typing import List, Set, Dict
+from typing import List, Set, Dict, Optional
 from thesis_consensus.models import (
+    PaperMetadata,
     ThesisEvidenceItem,
     MultiPaperSynthesis,
     TopicResearchBatch,
@@ -39,8 +41,8 @@ class ThesisExporter:
         path.parent.mkdir(parents=True, exist_ok=True)
 
         lines: List[str] = [
-            "# Fundamentos Teóricos de la Tesis: Síntesis de Literatura Arbitrada",
-            "> Documento generado automáticamente con normas oficiales **APA 7ma Edición** y evaluación de modelos de decisión.",
+            "# Fundamentos Teóricos de la Tesis: Evidencias de Literatura Arbitrada",
+            "> Evidencia recuperada y evaluada con normas oficiales **APA 7ma Edición** y filtrado por modelos de decisión.",
             "",
             "## 📑 Índice de Fundamentación por Temas de Investigación",
             "",
@@ -50,10 +52,10 @@ class ThesisExporter:
         for idx, topic in enumerate(batch.topics, start=1):
             anchor = f"tema-{idx}"
             conserved_count = len(batch.conserved_by_topic.get(topic, []))
-            lines.append(f"- [{idx}. {topic}](#{anchor}) *({conserved_count} fuentes de alta pertinencia)*")
+            lines.append(f"- [{idx}. {topic}](#{anchor}) *({conserved_count} fuentes aprobadas por umbral)*")
 
         lines.extend([
-            f"- [Referencias Bibliográficas Generales (APA 7ma Edición)](#referencias-bibliograficas-unificadas)",
+            f"- [Referencias Bibliográficas (APA 7ma Edición)](#referencias-bibliograficas-unificadas)",
             "",
             "---",
             "",
@@ -64,37 +66,15 @@ class ThesisExporter:
             anchor = f"tema-{idx}"
             conserved = batch.conserved_by_topic.get(topic, [])
             discarded = batch.discarded_by_topic.get(topic, [])
-            synthesis = batch.syntheses_by_topic.get(topic)
 
             lines.extend([
                 f"<a id=\"{anchor}\"></a>",
                 f"## {idx}. Tema: {topic}",
                 f"**Balance de revisión:** `{len(conserved)} fuentes conservadas` | `{len(discarded)} descartadas por umbral`",
                 "",
-                "### 📝 Síntesis Teórica Integrada (Múltiples Papers - Redacción en Español)",
-                "",
-            ])
-
-            if synthesis:
-                lines.extend([
-                    "#### Opción A: Redacción Narrativa Dialéctica (Recomendada para abrir el marco teórico)",
-                    f"> {synthesis.integrated_narrative}",
-                    "",
-                    "#### Opción B: Enfoque Complementario por Tipología de Evidencia",
-                    f"> {synthesis.complementary_narrative}",
-                    "",
-                    "#### Opción C: Afirmación con Citas Parentéticas Agrupadas (APA 7)",
-                    f"> {synthesis.parenthetical_synthesis}",
-                    "",
-                ])
-            else:
-                lines.append("*Sin síntesis multi-paper disponible.*")
-
-            # 3. Tarjeta de Veredicto del Modelo de Decisiones (Por qué se escogieron)
-            lines.extend([
                 "### 📊 Evaluación y Criterios del Modelo de Decisión",
                 "",
-                "| Estado | Autor y Año | P(Relevancia) | Umbral | Tipo Evidencia | Rigor Metodológico | Justificación de Elección |",
+                "| Estado | Autor(es) y Año | P(Relevancia) | Umbral | Tipo Evidencia | Rigor Metodológico | Justificación de Elección |",
                 "| :---: | :--- | :---: | :---: | :---: | :---: | :--- |",
             ])
 
@@ -118,7 +98,7 @@ class ThesisExporter:
 
             lines.append("")
 
-            # 4. Detalle y citas individuales por paper con trazabilidad anti-alucinación
+            # 3. Detalle y evidencias individuales por paper con trazabilidad anti-alucinación
             lines.append("### 📚 Evidencias Específicas por Artículo y Auditoría Textual (Cero Alucinación)")
             for p_idx, item in enumerate(conserved, start=1):
                 p = item.paper
@@ -127,16 +107,15 @@ class ThesisExporter:
                 lines.extend([
                     f"#### {idx}.{p_idx}. {p.title}",
                     f"- **Motor de Decisión:** `{engine_label}` | **Tipología:** `{ev_type_label}`",
-                    f"- **Cita narrativa:** `{item.apa7.narrative_citation}`",
-                    f"- **Cita parentética:** `{item.apa7.parenthetical_citation}`",
-                    f"- **Párrafo sugerido para marco teórico:**",
-                    f"> {item.narrative_paragraph}",
+                    f"- **Cita narrativa (APA 7):** `{item.apa7.narrative_citation}`",
+                    f"- **Cita parentética (APA 7):** `{item.apa7.parenthetical_citation}`",
                     "",
                     "> 🔍 **Auditoría de Veracidad y Respaldo Textual (Cero Alucinación):**",
                     f"> - **Cita Textual Literal del Artículo:** *\"{item.exact_source_quote}\"*",
                     f"> - **Procedencia de la Cita:** `{item.source_location}`",
                     f"> - **Tipo de Acceso:** `{p.content_source}` | **Citas Recibidas:** `{p.citation_count}`",
-                    f"> - **Traducción / Paráfrasis Aplicada:** *\"{item.key_findings_es}\"*",
+                    f"> - **Extracto Sustantivo / Abstract:**",
+                    f">   {item.content_excerpt or p.abstract}",
                     "",
                     f"- **Referencia bibliográfica APA 7:** {item.apa7.full_reference}",
                     f"- **DOI Verificable:** [{p.doi or p.url or 'Enlace al Paper'}]({p.doi or p.url or '#'})",
@@ -189,14 +168,14 @@ class ThesisExporter:
         items: List[ThesisEvidenceItem],
         topic_or_claim: str,
         output_filepath: str,
-        synthesis: MultiPaperSynthesis,
+        synthesis: Optional[MultiPaperSynthesis] = None,
     ) -> str:
         """Genera un archivo Markdown para una sola pregunta adaptándolo a la estructura de lote."""
         batch = TopicResearchBatch(
             topics=[topic_or_claim],
             conserved_by_topic={topic_or_claim: items},
             discarded_by_topic={topic_or_claim: []},
-            syntheses_by_topic={topic_or_claim: synthesis},
+            syntheses_by_topic={topic_or_claim: synthesis} if synthesis else {},
             all_conserved_items=items,
         )
         return cls.to_batch_markdown(batch, output_filepath)
@@ -245,17 +224,95 @@ class ThesisExporter:
         return str(path.resolve())
 
     @classmethod
+    def to_topic_json(
+        cls,
+        topic: str,
+        conserved: List[ThesisEvidenceItem],
+        discarded: List[PaperMetadata],
+        output_filepath: str,
+    ) -> str:
+        """
+        Exporta los datos estructurados en un formato JSON listo para ser consumido
+        directamente por un agente redactor de marco teórico.
+        """
+        path = Path(output_filepath)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        min_threshold = conserved[0].decision.threshold_applied if conserved else 0.80
+
+        data = {
+            "tema_investigacion": topic,
+            "resumen_evaluacion": {
+                "total_candidatos_evaluados": len(conserved) + len(discarded),
+                "papers_aprobados_conservados": len(conserved),
+                "papers_descartados": len(discarded),
+                "umbral_minimo_exigido": min_threshold,
+            },
+            "instrucciones_para_agente_redactor": (
+                "Este archivo contiene la evidencia científica arbitrada y verificada para fundamentar "
+                "este tema en la tesis. Utilice los datos de 'evidencias_conservadas' para redactar "
+                "el marco teórico. Emplee las citas narrativas y parentéticas en formato APA 7 proporcionadas, "
+                "cite textualmente o parafrasee basándose en 'cita_textual_literal' y 'contenido_sustantivo_extracto', "
+                "y agregue las referencias en 'citacion_apa7.referencia_completa' a la bibliografía."
+            ),
+            "evidencias_conservadas": [
+                {
+                    "paper_id": item.paper.paper_id,
+                    "titulo": item.paper.title,
+                    "autores": [a.full_name for a in item.paper.authors],
+                    "primer_autor": item.paper.authors[0].family_name if item.paper.authors else "Anónimo",
+                    "año": item.paper.year,
+                    "revista_o_fuente": item.paper.venue,
+                    "doi": item.paper.doi,
+                    "enlace_url": item.paper.doi or item.paper.url,
+                    "citas_recibidas": item.paper.citation_count,
+                    "tipo_acceso": item.paper.content_source,
+                    "citacion_apa7": {
+                        "cita_narrativa": item.apa7.narrative_citation,
+                        "cita_parentetica": item.apa7.parenthetical_citation,
+                        "referencia_completa": item.apa7.full_reference,
+                        "bibtex": item.apa7.bibtex_entry,
+                    },
+                    "evaluacion_decision": {
+                        "motor_decision": item.decision.decision_engine,
+                        "probabilidad_relevancia": round(item.decision.relevance_score, 4),
+                        "umbral_aplicado": item.decision.threshold_applied,
+                        "tipo_evidencia": item.decision.evidence_type,
+                        "rigor_metodologico": item.decision.quality_score,
+                        "justificacion_decision": item.decision.verdict_reason,
+                    },
+                    "cita_textual_literal": item.exact_source_quote,
+                    "ubicacion_fuente": item.source_location,
+                    "contenido_sustantivo_extracto": item.content_excerpt or item.paper.abstract,
+                    "abstract_completo": item.paper.abstract,
+                }
+                for item in conserved
+            ],
+            "papers_descartados": [
+                {
+                    "titulo": p.title,
+                    "autores": [a.full_name for a in p.authors],
+                    "año": p.year,
+                    "citas": p.citation_count,
+                    "motivo": "No superó el umbral mínimo exigido (80% - 85%)",
+                }
+                for p in discarded
+            ],
+        }
+
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+        return str(path.resolve())
+
+    @classmethod
     def export_batch_grouped_by_topic(
         cls,
         batch: TopicResearchBatch,
         base_output_dir: str = "outputs",
-        master_md_filename: str = "fundamentos_teoricos_tesis.md",
-        master_bib_filename: str = "referencias_tesis.bib",
     ) -> Dict[str, str]:
         """
-        Organiza y exporta todos los resultados ordenados en subcarpetas temáticas limpias.
-        Sin prefijos numéricos molestos (como tema_01) y agrupando el reporte consolidado
-        en su propia subcarpeta 'reporte_general_consolidado' para que la raíz de outputs quede 100% limpia.
+        Organiza y exporta todos los resultados ordenados exclusivamente en subcarpetas temáticas limpias.
+        Sin prefijos numéricos (como tema_01), sin reporte general consolidado redundante,
+        y asegurando que cada tema tenga su evidencia.json, referencias.bib y fundamentos_teoricos.md.
         """
         base_dir = Path(base_output_dir)
         base_dir.mkdir(parents=True, exist_ok=True)
@@ -270,13 +327,12 @@ class ThesisExporter:
 
             conserved = batch.conserved_by_topic.get(topic, [])
             discarded = batch.discarded_by_topic.get(topic, [])
-            synthesis = batch.syntheses_by_topic.get(topic)
 
             single_batch = TopicResearchBatch(
                 topics=[topic],
                 conserved_by_topic={topic: conserved},
                 discarded_by_topic={topic: discarded},
-                syntheses_by_topic={topic: synthesis} if synthesis else {},
+                syntheses_by_topic={},
                 all_conserved_items=conserved,
             )
 
@@ -286,22 +342,16 @@ class ThesisExporter:
 
             cls.to_batch_markdown(single_batch, topic_md)
             cls.to_batch_bibtex(single_batch, topic_bib)
-            cls.to_batch_json(single_batch, topic_json)
+            cls.to_topic_json(topic, conserved, discarded, topic_json)
 
             created_paths[f"tema_{idx}"] = str(topic_dir.resolve())
 
-        # 2. Exportar reporte consolidado maestro en su propia subcarpeta 'reporte_general_consolidado'
+        # 2. Limpiar carpeta de reporte consolidado si existiera de ejecuciones previas
         consolidated_dir = base_dir / "reporte_general_consolidado"
-        consolidated_dir.mkdir(parents=True, exist_ok=True)
-        master_md = str(consolidated_dir / master_md_filename)
-        master_bib = str(consolidated_dir / master_bib_filename)
-        master_json = str(consolidated_dir / "evidencia_academica.json")
+        if consolidated_dir.is_dir():
+            shutil.rmtree(consolidated_dir, ignore_errors=True)
 
-        cls.to_batch_markdown(batch, master_md)
-        cls.to_batch_bibtex(batch, master_bib)
-        cls.to_batch_json(batch, master_json)
-
-        # Limpiar cualquier archivo suelto que hubiera quedado en la raíz de outputs/
+        # 3. Limpiar cualquier archivo suelto que hubiera quedado en la raíz de outputs/
         for loose_file in ("fundamentos_teoricos_tesis.md", "referencias_tesis.bib", "evidencia_academica.json"):
             old_p = base_dir / loose_file
             if old_p.is_file():
@@ -309,10 +359,5 @@ class ThesisExporter:
                     old_p.unlink()
                 except Exception:
                     pass
-
-        created_paths["master_dir"] = str(consolidated_dir.resolve())
-        created_paths["master_md"] = master_md
-        created_paths["master_bib"] = master_bib
-        created_paths["master_json"] = master_json
 
         return created_paths

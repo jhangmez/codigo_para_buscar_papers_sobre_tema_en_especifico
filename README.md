@@ -12,10 +12,12 @@ Inspirado en plataformas como *Consensus.app*, pero adaptado a la elaboración s
 - [2. ¿Qué se le envía al Modelo de Decisión? (Resumen vs. Contenido Completo)](#2-qué-se-le-envía-al-modelo-de-decisión-resumen-vs-contenido-completo)
 - [3. Mecanismos de Validación y Toma de Decisiones](#3-mecanismos-de-validación-y-toma-de-decisiones)
 - [4. Seguridad y Cero Riesgo de Malware](#4-seguridad-y-cero-riesgo-de-malware)
-- [5. Redacción Multi-Paper y Estándar APA 7ma Edición](#5-redacción-multi-paper-y-estándar-apa-7ma-edición)
-- [6. Configuración Centralizada (constants.py)](#6-configuración-centralizada-constantspy)
-- [7. Modos de Uso y Ejecución por Lote (Batch)](#7-modos-de-uso-y-ejecución-por-lote-batch)
-- [8. Tipado Estricto (Cero Any) y Pruebas Unitarias](#8-tipado-estricto-cero-any-y-pruebas-unitarias)
+- [5. Auditoría Científica, Cero Alucinación y Estándar APA 7ma Edición](#5-auditoría-científica-cero-alucinación-y-estándar-apa-7ma-edición)
+- [6. evidencia.json: API Estructurada para Agentes Redactores](#6-evidenciajson-api-estructurada-para-agentes-redactores)
+- [7. Configuración Centralizada (constants.py)](#7-configuración-centralizada-constantspy)
+- [8. Modos de Uso y Ejecución por Lote (Batch)](#8-modos-de-uso-y-ejecución-por-lote-batch)
+- [9. Organización Estructurada de Salidas (outputs/)](#9-organización-estructurada-de-salidas-outputs)
+- [10. Tipado Estricto (Cero Any) y Pruebas Unitarias](#10-tipado-estricto-cero-any-y-pruebas-unitarias)
 
 ---
 
@@ -122,37 +124,76 @@ Descargar y ejecutar archivos PDF arbitrarios de internet representa vectores de
 
 ---
 
-## 5. Redacción Multi-Paper y Estándar APA 7ma Edición
+## 5. Auditoría Científica, Cero Alucinación y Estándar APA 7ma Edición
 
-En un marco teórico de tesis no se citan artículos aislados de forma inconexa. El módulo `synthesizer.py` genera **3 opciones de redacción integrada** en **español académico formal**:
+A diferencia de los asistentes que generan párrafos sintetizados o paráfrasis automáticas (propensas a mezclar idiomas o alucinar afirmaciones), **Thesis Consensus** opera como un **motor de recuperación, evaluación probabilística y auditoría científica estricta**:
 
-### Opción A: Redacción Narrativa Dialéctica
-Conecta múltiples autores en un discurso continuo utilizando conectores de contraste y adición:
-> *"En el análisis de los fundamentos vinculados a [Tema], la literatura especializada converge en puntos críticos de gestión. Por un lado, según destacan **Marrone et al. (2014)**, las organizaciones priorizan procesos de nivel operativo. En esta misma línea, **Palilingan y Batmetan (2018)** complementan esta perspectiva al demostrar que el 84.5% de los incidentes pueden resolverse de manera ágil. De manera concordante, estos autores coinciden en que..."*
-
-### Opción B: Enfoque por Tipología de Evidencia
-Separa la evidencia práctica en universidades de los modelos cuantitativos:
-> *"A nivel empírico en centros de educación superior, los estudios de caso desarrollados por **Ibrahim y Hamarash (2025)** demuestran que la estructuración formal mejora los tiempos de respuesta. Por otra parte, desde una aproximación de métricas de servicio, autores como **Babar et al. (2025)** subrayan que la automatización previene cuellos de botella..."*
-
-### Opción C: Citación Parentética Agrupada (APA 7)
-Agrupa las fuentes ordenadas alfabéticamente y separadas por punto y coma:
-> *"... resultan determinantes para resolver la congestión operativa y optimizar la atención de incidencias en mesas de ayuda académicas **(Babar, 2025; Ibrahim y Hamarash, 2025; Marrone et al., 2014)**."*
-
-### Formato de Referencia Bibliográfica Completa (APA 7):
-- **Formato:** `Apellido, Inicial(es). (Año). Título del artículo en sentence case. *Nombre de la Revista*, *volumen*(número), páginas. https://doi.org/...`
-- **Sentence Case:** Se preservan acrónimos como ITIL, ITSM, SLA, AI, IEEE.
-- **DOI Seguro:** Enlace activo estándar `https://doi.org/...` sin punto final.
+- **Cero Texto Sintético:** No genera párrafos simulados. Su objetivo es proporcionar datos científicos 100% verificables, citas exactas y cálculos de afinidad para que tú o un agente redactor independiente redacte el marco teórico a su manera.
+- **Auditoría Textual Literal:** Para cada artículo aprobado, extrae la **cita textual literal en inglés** (`cita_textual_literal`) directamente de la sección de resultados del PDF o del abstract oficial, indicando su procedencia exacta (`ubicacion_fuente`).
+- **Citación APA 7ma Edición Automatizada:** Genera de forma matemática las citas narrativas (p. ej. `Sarwar et al. (2023)`), las citas parentéticas (p. ej. `(Sarwar et al., 2023)`), la entrada BibTeX y la referencia bibliográfica completa en sentence case.
 
 ---
 
-## 6. Configuración Centralizada (`constants.py`)
+## 6. `evidencia.json`: API Estructurada para Agentes Redactores
+
+Cada carpeta temática incluye un archivo `evidencia.json` diseñado específicamente para que puedas dárselo a un agente LLM de redacción (ChatGPT, Claude, Antigravity, etc.) con una instrucción como:
+
+> *"Basándote en este archivo `evidencia.json`, redacta la sección de fundamentos teóricos sobre [Tema]. Utiliza las citas narrativas y parentéticas en formato APA 7 indicadas en `citacion_apa7` y fundamenta cada afirmación con la `cita_textual_literal` y el `contenido_sustantivo_extracto`."*
+
+### Estructura de `evidencia.json`:
+```json
+{
+  "tema_investigacion": "How is IT Service Management (ITSM) or ITIL implemented in higher education...",
+  "resumen_evaluacion": {
+    "total_candidatos_evaluados": 8,
+    "papers_aprobados_conservados": 5,
+    "papers_descartados": 3,
+    "umbral_minimo_exigido": 0.8
+  },
+  "evidencias_conservadas": [
+    {
+      "titulo": "Digital Transformation of Public Sector Governance With IT Service Management–A Pilot Study",
+      "primer_autor": "Sarwar",
+      "año": 2023,
+      "doi": "https://doi.org/10.1109/access.2023.3237550",
+      "tipo_acceso": "open_access_pdf",
+      "citacion_apa7": {
+        "cita_narrativa": "Sarwar et al. (2023)",
+        "cita_parentetica": "(Sarwar et al., 2023)",
+        "referencia_completa": "Sarwar, M. I., ... (2023). ... IEEE Access, 11, 6490–6512.",
+        "bibtex": "@article{sarwar_2023_digital, ...}"
+      },
+      "evaluacion_decision": {
+        "motor_decision": "unsloth_laya",
+        "probabilidad_relevancia": 0.916,
+        "tipo_evidencia": "theoretical",
+        "rigor_metodologico": 1.78,
+        "justificacion_decision": "Decisión Laya: P(relevancia)=91.6% (Umbral: 80%). Aceptado con alta afinidad"
+      },
+      "cita_textual_literal": "A well-implemented ITSM delivery system improves the quality of IT services...",
+      "ubicacion_fuente": "Sección de Resultados / Hallazgos del Artículo Completo (Open Access PDF)",
+      "contenido_sustantivo_extracto": "Information Technology or IT is a combination of technology itself..."
+    }
+  ],
+  "papers_descartados": [
+    {
+      "titulo": "Governance Mechanisms in Higher Education",
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    }
+  ]
+}
+```
+
+---
+
+## 7. Configuración Centralizada (`constants.py`)
 
 Todas las opciones globales se configuran en [`thesis_consensus/constants.py`](file:///Users/jhan/Documents/Proyectos/codigo_para_buscar_papers_sobre_tema_en_especifico/thesis_consensus/constants.py):
 
 | Variable | Valor por Defecto | Propósito |
 | :--- | :--- | :--- |
 | `DEFAULT_DECISION_ENGINE` | `"unsloth_laya"` | Motor de decisión predeterminado (Unsloth Desktop GPU) |
-| `DEFAULT_LANGUAGE` | `"es"` | Idioma de redacción de los párrafos y reportes |
+| `DEFAULT_LANGUAGE` | `"es"` | Idioma para citas y etiquetas APA 7 |
 | `DEFAULT_RELEVANCE_THRESHOLD` | `0.80` (80%) | Umbral de aprobación estándar del modelo de decisión |
 | `STRICT_RELEVANCE_THRESHOLD` | `0.85` (85%) | Umbral estricto para máxima rigurosidad |
 | `MINIMUM_RIGOR_SCORE` | `1.6 / 3.0` | Calidad metodológica mínima exigida |
@@ -161,7 +202,7 @@ Todas las opciones globales se configuran en [`thesis_consensus/constants.py`](f
 | `DEFAULT_SEARCH_LIMIT` | `15` | Cantidad de papers candidatos a explorar por tema |
 
 ### Autenticación Local Segura (`.env`)
-Unsloth Desktop protege su API local con un Bearer token para evitar accesos indebidos de otras aplicaciones en tu máquina.
+Unsloth Desktop protege su API local con un Bearer token.
 Crea tu archivo `.env` en la raíz (está incluido en `.gitignore` para no subirse a GitHub):
 ```bash
 UNSLOTH_API_KEY=sk-unsloth-tu_clave_aqui
@@ -170,7 +211,7 @@ UNSLOTH_URL=http://localhost:8888/v1/systemone
 
 ---
 
-## 7. Modos de Uso y Ejecución por Lote (Batch)
+## 8. Modos de Uso y Ejecución por Lote (Batch)
 
 ### A. Evaluar Múltiples Preguntas de Tesis en un Solo Comando (Motor Laya por Defecto)
 ```bash
@@ -199,41 +240,36 @@ python main.py --interactive
 
 ---
 
-## 8. Organización Estructurada de Salidas (`outputs/`)
+## 9. Organización Estructurada de Salidas (`outputs/`)
 
-Para evitar cualquier desorden al formular múltiples preguntas de tesis en lote, los resultados se organizan **automáticamente en subcarpetas por cada pregunta** dentro de `outputs/`:
+Para evitar cualquier desorden al formular múltiples preguntas de tesis en lote, los resultados se organizan **estrictamente en subcarpetas temáticas limpias** dentro de `outputs/`, sin carpetas consolidadas redundantes ni archivos sueltos:
 
 ```
 outputs/
 ├── tema_how-is-it-service-management-itsm-or-itil-imp/
-│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría del tema 1
-│   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 1
-│   └── evidencia.json           # Datos JSON estructurados y decisiones del tema 1
+│   ├── fundamentos_teoricos.md   # Reporte Markdown con tablas de decisión y evidencias auditadas
+│   ├── referencias.bib          # Bibliografía BibTeX deduplicada del tema
+│   └── evidencia.json           # JSON estructurado para el agente redactor de la tesis
 │
-├── tema_what-are-the-challenges-ticket-volume-overloa/
-│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría del tema 2
-│   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 2
-│   └── evidencia.json           # Datos JSON estructurados y decisiones del tema 2
-│
-└── reporte_general_consolidado/  # Carpeta dedicada al reporte unificado (sin archivos sueltos)
-    ├── fundamentos_teoricos_tesis.md  # Reporte maestro consolidado con índice interactivo y todos los temas
-    ├── referencias_tesis.bib          # Bibliografía general consolidada y deduplicada para toda la tesis
-    └── evidencia_academica.json       # Base de datos global en JSON de toda la revisión bibliográfica
+└── tema_what-are-the-challenges-ticket-volume-overloa/
+    ├── fundamentos_teoricos.md   # Reporte Markdown con tablas de decisión y evidencias auditadas
+    ├── referencias.bib          # Bibliografía BibTeX deduplicada del tema
+    └── evidencia.json           # JSON estructurado para el agente redactor de la tesis
 ```
 
 ---
 
-## 9. Tipado Estricto (Cero Any) y Pruebas Unitarias
+## 10. Tipado Estricto (Cero Any) y Pruebas Unitarias
 
 El código fue diseñado bajo las mejores prácticas de ingeniería de software en Python:
 - **Cero uso de `Any`:** Cada estructura, diccionario y parámetro posee tipos concretos (`str`, `int`, `float`, `Author`, `PaperMetadata`, `DecisionEvaluation`, etc.).
 - **Validación con Mypy:**
   ```bash
-  mypy thesis_consensus
+  mypy thesis_consensus tests
   # Resultado: Success: no issues found in 20 source files
   ```
 - **Pruebas Unitarias Automatizadas:**
   ```bash
   python -m unittest discover tests
-  # Resultado: Ran 7 tests in 0.002s - OK
+  # Resultado: Ran 9 tests in 0.046s - OK
   ```

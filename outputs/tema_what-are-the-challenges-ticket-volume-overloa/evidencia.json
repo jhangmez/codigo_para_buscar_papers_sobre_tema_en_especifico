@@ -1,437 +1,144 @@
 {
-  "topics": [
-    "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?"
-  ],
-  "conserved_by_topic": {
-    "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?": [
-      {
-        "paper": {
-          "paper_id": "https://openalex.org/W4410957124",
-          "title": "A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION",
-          "authors": [
-            {
-              "full_name": "Zahir Babar",
-              "family_name": "Babar",
-              "given_name": "Zahir"
-            },
-            {
-              "full_name": "Rajesh Paul",
-              "family_name": "Paul",
-              "given_name": "Rajesh"
-            },
-            {
-              "full_name": "Md Arifur Rahman",
-              "family_name": "Rahman",
-              "given_name": "Md Arifur"
-            },
-            {
-              "full_name": "Tonmoy Barua",
-              "family_name": "Barua",
-              "given_name": "Tonmoy"
-            }
-          ],
-          "year": 2025,
-          "venue": null,
-          "volume": "01",
-          "issue": "01",
-          "pages": "65–89",
-          "doi": "https://doi.org/10.63125/grqtf978",
-          "url": "https://doi.org/10.63125/grqtf978",
-          "abstract": "The rapid evolution of Artificial Intelligence (AI) has profoundly impacted IT support services, leading to a paradigm shift from traditional, hierarchical support structures to integrated, human-AI collaborative ecosystems. In these emerging models, AI systems complement human expertise by automating routine tasks, enabling predictive service responses, and enhancing decision accuracy, while human agents contribute contextual judgment, ethical oversight, and emotional intelligence. This systematic review investigates how such collaboration is transforming IT support operations, focusing specifically on its influence on user experience (UX), workflow automation, human cognitive adaptation, and institutional readiness. Adhering to the PRISMA 2020 guidelines, a total of 98 peer-reviewed articles published between 2013 and 2024 were rigorously identified, screened, and synthesized from leading academic databases including Scopus, Web of Science, IEEE Xplore, and ACM Digital Library. The reviewed literature reveals that AI technologies—such as chatbots, machine learning-driven ticketing systems, robotic process automation (RPA), and natural language processing (NLP)—have become central to the modern support landscape, improving first-contact resolution rates, reducing operational costs, and enabling 24/7 support scalability. The review further maps adoption patterns using established theoretical frameworks such as the Technology Acceptance Model (TAM), Unified Theory of Acceptance and Use of Technology (UTAUT), and various digital transformation models, all of which highlight key enablers like performance expectancy, ease of use, social influence, and strategic alignment. Despite promising outcomes, persistent challenges remain—including data fragmentation, algorithmic bias, interface limitations, and workforce resistance to automation—which must be addressed through thoughtful design and ethical governance. By synthesizing insights across technical, human, and organizational dimensions, this review contributes a comprehensive and interdisciplinary understanding of how human-AI collaboration is redefining IT support services, offering practical implications for researchers, system designers, and IT leaders seeking to deploy intelligent, sustainable, and user-centric support systems.",
-          "content_excerpt": "Journal of Sustainable Development and Policy Volume 01, Issue 01 (2025) Page No: 65 – 89 DOI: 10.63125/grqtf978 68 personalization. In IT support scenarios, user experience encompasses ease of access, response time, resolution accuracy, and communication clarity. AI-enabled chatbots and virtual assistants are now widely employed to manage first -level support queries, offering instant responses and guided troubleshooting (Puerta-Beldarrain et al., 2022). Studies show that when these systems are designed with empathetic response modeling and dynamic context tracking, they generate higher satisfaction levels compared to static or rule -based systems (Sharma et al., 2023 ). However, the presence of a human fallback system is crucial; when issues escalate beyond AI capability, seamless handover to a human agent preserves continuity and reinforces trust. Research also highlights the importance of interface design, where voice modulation, message clarity, and visual cues impact user engagement with AI tools. The co -presence of human agents and AI in support services can create a fluid user journey, w here AI initiates interaction and humans resolve nuanced concerns, forming a hybrid interaction model. The psychological comfort users derive from knowing a human is available if needed plays a critical role in acceptance and satisfaction with AI -driven su pport (Sauer & Burggräf, 2024). Additionally, UX metrics now incorporate AI responsiveness and contextual adaptability as indicators of service excellence, aligning with ISO/IEC 25010 standards for system usability. Therefore, understanding the dynamics of user-AI-human interaction is vital to designing effective support systems that optimize both performance and perception. The main objective of this systematic review is to explore how human-AI collaboration enhances IT support services, with a focus on improving user experience and automating workflows. It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness. The review also examines how this collaboration affects user satisfaction, operational performance, and the continued importance of human oversight in handling complex or ethical decisions. Additionally, it aims to identify organi zational factors —such as digital maturity, staff training, and governance—that influence the success of AI integration in support environments. By synthesizing current research, the study provides insights into how AI can augment rather than replace human expertise in IT support operations. LITERATURE REVIEW The increasing complexity of digital service environments has prompted a shift from traditional IT support frameworks to more dynamic, AI-augmented systems. In this context, the literature reflects a growing scholarly and industrial interest in how artificial intelligence collaborates with human agents to deliver timely, efficient, and user -centered IT support services. The evolution of this field intersects with multiple domains including service automa tion, human -computer interaction, cognitive augmentation, user experience design, and organizational transformation. Existing research has explored a wide range of AI technologies —such as chatbots, predictive analytics, robotic process automation (RPA), and natural language processing (NLP) —within IT support ecosystems, yet there remains a fragmented understanding of how these systems effectively integrate with human decision-makers and frontline support agents. This literature review aims to synthesize the se contributions by categorizing the body of work into core thematic areas that reflect the technological, human, organizational, and ethical dimensions of Human -AI collaboration in IT services. By structuring the literature according to specific objective s and sub-domains, this section provides a consolidated foundation for evaluating the effectiveness, limitations, and implementation considerations of hybrid IT support systems. The review is organized into nine detailed thematic areas that collectively re present the multifaceted nature of human -AI integration in modern support environments. IT support services (Tier 1, 2, 3 frameworks) The tiered model of IT support services has long served as the standard for managing end -user technical issues, with Tier 1, Tier 2, and Tier 3 representing distinct levels of support complexity and expertise. Tier 1 typically addresses common user issues such as password resets or connectivity problems,...",
-          "content_source": "open_access_pdf",
-          "citation_count": 18,
-          "is_open_access": true,
-          "open_access_pdf_url": "https://jsdp-journal.org/index.php/jsdp/article/download/4/4",
-          "source_api": "openalex"
-        },
-        "decision": {
-          "is_relevant": true,
-          "relevance_score": 0.961,
-          "threshold_applied": 0.8,
-          "evidence_type": "theoretical",
-          "quality_score": 2.14,
-          "verdict_reason": "Decisión Laya: P(relevancia)=96.1% (Umbral: 80%). Tipo=theoretical, Rigor=2.1/3.0. Aceptado con alta afinidad",
-          "rationale_breakdown": {
-            "probabilidad_relevancia": "96.1%",
-            "umbral_exigido": "80%",
-            "tipologia_clasificada": "theoretical",
-            "rigor_metodologico": "2.14/3.0",
-            "decision": "Conservar para Marco Teórico"
-          },
-          "decision_engine": "unsloth_laya"
-        },
-        "apa7": {
-          "narrative_citation": "Babar et al. (2025)",
-          "parenthetical_citation": "(Babar et al., 2025)",
-          "full_reference": "Babar, Z., Paul, R., Rahman, M. A., & Barua, T. (2025). A systematic review of human-ai collaboration in IT support services: Enhancing user experience and workflow automation. https://doi.org/10.63125/grqtf978",
-          "bibtex_entry": "@article{babar_2025_systematic,\n  title = {A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION},\n  author = {Babar, Zahir and Paul, Rajesh and Rahman, Md Arifur and Barua, Tonmoy},\n  year = {2025},\n  volume = {01},\n  number = {01},\n  pages = {65–89},\n  doi = {https://doi.org/10.63125/grqtf978},\n  url = {https://doi.org/10.63125/grqtf978},\n}"
-        },
-        "key_findings_es": "la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias",
-        "exact_source_quote": "It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness.",
-        "source_location": "Sección de Resultados / Hallazgos del Artículo Completo (PDF en memoria)",
-        "narrative_paragraph": "De acuerdo con Babar et al. (2025), la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Babar et al., 2025)."
-      },
-      {
-        "paper": {
-          "paper_id": "https://openalex.org/W4288488905",
-          "title": "Information management in the facilities domain: investigating practitioner priorities",
-          "authors": [
-            {
-              "full_name": "Conor Shaw",
-              "family_name": "Shaw",
-              "given_name": "Conor"
-            },
-            {
-              "full_name": "Flavia De Andrade Pereira",
-              "family_name": "Pereira",
-              "given_name": "Flavia De Andrade"
-            },
-            {
-              "full_name": "Ciarán McNally",
-              "family_name": "McNally",
-              "given_name": "Ciarán"
-            },
-            {
-              "full_name": "Karim Farghaly",
-              "family_name": "Farghaly",
-              "given_name": "Karim"
-            },
-            {
-              "full_name": "T. Hartmann",
-              "family_name": "Hartmann",
-              "given_name": "T."
-            },
-            {
-              "full_name": "James O’Donnell",
-              "family_name": "O’Donnell",
-              "given_name": "James"
-            }
-          ],
-          "year": 2022,
-          "venue": "Facilities",
-          "volume": "41",
-          "issue": "5/6",
-          "pages": "285–305",
-          "doi": "https://doi.org/10.1108/f-02-2022-0033",
-          "url": "https://doi.org/10.1108/f-02-2022-0033",
-          "abstract": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration.",
-          "content_excerpt": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration.",
-          "content_source": "abstract_only",
-          "citation_count": 16,
-          "is_open_access": true,
-          "open_access_pdf_url": "https://www.emerald.com/insight/content/doi/10.1108/F-02-2022-0033/full/pdf?title=information-management-in-the-facilities-domain-investigating-practitioner-priorities",
-          "source_api": "openalex"
-        },
-        "decision": {
-          "is_relevant": true,
-          "relevance_score": 0.855,
-          "threshold_applied": 0.8,
-          "evidence_type": "case_study",
-          "quality_score": 1.75,
-          "verdict_reason": "Decisión Laya: P(relevancia)=85.5% (Umbral: 80%). Tipo=case_study, Rigor=1.8/3.0. Aceptado con alta afinidad",
-          "rationale_breakdown": {
-            "probabilidad_relevancia": "85.5%",
-            "umbral_exigido": "80%",
-            "tipologia_clasificada": "case_study",
-            "rigor_metodologico": "1.75/3.0",
-            "decision": "Conservar para Marco Teórico"
-          },
-          "decision_engine": "unsloth_laya"
-        },
-        "apa7": {
-          "narrative_citation": "Shaw et al. (2022)",
-          "parenthetical_citation": "(Shaw et al., 2022)",
-          "full_reference": "Shaw, C., Pereira, F. D. A., McNally, C., Farghaly, K., Hartmann, T., & O’Donnell, J. (2022). Information management in the facilities domain: Investigating practitioner priorities. *Facilities*, *41*(5/6), 285–305. https://doi.org/10.1108/f-02-2022-0033",
-          "bibtex_entry": "@article{shaw_2022_information,\n  title = {Information management in the facilities domain: investigating practitioner priorities},\n  author = {Shaw, Conor and Pereira, Flavia De Andrade and McNally, Ciarán and Farghaly, Karim and Hartmann, T. and O’Donnell, James},\n  year = {2022},\n  journal = {Facilities},\n  volume = {41},\n  number = {5/6},\n  pages = {285–305},\n  doi = {https://doi.org/10.1108/f-02-2022-0033},\n  url = {https://doi.org/10.1108/f-02-2022-0033},\n}"
-        },
-        "key_findings_es": "la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención",
-        "exact_source_quote": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact.",
-        "source_location": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Crossref)",
-        "narrative_paragraph": "Según señalan Shaw et al. (2022), la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Shaw et al., 2022)."
-      }
-    ]
+  "tema_investigacion": "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?",
+  "resumen_evaluacion": {
+    "total_candidatos_evaluados": 8,
+    "papers_aprobados_conservados": 2,
+    "papers_descartados": 6,
+    "umbral_minimo_exigido": 0.8
   },
-  "discarded_by_topic": {
-    "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?": [
-      {
-        "paper_id": "https://openalex.org/W2108142795",
-        "title": "Intrusion detection and Big Heterogeneous Data: a Survey",
-        "authors": [
-          {
-            "full_name": "Richard Zuech",
-            "family_name": "Zuech",
-            "given_name": "Richard"
-          },
-          {
-            "full_name": "Taghi M. Khoshgoftaar",
-            "family_name": "Khoshgoftaar",
-            "given_name": "Taghi M."
-          },
-          {
-            "full_name": "Randall Wald",
-            "family_name": "Wald",
-            "given_name": "Randall"
-          }
-        ],
-        "year": 2015,
-        "venue": "Journal Of Big Data",
-        "volume": "2",
-        "issue": "1",
-        "pages": null,
-        "doi": "https://doi.org/10.1186/s40537-015-0013-4",
-        "url": "https://doi.org/10.1186/s40537-015-0013-4",
-        "abstract": "Intrusion Detection has been heavily studied in both industry and academia, but cybersecurity analysts still desire much more alert accuracy and overall threat analysis in order to secure their systems within cyberspace. Improvements to Intrusion Detection could be achieved by embracing a more comprehensive approach in monitoring security events from many different heterogeneous sources. Correlating security events from heterogeneous sources can grant a more holistic view and greater situational awareness of cyber threats. One problem with this approach is that currently, even a single event source (e.g., network traffic) can experience Big Data challenges when considered alone. Attempts to use more heterogeneous data sources pose an even greater Big Data challenge. Big Data technologies for Intrusion Detection can help solve these Big Heterogeneous Data challenges. In this paper, we review the scope of works considering the problem of heterogeneous data and in particular Big Heterogeneous Data. We discuss the specific issues of Data Fusion, Heterogeneous Intrusion Detection Architectures, and Security Information and Event Management (SIEM) systems, as well as presenting areas where more research opportunities exist. Overall, both cyber threat analysis and cyber intelligence could be enhanced by correlating security events across many diverse heterogeneous sources.",
-        "content_excerpt": "A required part of this site couldn’t load. This may be due to a browser\n extension, network issues, or browser settings. Please check your\n connection, disable any ad blockers, or try using a different browser.",
-        "content_source": "open_access_html",
-        "citation_count": 329,
-        "is_open_access": true,
-        "open_access_pdf_url": "https://link.springer.com/content/pdf/10.1186/s40537-015-0013-4.pdf",
-        "source_api": "openalex"
-      },
-      {
-        "paper_id": "https://openalex.org/W2981406182",
-        "title": "The Constitution of Algorithms",
-        "authors": [
-          {
-            "full_name": "Florian Jaton",
-            "family_name": "Jaton",
-            "given_name": "Florian"
-          }
-        ],
-        "year": 2021,
-        "venue": "The MIT Press eBooks",
-        "volume": null,
-        "issue": null,
-        "pages": null,
-        "doi": "https://doi.org/10.7551/mitpress/12517.001.0001",
-        "url": "https://doi.org/10.7551/mitpress/12517.001.0001",
-        "abstract": "A laboratory study that investigates how algorithms come into existence. Algorithms—often associated with the terms big data, machine learning, or artificial intelligence—underlie the technologies we use every day, and disputes over the consequences, actual or potential, of new algorithms arise regularly. In this book, Florian Jaton offers a new way to study computerized methods, providing an account of where algorithms come from and how they are constituted, investigating the practical activities by which algorithms are progressively assembled rather than what they may suggest or require once they are assembled. Drawing on a four-year ethnographic study of a computer science laboratory that specialized in digital image processing, Jaton illuminates the invisible processes that are behind the development of algorithms. Tracing what he terms a set of intertwining courses of actions sharing common finalities, he describes the practical activity of creating algorithms through the lenses of ground-truthing, programming, and formulating. He first presents the building of ground truths, referential repositories that form the material basis for algorithms. Then, after considering programming's resistance to ethnographic scrutiny, he describes programming courses of action he attended at the laboratory. Finally, he offers an account of courses of action that successfully formulated some of the relationships among the data of a ground-truth database, revealing the links between ground-truthing, programming, and formulating activities—entangled processes that lead to the shaping of algorithms. In practice, ground-truthing, programming, and formulating form a whirlwind process, an emergent and intertwined agency. The open access edition of this book was made possible by generous funding from Arcadia – a charitable fund of Lisbet Rausing and Peter Baldwin.",
-        "content_excerpt": "A laboratory study that investigates how algorithms come into existence. Algorithms—often associated with the terms big data, machine learning, or artificial intelligence—underlie the technologies we use every day, and disputes over the consequences, actual or potential, of new algorithms arise regularly. In this book, Florian Jaton offers a new way to study computerized methods, providing an account of where algorithms come from and how they are constituted, investigating the practical activities by which algorithms are progressively assembled rather than what they may suggest or require once they are assembled. Drawing on a four-year ethnographic study of a computer science laboratory that specialized in digital image processing, Jaton illuminates the invisible processes that are behind the development of algorithms. Tracing what he terms a set of intertwining courses of actions sharing common finalities, he describes the practical activity of creating algorithms through the lenses of ground-truthing, programming, and formulating. He first presents the building of ground truths, referential repositories that form the material basis for algorithms. Then, after considering programming's resistance to ethnographic scrutiny, he describes programming courses of action he attended at the laboratory. Finally, he offers an account of courses of action that successfully formulated some of the relationships among the data of a ground-truth database, revealing the links between ground-truthing, programming, and formulating activities—entangled processes that lead to the shaping of algorithms. In practice, ground-truthing, programming, and formulating form a whirlwind process, an emergent and intertwined agency. The open access edition of this book was made possible by generous funding from Arcadia – a charitable fund of Lisbet Rausing and Peter Baldwin.",
-        "content_source": "abstract_only",
-        "citation_count": 102,
-        "is_open_access": true,
-        "open_access_pdf_url": "https://direct.mit.edu/books/book/chapter-pdf/1899369/9780262363235_f000000.pdf",
-        "source_api": "openalex"
-      },
-      {
-        "paper_id": "https://openalex.org/W7114889968",
-        "title": "A Systematic Literature Review of Retrieval-Augmented Generation: Techniques, Metrics, and Challenges",
-        "authors": [
-          {
-            "full_name": "Andrew Brown",
-            "family_name": "Brown",
-            "given_name": "Andrew"
-          },
-          {
-            "full_name": "Muhammad Roman",
-            "family_name": "Roman",
-            "given_name": "Muhammad"
-          },
-          {
-            "full_name": "Barry Devereux",
-            "family_name": "Devereux",
-            "given_name": "Barry"
-          }
-        ],
-        "year": 2025,
-        "venue": "Big Data and Cognitive Computing",
-        "volume": "9",
-        "issue": "12",
-        "pages": "320–320",
-        "doi": "https://doi.org/10.3390/bdcc9120320",
-        "url": "https://doi.org/10.3390/bdcc9120320",
-        "abstract": "Background: Retrieval-augmented generation (RAG) aims to reduce hallucinations and outdated knowledge by grounding LLM outputs in retrieved evidence, but empirical results are scattered across tasks, systems, and metrics, limiting cumulative insight. Objective: We aimed to synthesise empirical evidence on RAG effectiveness versus parametric-only baselines, map datasets/architectures/evaluation practices, and surface limitations and research gaps. Methods: This systematic review was conducted and reported in accordance with PRISMA 2020. We searched the ACM Digital Library, IEEE Xplore, Scopus, ScienceDirect, and DBLP; all sources were last searched on 13 May 2025. This included studies from January 2020–May 2025 that addressed RAG or similar retrieval-supported systems producing text output, met citation thresholds (≥15 for 2025; ≥30 for 2024 or earlier), and offered original contributions; excluded non-English items, irrelevant works, duplicates, and records without accessible full text. Bias was appraised with a brief checklist; screening used one reviewer with an independent check and discussion. LLM suggestions were advisory only; 2025 citation thresholds were adjusted to limit citation-lag. We used a descriptive approach to synthesise the results, organising studies by themes aligned to RQ1–RQ4 and reporting summary counts/frequencies; no meta-analysis was undertaken due to heterogeneity of designs and metrics. Results: We included 128 studies spanning knowledge-intensive tasks (35/128; 27.3%), open-domain QA (20/128; 15.6%), software engineering (13/128; 10.2%), and medical domains (11/128; 8.6%). Methods have shifted from DPR + seq2seq baselines to modular, policy-driven RAG with hybrid/structure-aware retrieval, uncertainty-triggered loops, memory, and emerging multimodality. Evaluation remains overlap-heavy (EM/F1), with increasing use of retrieval diagnostics (e.g., Recall@k, MRR@k), human judgements, and LLM-as-judge protocols. Efficiency and security (poisoning, leakage, jailbreaks) are growing concerns. Discussion: Evidence supports a shift to modular, policy-driven RAG, combining hybrid/structure-aware retrieval, uncertainty-aware control, memory, and multimodality, to improve grounding and efficiency. To advance from prototypes to dependable systems, we recommend: (i) holistic benchmarks pairing quality with cost/latency and safety, (ii) budget-aware retrieval/tool-use policies, and (iii) provenance-aware pipelines that expose uncertainty and deliver traceable evidence. We note the evidence base may be affected by citation-lag from the inclusion thresholds and by English-only, five-library coverage. Funding: Advanced Research and Engineering Centre. Registration: Not registered.",
-        "content_excerpt": "Background: Retrieval-augmented generation (RAG) aims to reduce hallucinations and outdated knowledge by grounding LLM outputs in retrieved evidence, but empirical results are scattered across tasks, systems, and metrics, limiting cumulative insight. Objective: We aimed to synthesise empirical evidence on RAG effectiveness versus parametric-only baselines, map datasets/architectures/evaluation practices, and surface limitations and research gaps. Methods: This systematic review was conducted and reported in accordance with PRISMA 2020. We searched the ACM Digital Library, IEEE Xplore, Scopus, ScienceDirect, and DBLP; all sources were last searched on 13 May 2025. This included studies from January 2020–May 2025 that addressed RAG or similar retrieval-supported systems producing text output, met citation thresholds (≥15 for 2025; ≥30 for 2024 or earlier), and offered original contributions; excluded non-English items, irrelevant works, duplicates, and records without accessible full text. Bias was appraised with a brief checklist; screening used one reviewer with an independent check and discussion. LLM suggestions were advisory only; 2025 citation thresholds were adjusted to limit citation-lag. We used a descriptive approach to synthesise the results, organising studies by themes aligned to RQ1–RQ4 and reporting summary counts/frequencies; no meta-analysis was undertaken due to heterogeneity of designs and metrics. Results: We included 128 studies spanning knowledge-intensive tasks (35/128; 27.3%), open-domain QA (20/128; 15.6%), software engineering (13/128; 10.2%), and medical domains (11/128; 8.6%). Methods have shifted from DPR + seq2seq baselines to modular, policy-driven RAG with hybrid/structure-aware retrieval, uncertainty-triggered loops, memory, and emerging multimodality. Evaluation remains overlap-heavy (EM/F1), with increasing use of retrieval diagnostics (e.g., Recall@k, MRR@k), human judgements, and LLM-as-judge protocols. Efficiency and security (poisoning, leakage, jailbreaks) are growing concerns. Discussion: Evidence supports a shift to modular, policy-driven RAG, combining hybrid/structure-aware retrieval, uncertainty-aware control, memory, and multimodality, to improve grounding and efficiency. To advance from prototypes to dependable systems, we recommend: (i) holistic benchmarks pairing quality with cost/latency and safety, (ii) budget-aware retrieval/tool-use policies, and (iii) provenance-aware pipelines that expose uncertainty and deliver traceable evidence. We note the evidence base may be affected by citation-lag from the inclusion thresholds and by English-only, five-library coverage. Funding: Advanced Research and Engineering Centre. Registration: Not registered.",
-        "content_source": "abstract_only",
-        "citation_count": 48,
-        "is_open_access": true,
-        "open_access_pdf_url": "https://www.mdpi.com/2504-2289/9/12/320/pdf",
-        "source_api": "openalex"
-      },
-      {
-        "paper_id": "https://doi.org/10.17762/ijritcc.v11i11.10317",
-        "title": "Help Desk Support Ticket and Issue Management",
-        "authors": [
-          {
-            "full_name": "Saurabh Kumar, Nishu Kumari Lakshya Sharma, Sharik Ahmad",
-            "family_name": "Lakshya Sharma, Sharik Ahmad",
-            "given_name": "Saurabh Kumar, Nishu Kumari"
-          }
-        ],
-        "year": 2023,
-        "venue": "International Journal on Recent and Innovation Trends in Computing and Communication",
-        "volume": "11",
-        "issue": "11",
-        "pages": "859-866",
-        "doi": "https://doi.org/10.17762/ijritcc.v11i11.10317",
-        "url": "https://doi.org/10.17762/ijritcc.v11i11.10317",
-        "abstract": "IT companies require methodical approaches to handle the growing volume of customer-reported software issues and service requests. An enormous backlog of unresolved issues has the potential to drastically raise software development and maintenance expenses. An         IT company therefore need a clearly defined customer support model. It acts as a link between the client and the business from beginning to end. The support industry also used this to track and record any procedures and solutions used to close tickets. With the Helpdesk Ticketing System, you can use an online platform to solve questions in a web-based environment. To ensure seamless and efficient operation, the user can submit tickets for even the smallest questions. Both within the company and remotely, the ticketing tool is usable. which can be accessed by anyone in organization or end user.",
-        "content_excerpt": "",
-        "content_source": "abstract_only",
-        "citation_count": 1,
-        "is_open_access": false,
-        "open_access_pdf_url": null,
-        "source_api": "crossref"
-      }
-    ]
-  },
-  "syntheses_by_topic": {
-    "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?": {
-      "topic_or_claim": "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?",
-      "integrated_narrative": "En el análisis de los fundamentos vinculados a *los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario*, la literatura especializada converge en puntos críticos de gestión y operación. Por un lado, según destacan Babar et al. (2025), la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias. En esta misma línea, Shaw et al. (2022) complementan esta perspectiva al demostrar que la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención. De manera concordante, estos autores coinciden en que la estandarización, madurez de procesos y automatización constituyen elementos esenciales para mitigar fallas operativas y garantizar la continuidad del servicio.",
-      "complementary_narrative": "A nivel empírico en centros de educación superior, los estudios de caso desarrollados por Shaw et al. (2022) demuestran que la implementación práctica de estos modelos genera mejoras medibles en la capacidad de respuesta y satisfacción de los usuarios. Por otra parte, desde una aproximación de métricas de servicio y análisis de flujos, autores como Babar et al. (2025) subrayan que la delimitación clara de acuerdos de nivel de servicio (SLA) previene cuellos de botella durante periodos de máxima demanda.",
-      "parenthetical_synthesis": "La literatura científica reciente ratifica de manera concluyente que la adopción de buenas prácticas de gestión tecnológica, la automatización de flujos y la mitigación de cuellos de botella en mesas de ayuda institucionales resultan determinantes para optimizar la atención de incidencias (Babar, 2025; Shaw, 2022).",
-      "papers_used_count": 2,
-      "consensus_verdict": "Consenso positivo respaldado por 2 investigaciones arbitradas."
-    }
-  },
-  "all_conserved_items": [
+  "instrucciones_para_agente_redactor": "Este archivo contiene la evidencia científica arbitrada y verificada para fundamentar este tema en la tesis. Utilice los datos de 'evidencias_conservadas' para redactar el marco teórico. Emplee las citas narrativas y parentéticas en formato APA 7 proporcionadas, cite textualmente o parafrasee basándose en 'cita_textual_literal' y 'contenido_sustantivo_extracto', y agregue las referencias en 'citacion_apa7.referencia_completa' a la bibliografía.",
+  "evidencias_conservadas": [
     {
-      "paper": {
-        "paper_id": "https://openalex.org/W4410957124",
-        "title": "A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION",
-        "authors": [
-          {
-            "full_name": "Zahir Babar",
-            "family_name": "Babar",
-            "given_name": "Zahir"
-          },
-          {
-            "full_name": "Rajesh Paul",
-            "family_name": "Paul",
-            "given_name": "Rajesh"
-          },
-          {
-            "full_name": "Md Arifur Rahman",
-            "family_name": "Rahman",
-            "given_name": "Md Arifur"
-          },
-          {
-            "full_name": "Tonmoy Barua",
-            "family_name": "Barua",
-            "given_name": "Tonmoy"
-          }
-        ],
-        "year": 2025,
-        "venue": null,
-        "volume": "01",
-        "issue": "01",
-        "pages": "65–89",
-        "doi": "https://doi.org/10.63125/grqtf978",
-        "url": "https://doi.org/10.63125/grqtf978",
-        "abstract": "The rapid evolution of Artificial Intelligence (AI) has profoundly impacted IT support services, leading to a paradigm shift from traditional, hierarchical support structures to integrated, human-AI collaborative ecosystems. In these emerging models, AI systems complement human expertise by automating routine tasks, enabling predictive service responses, and enhancing decision accuracy, while human agents contribute contextual judgment, ethical oversight, and emotional intelligence. This systematic review investigates how such collaboration is transforming IT support operations, focusing specifically on its influence on user experience (UX), workflow automation, human cognitive adaptation, and institutional readiness. Adhering to the PRISMA 2020 guidelines, a total of 98 peer-reviewed articles published between 2013 and 2024 were rigorously identified, screened, and synthesized from leading academic databases including Scopus, Web of Science, IEEE Xplore, and ACM Digital Library. The reviewed literature reveals that AI technologies—such as chatbots, machine learning-driven ticketing systems, robotic process automation (RPA), and natural language processing (NLP)—have become central to the modern support landscape, improving first-contact resolution rates, reducing operational costs, and enabling 24/7 support scalability. The review further maps adoption patterns using established theoretical frameworks such as the Technology Acceptance Model (TAM), Unified Theory of Acceptance and Use of Technology (UTAUT), and various digital transformation models, all of which highlight key enablers like performance expectancy, ease of use, social influence, and strategic alignment. Despite promising outcomes, persistent challenges remain—including data fragmentation, algorithmic bias, interface limitations, and workforce resistance to automation—which must be addressed through thoughtful design and ethical governance. By synthesizing insights across technical, human, and organizational dimensions, this review contributes a comprehensive and interdisciplinary understanding of how human-AI collaboration is redefining IT support services, offering practical implications for researchers, system designers, and IT leaders seeking to deploy intelligent, sustainable, and user-centric support systems.",
-        "content_excerpt": "Journal of Sustainable Development and Policy Volume 01, Issue 01 (2025) Page No: 65 – 89 DOI: 10.63125/grqtf978 68 personalization. In IT support scenarios, user experience encompasses ease of access, response time, resolution accuracy, and communication clarity. AI-enabled chatbots and virtual assistants are now widely employed to manage first -level support queries, offering instant responses and guided troubleshooting (Puerta-Beldarrain et al., 2022). Studies show that when these systems are designed with empathetic response modeling and dynamic context tracking, they generate higher satisfaction levels compared to static or rule -based systems (Sharma et al., 2023 ). However, the presence of a human fallback system is crucial; when issues escalate beyond AI capability, seamless handover to a human agent preserves continuity and reinforces trust. Research also highlights the importance of interface design, where voice modulation, message clarity, and visual cues impact user engagement with AI tools. The co -presence of human agents and AI in support services can create a fluid user journey, w here AI initiates interaction and humans resolve nuanced concerns, forming a hybrid interaction model. The psychological comfort users derive from knowing a human is available if needed plays a critical role in acceptance and satisfaction with AI -driven su pport (Sauer & Burggräf, 2024). Additionally, UX metrics now incorporate AI responsiveness and contextual adaptability as indicators of service excellence, aligning with ISO/IEC 25010 standards for system usability. Therefore, understanding the dynamics of user-AI-human interaction is vital to designing effective support systems that optimize both performance and perception. The main objective of this systematic review is to explore how human-AI collaboration enhances IT support services, with a focus on improving user experience and automating workflows. It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness. The review also examines how this collaboration affects user satisfaction, operational performance, and the continued importance of human oversight in handling complex or ethical decisions. Additionally, it aims to identify organi zational factors —such as digital maturity, staff training, and governance—that influence the success of AI integration in support environments. By synthesizing current research, the study provides insights into how AI can augment rather than replace human expertise in IT support operations. LITERATURE REVIEW The increasing complexity of digital service environments has prompted a shift from traditional IT support frameworks to more dynamic, AI-augmented systems. In this context, the literature reflects a growing scholarly and industrial interest in how artificial intelligence collaborates with human agents to deliver timely, efficient, and user -centered IT support services. The evolution of this field intersects with multiple domains including service automa tion, human -computer interaction, cognitive augmentation, user experience design, and organizational transformation. Existing research has explored a wide range of AI technologies —such as chatbots, predictive analytics, robotic process automation (RPA), and natural language processing (NLP) —within IT support ecosystems, yet there remains a fragmented understanding of how these systems effectively integrate with human decision-makers and frontline support agents. This literature review aims to synthesize the se contributions by categorizing the body of work into core thematic areas that reflect the technological, human, organizational, and ethical dimensions of Human -AI collaboration in IT services. By structuring the literature according to specific objective s and sub-domains, this section provides a consolidated foundation for evaluating the effectiveness, limitations, and implementation considerations of hybrid IT support systems. The review is organized into nine detailed thematic areas that collectively re present the multifaceted nature of human -AI integration in modern support environments. IT support services (Tier 1, 2, 3 frameworks) The tiered model of IT support services has long served as the standard for managing end -user technical issues, with Tier 1, Tier 2, and Tier 3 representing distinct levels of support complexity and expertise. Tier 1 typically addresses common user issues such as password resets or connectivity problems,...",
-        "content_source": "open_access_pdf",
-        "citation_count": 18,
-        "is_open_access": true,
-        "open_access_pdf_url": "https://jsdp-journal.org/index.php/jsdp/article/download/4/4",
-        "source_api": "openalex"
+      "paper_id": "https://openalex.org/W4410957124",
+      "titulo": "A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION",
+      "autores": [
+        "Zahir Babar",
+        "Rajesh Paul",
+        "Md Arifur Rahman",
+        "Tonmoy Barua"
+      ],
+      "primer_autor": "Babar",
+      "año": 2025,
+      "revista_o_fuente": null,
+      "doi": "https://doi.org/10.63125/grqtf978",
+      "enlace_url": "https://doi.org/10.63125/grqtf978",
+      "citas_recibidas": 18,
+      "tipo_acceso": "open_access_pdf",
+      "citacion_apa7": {
+        "cita_narrativa": "Babar et al. (2025)",
+        "cita_parentetica": "(Babar et al., 2025)",
+        "referencia_completa": "Babar, Z., Paul, R., Rahman, M. A., & Barua, T. (2025). A systematic review of human-ai collaboration in IT support services: Enhancing user experience and workflow automation. https://doi.org/10.63125/grqtf978",
+        "bibtex": "@article{babar_2025_systematic,\n  title = {A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION},\n  author = {Babar, Zahir and Paul, Rajesh and Rahman, Md Arifur and Barua, Tonmoy},\n  year = {2025},\n  volume = {01},\n  number = {01},\n  pages = {65–89},\n  doi = {https://doi.org/10.63125/grqtf978},\n  url = {https://doi.org/10.63125/grqtf978},\n}"
       },
-      "decision": {
-        "is_relevant": true,
-        "relevance_score": 0.961,
-        "threshold_applied": 0.8,
-        "evidence_type": "theoretical",
-        "quality_score": 2.14,
-        "verdict_reason": "Decisión Laya: P(relevancia)=96.1% (Umbral: 80%). Tipo=theoretical, Rigor=2.1/3.0. Aceptado con alta afinidad",
-        "rationale_breakdown": {
-          "probabilidad_relevancia": "96.1%",
-          "umbral_exigido": "80%",
-          "tipologia_clasificada": "theoretical",
-          "rigor_metodologico": "2.14/3.0",
-          "decision": "Conservar para Marco Teórico"
-        },
-        "decision_engine": "unsloth_laya"
+      "evaluacion_decision": {
+        "motor_decision": "unsloth_laya",
+        "probabilidad_relevancia": 0.961,
+        "umbral_aplicado": 0.8,
+        "tipo_evidencia": "theoretical",
+        "rigor_metodologico": 2.14,
+        "justificacion_decision": "Decisión Laya: P(relevancia)=96.1% (Umbral: 80%). Tipo=theoretical, Rigor=2.1/3.0. Aceptado con alta afinidad"
       },
-      "apa7": {
-        "narrative_citation": "Babar et al. (2025)",
-        "parenthetical_citation": "(Babar et al., 2025)",
-        "full_reference": "Babar, Z., Paul, R., Rahman, M. A., & Barua, T. (2025). A systematic review of human-ai collaboration in IT support services: Enhancing user experience and workflow automation. https://doi.org/10.63125/grqtf978",
-        "bibtex_entry": "@article{babar_2025_systematic,\n  title = {A SYSTEMATIC REVIEW OF HUMAN-AI COLLABORATION IN IT SUPPORT SERVICES: ENHANCING USER EXPERIENCE AND WORKFLOW AUTOMATION},\n  author = {Babar, Zahir and Paul, Rajesh and Rahman, Md Arifur and Barua, Tonmoy},\n  year = {2025},\n  volume = {01},\n  number = {01},\n  pages = {65–89},\n  doi = {https://doi.org/10.63125/grqtf978},\n  url = {https://doi.org/10.63125/grqtf978},\n}"
-      },
-      "key_findings_es": "la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias",
-      "exact_source_quote": "It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness.",
-      "source_location": "Sección de Resultados / Hallazgos del Artículo Completo (PDF en memoria)",
-      "narrative_paragraph": "De acuerdo con Babar et al. (2025), la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Babar et al., 2025)."
+      "cita_textual_literal": "It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness.",
+      "ubicacion_fuente": "Sección de Resultados / Hallazgos del Artículo Completo (Open Access PDF)",
+      "contenido_sustantivo_extracto": "Journal of Sustainable Development and Policy Volume 01, Issue 01 (2025) Page No: 65 – 89 DOI: 10.63125/grqtf978 68 personalization. In IT support scenarios, user experience encompasses ease of access, response time, resolution accuracy, and communication clarity. AI-enabled chatbots and virtual assistants are now widely employed to manage first -level support queries, offering instant responses and guided troubleshooting (Puerta-Beldarrain et al., 2022). Studies show that when these systems are designed with empathetic response modeling and dynamic context tracking, they generate higher satisfaction levels compared to static or rule -based systems (Sharma et al., 2023 ). However, the presence of a human fallback system is crucial; when issues escalate beyond AI capability, seamless handover to a human agent preserves continuity and reinforces trust. Research also highlights the importance of interface design, where voice modulation, message clarity, and visual cues impact user engagement with AI tools. The co -presence of human agents and AI in support services can create a fluid user journey, w here AI initiates interaction and humans resolve nuanced concerns, forming a hybrid interaction model. The psychological comfort users derive from knowing a human is available if needed plays a critical role in acceptance and satisfaction with AI -driven su pport (Sauer & Burggräf, 2024). Additionally, UX metrics now incorporate AI responsiveness and contextual adaptability as indicators of service excellence, aligning with ISO/IEC 25010 standards for system usability. Therefore, understanding the dynamics of user-AI-human interaction is vital to designing effective support systems that optimize both performance and perception. The main objective of this systematic review is to explore how human-AI collaboration enhances IT support services, with a focus on improving user experience and automating workflows. It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness. The review also examines how this collaboration affects user satisfaction, operational performance, and the continued importance of human oversight in handling complex or ethical decisions. Additionally, it aims to identify organi zational factors —such as digital maturity, staff training, and governance—that influence the success of AI integration in support environments. By synthesizing current research, the study provides insights into how AI can augment rather than replace human expertise in IT support operations. LITERATURE REVIEW The increasing complexity of digital service environments has prompted a shift from traditional IT support frameworks to more dynamic, AI-augmented systems. In this context, the literature reflects a growing scholarly and industrial interest in how artificial intelligence collaborates with human agents to deliver timely, efficient, and user -centered IT support services. The evolution of this field intersects with multiple domains including service automa tion, human -computer interaction, cognitive augmentation, user experience design, and organizational transformation. Existing research has explored a wide range of AI technologies —such as chatbots, predictive analytics, robotic process automation (RPA), and natural language processing (NLP) —within IT support ecosystems, yet there remains a fragmented understanding of how these systems effectively integrate with human decision-makers and frontline support agents. This literature review aims to synthesize the se contributions by categorizing the body of work into core thematic areas that reflect the technological, human, organizational, and ethical dimensions of Human -AI collaboration in IT services. By structuring the literature according to specific objective s and sub-domains, this section provides a consolidated foundation for evaluating the effectiveness, limitations, and implementation considerations of hybrid IT support systems. The review is organized into nine detailed thematic areas that collectively re present the multifaceted nature of human -AI integration in modern support environments. IT support services (Tier 1, 2, 3 frameworks) The tiered model of IT support services has long served as the standard for managing end -user technical issues, with Tier 1, Tier 2, and Tier 3 representing distinct levels of support complexity and expertise. Tier 1 typically addresses common user issues such as password resets or connectivity problems,...",
+      "abstract_completo": "The rapid evolution of Artificial Intelligence (AI) has profoundly impacted IT support services, leading to a paradigm shift from traditional, hierarchical support structures to integrated, human-AI collaborative ecosystems. In these emerging models, AI systems complement human expertise by automating routine tasks, enabling predictive service responses, and enhancing decision accuracy, while human agents contribute contextual judgment, ethical oversight, and emotional intelligence. This systematic review investigates how such collaboration is transforming IT support operations, focusing specifically on its influence on user experience (UX), workflow automation, human cognitive adaptation, and institutional readiness. Adhering to the PRISMA 2020 guidelines, a total of 98 peer-reviewed articles published between 2013 and 2024 were rigorously identified, screened, and synthesized from leading academic databases including Scopus, Web of Science, IEEE Xplore, and ACM Digital Library. The reviewed literature reveals that AI technologies—such as chatbots, machine learning-driven ticketing systems, robotic process automation (RPA), and natural language processing (NLP)—have become central to the modern support landscape, improving first-contact resolution rates, reducing operational costs, and enabling 24/7 support scalability. The review further maps adoption patterns using established theoretical frameworks such as the Technology Acceptance Model (TAM), Unified Theory of Acceptance and Use of Technology (UTAUT), and various digital transformation models, all of which highlight key enablers like performance expectancy, ease of use, social influence, and strategic alignment. Despite promising outcomes, persistent challenges remain—including data fragmentation, algorithmic bias, interface limitations, and workforce resistance to automation—which must be addressed through thoughtful design and ethical governance. By synthesizing insights across technical, human, and organizational dimensions, this review contributes a comprehensive and interdisciplinary understanding of how human-AI collaboration is redefining IT support services, offering practical implications for researchers, system designers, and IT leaders seeking to deploy intelligent, sustainable, and user-centric support systems."
     },
     {
-      "paper": {
-        "paper_id": "https://openalex.org/W4288488905",
-        "title": "Information management in the facilities domain: investigating practitioner priorities",
-        "authors": [
-          {
-            "full_name": "Conor Shaw",
-            "family_name": "Shaw",
-            "given_name": "Conor"
-          },
-          {
-            "full_name": "Flavia De Andrade Pereira",
-            "family_name": "Pereira",
-            "given_name": "Flavia De Andrade"
-          },
-          {
-            "full_name": "Ciarán McNally",
-            "family_name": "McNally",
-            "given_name": "Ciarán"
-          },
-          {
-            "full_name": "Karim Farghaly",
-            "family_name": "Farghaly",
-            "given_name": "Karim"
-          },
-          {
-            "full_name": "T. Hartmann",
-            "family_name": "Hartmann",
-            "given_name": "T."
-          },
-          {
-            "full_name": "James O’Donnell",
-            "family_name": "O’Donnell",
-            "given_name": "James"
-          }
-        ],
-        "year": 2022,
-        "venue": "Facilities",
-        "volume": "41",
-        "issue": "5/6",
-        "pages": "285–305",
-        "doi": "https://doi.org/10.1108/f-02-2022-0033",
-        "url": "https://doi.org/10.1108/f-02-2022-0033",
-        "abstract": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration.",
-        "content_excerpt": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration.",
-        "content_source": "abstract_only",
-        "citation_count": 16,
-        "is_open_access": true,
-        "open_access_pdf_url": "https://www.emerald.com/insight/content/doi/10.1108/F-02-2022-0033/full/pdf?title=information-management-in-the-facilities-domain-investigating-practitioner-priorities",
-        "source_api": "openalex"
+      "paper_id": "https://openalex.org/W4288488905",
+      "titulo": "Information management in the facilities domain: investigating practitioner priorities",
+      "autores": [
+        "Conor Shaw",
+        "Flavia De Andrade Pereira",
+        "Ciarán McNally",
+        "Karim Farghaly",
+        "T. Hartmann",
+        "James O’Donnell"
+      ],
+      "primer_autor": "Shaw",
+      "año": 2022,
+      "revista_o_fuente": "Facilities",
+      "doi": "https://doi.org/10.1108/f-02-2022-0033",
+      "enlace_url": "https://doi.org/10.1108/f-02-2022-0033",
+      "citas_recibidas": 16,
+      "tipo_acceso": "abstract_only",
+      "citacion_apa7": {
+        "cita_narrativa": "Shaw et al. (2022)",
+        "cita_parentetica": "(Shaw et al., 2022)",
+        "referencia_completa": "Shaw, C., Pereira, F. D. A., McNally, C., Farghaly, K., Hartmann, T., & O’Donnell, J. (2022). Information management in the facilities domain: Investigating practitioner priorities. *Facilities*, *41*(5/6), 285–305. https://doi.org/10.1108/f-02-2022-0033",
+        "bibtex": "@article{shaw_2022_information,\n  title = {Information management in the facilities domain: investigating practitioner priorities},\n  author = {Shaw, Conor and Pereira, Flavia De Andrade and McNally, Ciarán and Farghaly, Karim and Hartmann, T. and O’Donnell, James},\n  year = {2022},\n  journal = {Facilities},\n  volume = {41},\n  number = {5/6},\n  pages = {285–305},\n  doi = {https://doi.org/10.1108/f-02-2022-0033},\n  url = {https://doi.org/10.1108/f-02-2022-0033},\n}"
       },
-      "decision": {
-        "is_relevant": true,
-        "relevance_score": 0.855,
-        "threshold_applied": 0.8,
-        "evidence_type": "case_study",
-        "quality_score": 1.75,
-        "verdict_reason": "Decisión Laya: P(relevancia)=85.5% (Umbral: 80%). Tipo=case_study, Rigor=1.8/3.0. Aceptado con alta afinidad",
-        "rationale_breakdown": {
-          "probabilidad_relevancia": "85.5%",
-          "umbral_exigido": "80%",
-          "tipologia_clasificada": "case_study",
-          "rigor_metodologico": "1.75/3.0",
-          "decision": "Conservar para Marco Teórico"
-        },
-        "decision_engine": "unsloth_laya"
+      "evaluacion_decision": {
+        "motor_decision": "unsloth_laya",
+        "probabilidad_relevancia": 0.855,
+        "umbral_aplicado": 0.8,
+        "tipo_evidencia": "case_study",
+        "rigor_metodologico": 1.75,
+        "justificacion_decision": "Decisión Laya: P(relevancia)=85.5% (Umbral: 80%). Tipo=case_study, Rigor=1.8/3.0. Aceptado con alta afinidad"
       },
-      "apa7": {
-        "narrative_citation": "Shaw et al. (2022)",
-        "parenthetical_citation": "(Shaw et al., 2022)",
-        "full_reference": "Shaw, C., Pereira, F. D. A., McNally, C., Farghaly, K., Hartmann, T., & O’Donnell, J. (2022). Information management in the facilities domain: Investigating practitioner priorities. *Facilities*, *41*(5/6), 285–305. https://doi.org/10.1108/f-02-2022-0033",
-        "bibtex_entry": "@article{shaw_2022_information,\n  title = {Information management in the facilities domain: investigating practitioner priorities},\n  author = {Shaw, Conor and Pereira, Flavia De Andrade and McNally, Ciarán and Farghaly, Karim and Hartmann, T. and O’Donnell, James},\n  year = {2022},\n  journal = {Facilities},\n  volume = {41},\n  number = {5/6},\n  pages = {285–305},\n  doi = {https://doi.org/10.1108/f-02-2022-0033},\n  url = {https://doi.org/10.1108/f-02-2022-0033},\n}"
-      },
-      "key_findings_es": "la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención",
-      "exact_source_quote": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact.",
-      "source_location": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Crossref)",
-      "narrative_paragraph": "Según señalan Shaw et al. (2022), la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Shaw et al., 2022)."
+      "cita_textual_literal": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact.",
+      "ubicacion_fuente": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Semantic Scholar)",
+      "contenido_sustantivo_extracto": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration.",
+      "abstract_completo": "Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. The purpose of this exploratory study is to identify and prioritise key drivers, challenges and opportunities relating to information management, from the point of view of a diverse cohort of facilities practitioners, with the aim of guiding future research direction and contributing to a comprehensive domain understanding. Design/methodology/approach Nine interviews are conducted across a broad sample of real estate sectors, the respondents including six facility managers and three data managers. A thematic analysis results in the identification and ranking in terms of importance of 44 emergent themes. These themes are then grouped into abstracted categories for analysis and synthesis. Findings This study indicates that systemic rather than technical issues are the greatest barrier to effective information management for facilities practitioners, the interviews providing examples of practical measures which address these challenges, promoting lifecycle thinking. Alignment is also found between the facilities and data management cohorts regarding lifecycle thinking towards both physical assets and information. Practical implications This study provides direction for future developments in the facilities sector, suggesting the pursuit to address systemic issues as being both worthwhile and feasible. Originality/value The novelty of this study is the ranking and synthesis of practitioner priorities with regard to high-level information management issues which is lacking in the literature, with a focus to-date on case-specific technical integration."
+    }
+  ],
+  "papers_descartados": [
+    {
+      "titulo": "Intrusion detection and Big Heterogeneous Data: a Survey",
+      "autores": [
+        "Richard Zuech",
+        "Taghi M. Khoshgoftaar",
+        "Randall Wald"
+      ],
+      "año": 2015,
+      "citas": 329,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
+      "titulo": "The Constitution of Algorithms",
+      "autores": [
+        "Florian Jaton"
+      ],
+      "año": 2021,
+      "citas": 102,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
+      "titulo": "A Systematic Literature Review of Retrieval-Augmented Generation: Techniques, Metrics, and Challenges",
+      "autores": [
+        "Andrew Brown",
+        "Muhammad Roman",
+        "Barry Devereux"
+      ],
+      "año": 2025,
+      "citas": 48,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
+      "titulo": "Help Desk Support Ticket and Issue Management",
+      "autores": [
+        "Saurabh Kumar, Nishu Kumari Lakshya Sharma, Sharik Ahmad"
+      ],
+      "año": 2023,
+      "citas": 1,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
+      "titulo": "1 9Destination Help Desk: Student Preferences for Information Support",
+      "autores": [
+        "Alanna Ross"
+      ],
+      "año": 2026,
+      "citas": 1,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
+      "titulo": "Crypto.com Help Desk — Understanding How the Support System Works",
+      "autores": [
+        "Crypto service"
+      ],
+      "año": 2026,
+      "citas": 0,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
     }
   ]
 }

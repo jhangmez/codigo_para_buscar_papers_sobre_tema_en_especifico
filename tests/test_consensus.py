@@ -183,9 +183,87 @@ class TestThesisConsensus(unittest.TestCase):
         self.assertIn("Palilingan (2021)", multi_syn.integrated_narrative)
         self.assertIn("(Marrone, 2020; Palilingan, 2021)", multi_syn.parenthetical_synthesis)
         self.assertEqual(multi_syn.papers_used_count, 2)
-        # Verificación anti-alucinación
-        self.assertTrue(len(item1.exact_source_quote) > 10)
-        self.assertIn("Resumen Oficial", item1.source_location)
+    def test_agent_evidence_extraction_and_quote(self) -> None:
+        """Verifica la extracción exacta de citas y metadatos sin generar síntesis alucinada."""
+        from thesis_consensus.agent import ThesisConsensusAgent
+
+        text = (
+            "Managing IT service desks requires standardized frameworks. "
+            "We analyze 10,000 university tickets and results demonstrate that automating ticket triage reduces resolution time by 35%. "
+            "In conclusion, proactive incident resolution improves overall academic satisfaction."
+        )
+        quote = ThesisConsensusAgent._extract_verbatim_quote(text)
+        self.assertIn("reduces resolution time by 35%", quote)
+
+        paper_pdf = PaperMetadata(
+            paper_id="W1",
+            title="Automating Help Desk Tickets",
+            content_source="open_access_pdf",
+        )
+        loc_pdf = ThesisConsensusAgent._get_source_location(paper_pdf)
+        self.assertIn("Open Access PDF", loc_pdf)
+
+        paper_abs = PaperMetadata(
+            paper_id="W2",
+            title="Service Management in Education",
+            content_source="abstract_only",
+        )
+        loc_abs = ThesisConsensusAgent._get_source_location(paper_abs)
+        self.assertIn("Resumen Oficial", loc_abs)
+
+    def test_to_topic_json_prompt_ready(self) -> None:
+        """Verifica que to_topic_json genere una estructura lista para agentes redactores."""
+        import tempfile
+        import json
+        from pathlib import Path
+        from thesis_consensus.exporter import ThesisExporter
+        from thesis_consensus.models import ThesisEvidenceItem
+
+        paper = PaperMetadata(
+            paper_id="W99",
+            title="Adoption of ITSM in Universities",
+            authors=[Author(full_name="Jane Doe", family_name="Doe", given_name="Jane")],
+            year=2023,
+            venue="Journal of Academic Computing",
+            doi="https://doi.org/10.1000/182",
+            abstract="Study on ticket volumes and bottlenecks.",
+        )
+        dec = DecisionEvaluation(
+            is_relevant=True,
+            relevance_score=0.92,
+            threshold_applied=0.80,
+            evidence_type="case_study",
+            quality_score=2.8,
+            verdict_reason="Alta relevancia empírica directa",
+            decision_engine="unsloth_laya",
+        )
+        apa = build_apa7_citation(paper, language="es")
+        item = ThesisEvidenceItem(
+            paper=paper,
+            decision=dec,
+            apa7=apa,
+            exact_source_quote="Study on ticket volumes and bottlenecks.",
+            source_location="Resumen Oficial Indexado",
+            content_excerpt="Study on ticket volumes and bottlenecks.",
+        )
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            json_file = Path(tmpdir) / "evidencia.json"
+            ThesisExporter.to_topic_json(
+                topic="ITSM en universidades",
+                conserved=[item],
+                discarded=[],
+                output_filepath=str(json_file),
+            )
+            self.assertTrue(json_file.exists())
+            data = json.loads(json_file.read_text(encoding="utf-8"))
+            self.assertEqual(data["tema_investigacion"], "ITSM en universidades")
+            self.assertEqual(data["resumen_evaluacion"]["papers_aprobados_conservados"], 1)
+            self.assertIn("instrucciones_para_agente_redactor", data)
+            ev = data["evidencias_conservadas"][0]
+            self.assertEqual(ev["citacion_apa7"]["cita_narrativa"], "Doe (2023)")
+            self.assertEqual(ev["citacion_apa7"]["cita_parentetica"], "(Doe, 2023)")
+            self.assertEqual(ev["evaluacion_decision"]["motor_decision"], "unsloth_laya")
 
 
 if __name__ == "__main__":

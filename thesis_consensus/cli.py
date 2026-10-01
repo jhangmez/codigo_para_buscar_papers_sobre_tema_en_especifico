@@ -39,7 +39,7 @@ def display_welcome_banner(threshold: float, language: str) -> None:
             "[bold cyan]🎓 THESIS CONSENSUS (Buscador y Evaluador de Literatura para Tesis)[/bold cyan]\n"
             f"[green]• Idioma configurado:[/green] [bold white]{language.upper()} (Español Académico)[/bold white]\n"
             f"[yellow]• Umbral de corte del Modelo de Decisión:[/yellow] [bold red]{threshold:.0%}[/bold red] (Alta exigencia para tesis)\n"
-            "[magenta]• Síntesis multi-paper integrada con normas oficiales APA 7ma Edición[/magenta]",
+            "[magenta]• Extracción de evidencias académicas arbitradas y citas oficiales APA 7ma Edición[/magenta]",
             border_style="cyan",
         )
     )
@@ -132,38 +132,22 @@ def process_topics_batch(
         console.print(table)
         console.print(f"[bold]Balance:[/bold] [green]{len(conserved)} conservados[/green] | [red]{len(discarded)} descartados[/red]")
 
-        # 2. Síntesis Multi-Paper en Español
-        if synthesis and conserved:
-            console.print(Panel(
-                f"[bold yellow]📝 Síntesis Teórica Integrada (Múltiples Papers)[/bold yellow]\n\n"
-                f"[bold white]Opción A (Narrativa Dialéctica recomendada):[/bold white]\n{synthesis.integrated_narrative}\n\n"
-                f"[bold white]Opción B (Citación Parentética Agrupada APA 7):[/bold white]\n{synthesis.parenthetical_synthesis}",
-                border_style="yellow",
-            ))
-
-    # Exportar resultados estructurados agrupados por cada pregunta
+        # 2. Exportar resultados estructurados agrupados por cada pregunta
     export_paths = ThesisExporter.export_batch_grouped_by_topic(
         batch=batch,
         base_output_dir=DEFAULT_OUTPUT_DIR,
-        master_md_filename=Path(out_md).name,
-        master_bib_filename=Path(out_bib).name,
     )
 
     console.print("\n" + "#" * 80)
-    console.print("[bold green]✔ Resultados organizados y agrupados por pregunta:[/bold green]")
+    console.print("[bold green]✔ Resultados organizados y agrupados por pregunta (sin reportes redundantes):[/bold green]")
     for idx, topic in enumerate(batch.topics, start=1):
         topic_folder = export_paths.get(f"tema_{idx}")
         if topic_folder:
             console.print(f"  📂 [cyan]{topic_folder}[/cyan]")
-            console.print("     ├── [white]fundamentos_teoricos.md[/white] (Marco teórico específico)")
+            console.print("     ├── [white]fundamentos_teoricos.md[/white] (Reporte de evidencias y auditoría)")
             console.print("     ├── [white]referencias.bib[/white] (BibTeX específico del tema)")
-            console.print("     └── [white]evidencia.json[/white] (JSON estructurado)")
+            console.print("     └── [white]evidencia.json[/white] (JSON estructurado para agente redactor)")
 
-    console.print(f"\n[bold green]✔ Reporte maestro consolidado agrupado en carpeta dedicada:[/bold green]")
-    console.print(f"  📂 [cyan]{export_paths.get('master_dir')}[/cyan]")
-    console.print("     ├── [white]fundamentos_teoricos_tesis.md[/white] (Reporte unificado)")
-    console.print("     ├── [white]referencias_tesis.bib[/white] (Bibliografía general consolidada)")
-    console.print("     └── [white]evidencia_academica.json[/white] (Base de datos JSON)")
     console.print("#" * 80 + "\n")
 
     return batch
