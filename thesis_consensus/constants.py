@@ -37,11 +37,12 @@ DEFAULT_SEARCH_LIMIT: int = 15
 DEFAULT_MIN_PUBLICATION_YEAR: int = 2015
 
 # ==============================================================================
-# ARCHIVOS Y RUTAS POR DEFECTO
+# ARCHIVOS Y RUTAS POR DEFECTO (Organización en carpetas)
 # ==============================================================================
-DEFAULT_OUTPUT_MD: str = "fundamentos_teoricos_tesis.md"
-DEFAULT_OUTPUT_BIB: str = "referencias_tesis.bib"
-DEFAULT_OUTPUT_JSON: str = "tesis_consenso.json"
+DEFAULT_OUTPUT_DIR: str = "outputs"
+DEFAULT_OUTPUT_MD: str = "outputs/fundamentos_teoricos_tesis.md"
+DEFAULT_OUTPUT_BIB: str = "outputs/referencias_tesis.bib"
+DEFAULT_OUTPUT_JSON: str = "outputs/evidencia_academica.json"
 
 # ==============================================================================
 # LÉXICO ACADÉMICO, ACRÓNIMOS Y STOPWORDS

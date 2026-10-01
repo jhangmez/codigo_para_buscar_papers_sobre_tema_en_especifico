@@ -183,6 +183,9 @@ class TestThesisConsensus(unittest.TestCase):
         self.assertIn("Palilingan (2021)", multi_syn.integrated_narrative)
         self.assertIn("(Marrone, 2020; Palilingan, 2021)", multi_syn.parenthetical_synthesis)
         self.assertEqual(multi_syn.papers_used_count, 2)
+        # Verificación anti-alucinación
+        self.assertTrue(len(item1.exact_source_quote) > 10)
+        self.assertIn("Resumen Oficial", item1.source_location)
 
 
 if __name__ == "__main__":

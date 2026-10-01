@@ -115,7 +115,9 @@ class ThesisEvidenceItem(BaseModel):
     decision: DecisionEvaluation
     apa7: Apa7Citation
     key_findings_es: str          # Hallazgo o evidencia clave traducido y sintetizado al español
-    narrative_paragraph: str      # Párrafo individual redactado en español
+    exact_source_quote: str       # Fragmento textual EXACTO y literal del paper en inglés (Cero alucinación)
+    source_location: str          # Procedencia del fragmento (PDF Resultados, HTML Open Access, Abstract Oficial)
+    narrative_paragraph: str      # Párrafo individual redactado en español listo para el marco teórico
 
 
 class MultiPaperSynthesis(BaseModel):

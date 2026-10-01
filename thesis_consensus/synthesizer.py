@@ -121,12 +121,23 @@ class ThesisSynthesizer:
         topic_or_claim: str,
         index: int = 0,
     ) -> ThesisEvidenceItem:
-        """Construye un elemento individual de evidencia fundamentado en español."""
+        """Construye un elemento individual de evidencia fundamentado en español con respaldo textual exacto."""
         apa7 = build_apa7_citation(paper, language=self._language)
-        raw_finding = self._extract_key_findings(paper.abstract, topic_or_claim)
+
+        # Priorizar el texto profundo de resultados si está disponible
+        text_source_pool = paper.content_excerpt if paper.content_excerpt else paper.abstract
+        raw_finding = self._extract_key_findings(text_source_pool, topic_or_claim)
 
         # Traducir y refinar el hallazgo al español académico
         finding_es = self._translate_and_polish_finding_to_spanish(raw_finding)
+
+        # Determinar la procedencia exacta para la auditoría anti-alucinación
+        if paper.content_source == "open_access_pdf":
+            location_str = "Sección de Resultados / Hallazgos del Artículo Completo (PDF en memoria)"
+        elif paper.content_source == "open_access_html":
+            location_str = "Cuerpo del Artículo Completo (Página HTML Open Access)"
+        else:
+            location_str = "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Crossref)"
 
         templates_es = [
             "De acuerdo con {citation}, {finding}.",
@@ -150,6 +161,8 @@ class ThesisSynthesizer:
             decision=decision,
             apa7=apa7,
             key_findings_es=finding_es,
+            exact_source_quote=raw_finding,
+            source_location=location_str,
             narrative_paragraph=paragraph,
         )
 

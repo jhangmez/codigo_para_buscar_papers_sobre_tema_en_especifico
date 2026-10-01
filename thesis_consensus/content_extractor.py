@@ -140,6 +140,18 @@ class SafeContentExtractor:
                 elif "text/html" in content_type:
                     html_text = resp.text
                     clean_text = self._clean_html_text(html_text)
+
+                    # Detección y rechazo de páginas de bloqueo / Cloudflare / Captcha
+                    bot_indicators = [
+                        "confirm you are a human", "robot", "captcha", "cloudflare",
+                        "security check", "verify you are human", "please enable cookies",
+                        "just a moment", "access denied", "attention required"
+                    ]
+                    clean_lower = clean_text.lower()
+                    if any(indicator in clean_lower for indicator in bot_indicators):
+                        # Descartar texto de captcha y recurrir al abstract indexado verificado
+                        return paper.abstract, "abstract_only"
+
                     if len(clean_text) > 300:
                         refined_text = self._prioritize_academic_sections(clean_text)
                         return refined_text, "open_access_html"

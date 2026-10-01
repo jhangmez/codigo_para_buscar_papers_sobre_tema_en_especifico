@@ -116,17 +116,25 @@ class ThesisExporter:
 
             lines.append("")
 
-            # 4. Detalle y citas individuales por paper
-            lines.append("### 📚 Evidencias Específicas por Artículo")
+            # 4. Detalle y citas individuales por paper con trazabilidad anti-alucinación
+            lines.append("### 📚 Evidencias Específicas por Artículo y Auditoría Textual (Cero Alucinación)")
             for p_idx, item in enumerate(conserved, start=1):
                 p = item.paper
                 lines.extend([
                     f"#### {idx}.{p_idx}. {p.title}",
                     f"- **Cita narrativa:** `{item.apa7.narrative_citation}`",
                     f"- **Cita parentética:** `{item.apa7.parenthetical_citation}`",
-                    f"- **Aporte al marco teórico:** {item.narrative_paragraph}",
-                    f"- **Referencia APA 7:** {item.apa7.full_reference}",
-                    f"- **DOI:** [{p.doi or p.url or 'Enlace'}]({p.doi or p.url or '#'})",
+                    f"- **Párrafo sugerido para marco teórico:**",
+                    f"> {item.narrative_paragraph}",
+                    "",
+                    "> 🔍 **Auditoría de Veracidad y Respaldo Textual (Cero Alucinación):**",
+                    f"> - **Cita Textual Literal del Artículo:** *\"{item.exact_source_quote}\"*",
+                    f"> - **Procedencia de la Cita:** `{item.source_location}`",
+                    f"> - **Tipo de Acceso:** `{p.content_source}` | **Citas Recibidas:** `{p.citation_count}`",
+                    f"> - **Traducción / Paráfrasis Aplicada:** *\"{item.key_findings_es}\"*",
+                    "",
+                    f"- **Referencia bibliográfica APA 7:** {item.apa7.full_reference}",
+                    f"- **DOI Verificable:** [{p.doi or p.url or 'Enlace al Paper'}]({p.doi or p.url or '#'})",
                     "",
                 ])
 
