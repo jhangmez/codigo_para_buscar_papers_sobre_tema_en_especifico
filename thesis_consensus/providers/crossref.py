@@ -7,14 +7,23 @@ from typing import List, Optional, Dict
 import httpx
 from thesis_consensus.models import Author, PaperMetadata
 from thesis_consensus.providers.base import BaseAcademicProvider
+from thesis_consensus.constants import (
+    CROSSREF_BASE_URL,
+    DEFAULT_USER_EMAIL,
+    DEFAULT_TIMEOUT_SECONDS,
+)
 
 
 class CrossrefProvider(BaseAcademicProvider):
     """Proveedor para la API REST de Crossref."""
 
-    BASE_URL = "https://api.crossref.org/works"
+    BASE_URL = CROSSREF_BASE_URL
 
-    def __init__(self, email: str = "thesis_researcher@university.edu", timeout_seconds: float = 15.0) -> None:
+    def __init__(
+        self,
+        email: str = DEFAULT_USER_EMAIL,
+        timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
+    ) -> None:
         self._email = email
         self._timeout_seconds = timeout_seconds
 

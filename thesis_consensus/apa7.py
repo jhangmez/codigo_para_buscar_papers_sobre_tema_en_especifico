@@ -10,6 +10,7 @@ Incluye soporte para:
 import re
 from typing import List, Literal, Tuple
 from thesis_consensus.models import Author, PaperMetadata, Apa7Citation
+from thesis_consensus.constants import ACADEMIC_ACRONYMS, DEFAULT_LANGUAGE
 
 
 def _to_sentence_case(title: str) -> str:
@@ -21,10 +22,7 @@ def _to_sentence_case(title: str) -> str:
     if not title:
         return ""
 
-    known_acronyms = {
-        "itil", "itsm", "it", "ai", "ict", "sla", "kpi", "api", "erp",
-        "iso", "ieee", "acm", "cio", "cto", "nlp", "llm", "usa", "uk"
-    }
+    known_acronyms = set(ACADEMIC_ACRONYMS)
 
     # Dividir por oraciones o subtítulos (después de ':' o '-')
     subparts = re.split(r"(: |- )", title)

@@ -5,7 +5,7 @@ Endpoint: POST /v1/systemone
 """
 
 import os
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 import httpx
 from thesis_consensus.models import (
     PaperMetadata,
@@ -15,6 +15,13 @@ from thesis_consensus.models import (
     LayaScoreResponse,
 )
 from thesis_consensus.decision.protocol import BaseDecisionJudge
+from thesis_consensus.constants import (
+    UNSLOTH_DEFAULT_URL,
+    DEFAULT_RELEVANCE_THRESHOLD,
+    DEFAULT_DECISION_MODEL,
+    DEFAULT_TIMEOUT_SECONDS,
+    MINIMUM_RIGOR_SCORE,
+)
 
 
 class UnslothLayaJudge(BaseDecisionJudge):
@@ -23,21 +30,19 @@ class UnslothLayaJudge(BaseDecisionJudge):
     Utiliza preguntas 'noul' (probabilidad sí/no), 'choice' (clasificación) y 'score' (calidad).
     """
 
-    DEFAULT_BASE_URL = "http://localhost:8888/v1/systemone"
-
     def __init__(
         self,
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
-        model_name: str = "laya",
-        relevance_threshold: float = 0.55,
-        timeout_seconds: float = 12.0,
+        model_name: str = DEFAULT_DECISION_MODEL,
+        default_threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
+        timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
     ) -> None:
         raw_url = base_url if base_url is not None else os.getenv("UNSLOTH_API_URL")
-        self._base_url: str = raw_url if raw_url else self.DEFAULT_BASE_URL
+        self._base_url: str = raw_url if raw_url else UNSLOTH_DEFAULT_URL
         self._api_key: str = api_key if api_key is not None else (os.getenv("UNSLOTH_API_KEY") or "")
         self._model_name: str = model_name
-        self._relevance_threshold: float = relevance_threshold
+        self._default_threshold: float = default_threshold
         self._timeout_seconds: float = timeout_seconds
 
     @property
@@ -62,16 +67,20 @@ class UnslothLayaJudge(BaseDecisionJudge):
                     },
                 }
                 res = client.post(self._base_url, headers=headers, json=payload)
-                # Debe responder 200 OK para considerarse activo
                 return res.status_code == 200
         except Exception:
             return False
 
-    def evaluate(self, paper: PaperMetadata, topic_or_claim: str) -> DecisionEvaluation:
+    def evaluate(
+        self,
+        paper: PaperMetadata,
+        topic_or_claim: str,
+        threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
+    ) -> DecisionEvaluation:
         """
         Envía los metadatos y el resumen del paper a Unsloth Laya para tomar la decisión estructurada.
+        Aplica el umbral alto exigido (80% - 85%).
         """
-        # Preparar el estado (texto de entrada para el modelo)
         abstract_snippet = paper.abstract[:1500] if paper.abstract else "(Sin resumen disponible, evaluar por título)"
         state_text = (
             f"Paper Title: {paper.title}\n"
@@ -80,19 +89,16 @@ class UnslothLayaJudge(BaseDecisionJudge):
             f"Abstract: {abstract_snippet}"
         )
 
-        headers: Dict[str, str] = {
-            "Content-Type": "application/json",
-        }
+        headers: Dict[str, str] = {"Content-Type": "application/json"}
         if self._api_key:
             headers["Authorization"] = f"Bearer {self._api_key}"
 
-        # Definir las 3 preguntas clave según las capacidades de Laya
         questions_payload: Dict[str, object] = {
             "is_relevant": {
                 "type": "noul",
                 "instructions": (
-                    f"Does this academic paper provide direct evidence, theoretical foundations, "
-                    f"case studies, or empirical findings related to: '{topic_or_claim}'?"
+                    f"Does this academic paper provide direct empirical evidence, theoretical models, "
+                    f"or actionable insights directly answering: '{topic_or_claim}'?"
                 ),
             },
             "evidence_type": {
@@ -127,61 +133,74 @@ class UnslothLayaJudge(BaseDecisionJudge):
             with httpx.Client(timeout=self._timeout_seconds) as client:
                 resp = client.post(self._base_url, headers=headers, json=body)
                 if resp.status_code != 200:
-                    return self._fallback_error_evaluation(f"HTTP {resp.status_code}: {resp.text[:100]}")
+                    return self._fallback_error_evaluation(f"HTTP {resp.status_code}: {resp.text[:100]}", threshold)
 
                 data = resp.json()
                 answers_dict = data.get("answers")
                 if not isinstance(answers_dict, dict):
-                    return self._fallback_error_evaluation("Respuesta sin campo 'answers'")
+                    return self._fallback_error_evaluation("Respuesta sin campo 'answers'", threshold)
 
-                # 1. Parsear respuesta 'noul'
                 relevance_prob = 0.5
                 raw_noul = answers_dict.get("is_relevant")
                 if isinstance(raw_noul, dict):
                     parsed_noul = LayaNoulResponse.model_validate(raw_noul)
                     relevance_prob = parsed_noul.noul
 
-                # 2. Parsear respuesta 'choice'
                 evidence_choice = "theoretical"
                 raw_choice = answers_dict.get("evidence_type")
                 if isinstance(raw_choice, dict):
                     parsed_choice = LayaChoiceResponse.model_validate(raw_choice)
                     evidence_choice = parsed_choice.choice
 
-                # 3. Parsear respuesta 'score'
                 rigor_score = 1.5
                 raw_score = answers_dict.get("rigor_score")
                 if isinstance(raw_score, dict):
                     parsed_score = LayaScoreResponse.model_validate(raw_score)
                     rigor_score = parsed_score.score
 
-                # Decisión: Conservar si probabilidad >= umbral y no es irrelevante
-                is_conserved = (relevance_prob >= self._relevance_threshold) and (evidence_choice != "irrelevant")
+                # Veredicto con umbral alto (80% u 85%) y rigor mínimo
+                is_conserved = (
+                    relevance_prob >= threshold
+                    and evidence_choice != "irrelevant"
+                    and rigor_score >= MINIMUM_RIGOR_SCORE
+                )
+
+                rationale = {
+                    "probabilidad_relevancia": f"{relevance_prob:.1%}",
+                    "umbral_exigido": f"{threshold:.0%}",
+                    "tipologia_clasificada": evidence_choice,
+                    "rigor_metodologico": f"{rigor_score:.2f}/3.0",
+                    "decision": "Conservar para Marco Teórico" if is_conserved else "Descartar",
+                }
 
                 reason = (
-                    f"Laya Decision: P(relevancia)={relevance_prob:.2f}, "
+                    f"Decisión Laya: P(relevancia)={relevance_prob:.1%} (Umbral: {threshold:.0%}). "
                     f"Tipo={evidence_choice}, Rigor={rigor_score:.1f}/3.0. "
-                    f"{'Aceptado para fundamentos teóricos' if is_conserved else 'Descartado por baja afinidad'}"
+                    f"{'Aceptado con alta afinidad' if is_conserved else 'Rechazado por no alcanzar el umbral exigido'}"
                 )
 
                 return DecisionEvaluation(
                     is_relevant=is_conserved,
-                    relevance_score=relevance_prob,
+                    relevance_score=round(relevance_prob, 3),
+                    threshold_applied=threshold,
                     evidence_type=evidence_choice,
-                    quality_score=rigor_score,
+                    quality_score=round(rigor_score, 2),
                     verdict_reason=reason,
+                    rationale_breakdown=rationale,
                     decision_engine="unsloth_laya",
                 )
 
         except Exception as err:
-            return self._fallback_error_evaluation(str(err))
+            return self._fallback_error_evaluation(str(err), threshold)
 
-    def _fallback_error_evaluation(self, err_msg: str) -> DecisionEvaluation:
+    def _fallback_error_evaluation(self, err_msg: str, threshold: float) -> DecisionEvaluation:
         return DecisionEvaluation(
             is_relevant=False,
             relevance_score=0.0,
+            threshold_applied=threshold,
             evidence_type="irrelevant",
             quality_score=0.0,
             verdict_reason=f"Error en Unsloth Laya: {err_msg}",
+            rationale_breakdown={"error": err_msg},
             decision_engine="unsloth_laya",
         )

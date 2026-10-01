@@ -1,127 +1,157 @@
 """
 Interfaz de línea de comandos (CLI) interactiva y scriptable con Rich.
-Muestra tablas, veredictos de decisión, citas en APA 7 y exportación directa.
+Muestra tablas, veredictos de decisión con umbrales altos (80%-85%),
+síntesis multi-paper y exportación consolidada para múltiples preguntas de tesis.
 """
 
 import argparse
 import sys
+from pathlib import Path
 from typing import List, Optional
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-from rich.markdown import Markdown
 
 from thesis_consensus.agent import ThesisConsensusAgent
 from thesis_consensus.decision import create_decision_judge
-from thesis_consensus.providers.openalex import OpenAlexProvider
 from thesis_consensus.exporter import ThesisExporter
-from thesis_consensus.synthesizer import ThesisSynthesizer
-from thesis_consensus.models import ThesisEvidenceItem, PaperMetadata
+from thesis_consensus.models import TopicResearchBatch
+from thesis_consensus.constants import (
+    DEFAULT_LANGUAGE,
+    DEFAULT_RELEVANCE_THRESHOLD,
+    STRICT_RELEVANCE_THRESHOLD,
+    DEFAULT_SEARCH_LIMIT,
+    DEFAULT_MIN_PUBLICATION_YEAR,
+    DEFAULT_OUTPUT_MD,
+    DEFAULT_OUTPUT_BIB,
+)
 
 console = Console()
 
 
-def display_welcome_banner() -> None:
+def display_welcome_banner(threshold: float, language: str) -> None:
     """Muestra el encabezado del asistente de investigación."""
     console.print(
         Panel.fit(
             "[bold cyan]🎓 THESIS CONSENSUS (Buscador y Evaluador de Literatura para Tesis)[/bold cyan]\n"
-            "[green]• Búsqueda científica segura sin descarga de PDFs riesgosos (vía OpenAlex & Crossref)[/green]\n"
-            "[yellow]• Evaluación y filtrado con Modelos de Decisión (Unsloth Laya / Jev API / Heurístico)[/yellow]\n"
-            "[magenta]• Redacción automática de párrafos y referencias en formato APA 7ma Edición[/magenta]",
+            f"[green]• Idioma configurado:[/green] [bold white]{language.upper()} (Español Académico)[/bold white]\n"
+            f"[yellow]• Umbral de corte del Modelo de Decisión:[/yellow] [bold red]{threshold:.0%}[/bold red] (Alta exigencia para tesis)\n"
+            "[magenta]• Síntesis multi-paper integrada con normas oficiales APA 7ma Edición[/magenta]",
             border_style="cyan",
         )
     )
 
 
-def run_pipeline(
-    topic: str,
-    limit: int = 15,
-    min_year: int = 2014,
+def process_topics_batch(
+    topics: List[str],
+    limit: int = DEFAULT_SEARCH_LIMIT,
+    min_year: int = DEFAULT_MIN_PUBLICATION_YEAR,
     engine: str = "auto",
-    out_md: str = "fundamentos_teoricos.md",
-    out_bib: Optional[str] = "referencias.bib",
-) -> List[ThesisEvidenceItem]:
-    """Ejecuta el pipeline completo de búsqueda, evaluación y generación APA 7."""
-    console.print(f"\n[bold blue]🔍 Consulta de Tesis / Afirmación a fundamentar:[/bold blue]\n[italic]\"{topic}\"[/italic]\n")
-
-    # Inicializar motor de decisión
+    threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
+    language: str = DEFAULT_LANGUAGE,
+    out_md: str = DEFAULT_OUTPUT_MD,
+    out_bib: str = DEFAULT_OUTPUT_BIB,
+) -> TopicResearchBatch:
+    """Procesa un conjunto de preguntas o afirmaciones de forma estructurada."""
     judge = create_decision_judge(preferred_engine=engine)
+    agent = ThesisConsensusAgent(decision_judge=judge, language=language)
+
     console.print(f"[bold]⚙️ Motor de Decisión activo:[/bold] [yellow]{judge.engine_name}[/yellow]")
     if judge.engine_name == "unsloth_laya":
         if judge.is_available():
             console.print("[green]✔ Servidor Unsloth Desktop (Laya / Jev API) conectado en localhost:8888[/green]")
         else:
-            console.print("[yellow]ℹ Servidor Unsloth Desktop no detectado en localhost:8888. (Para activarlo: Abre Unsloth Desktop -> Settings -> Decision API -> Serve requests)[/yellow]")
+            console.print("[yellow]ℹ Servidor Unsloth Laya no detectado. Utilizando evaluador semántico con umbral estricto.[/yellow]")
     elif judge.engine_name == "heuristic_academic":
-        console.print("[cyan]ℹ Evaluador semántico académico activo (clasificación y filtrado sin necesidad de GPU)[/cyan]")
+        console.print("[cyan]ℹ Evaluador semántico académico activo (umbral de corte calibrado al 80%-85%)[/cyan]")
 
-    agent = ThesisConsensusAgent(decision_judge=judge)
+    console.print(f"\n[bold green]📋 Total de temas a fundamentar:[/bold green] [bold white]{len(topics)}[/bold white]\n")
 
-    with console.status("[bold green]Buscando papers en bases indexadas y evaluando pertinencia..."):
-        conserved, discarded = agent.research_and_fundament(
-            topic_or_claim=topic,
-            limit_search=limit,
+    def topic_progress_callback(curr: int, total: int, current_topic: str) -> None:
+        console.print(f"[bold cyan]▶ [{curr}/{total}] Analizando literatura para:[/bold cyan] [italic]\"{current_topic}\"[/italic]")
+
+    with console.status("[bold green]Consultando bases indexadas y evaluando pertinencia con el modelo de decisión..."):
+        batch = agent.research_batch(
+            topics=topics,
+            limit_per_topic=limit,
             min_year=min_year,
+            threshold=threshold,
+            topic_callback=topic_progress_callback,
         )
 
-    # Mostrar tabla resumen de decisiones
-    table = Table(title="📊 Evaluación y Filtrado de Literatura Científica", border_style="cyan")
-    table.add_column("Estado", justify="center", style="bold", width=12)
-    table.add_column("Año", justify="center", width=6)
-    table.add_column("Citas", justify="center", width=7)
-    table.add_column("Tipo Evidencia", style="magenta", width=18)
-    table.add_column("Título del Paper", style="white")
+    # Imprimir resumen ordenado por cada tema
+    for idx, topic in enumerate(topics, start=1):
+        conserved = batch.conserved_by_topic.get(topic, [])
+        discarded = batch.discarded_by_topic.get(topic, [])
+        synthesis = batch.syntheses_by_topic.get(topic)
 
-    for item in conserved:
-        table.add_row(
-            "[green]CONSERVAR[/green]",
-            str(item.paper.year or "-"),
-            str(item.paper.citation_count),
-            item.decision.evidence_type,
-            item.paper.title[:75] + ("..." if len(item.paper.title) > 75 else "")
+        console.print("\n" + "=" * 80)
+        console.print(f"[bold cyan]SECCIÓN {idx}: {topic}[/bold cyan]")
+        console.print("=" * 80)
+
+        # 1. Tabla de Veredicto del Modelo de Decisiones (Por qué se escogieron)
+        table = Table(
+            title=f"📊 Veredictos del Modelo de Decisión (Umbral Mínimo: {threshold:.0%})",
+            border_style="cyan"
         )
+        table.add_column("Estado", justify="center", width=12)
+        table.add_column("Autor(es) / Año", width=22)
+        table.add_column("P(Relevancia)", justify="center", width=14)
+        table.add_column("Tipo Evidencia", style="magenta", width=16)
+        table.add_column("Rigor", justify="center", width=10)
+        table.add_column("Justificación del Modelo de Decisión", style="white")
 
-    for p in discarded:
-        table.add_row(
-            "[red]DESCARTAR[/red]",
-            str(p.year or "-"),
-            str(p.citation_count),
-            "[dim]No relevante[/dim]",
-            f"[dim]{p.title[:75]}...[/dim]"
-        )
+        for it in conserved:
+            author_str = it.paper.authors[0].family_name if it.paper.authors else "Anónimo"
+            year_str = str(it.paper.year) if it.paper.year else "s.f."
+            table.add_row(
+                "[green]CONSERVAR[/green]",
+                f"{author_str} ({year_str})",
+                f"[bold green]{it.decision.relevance_score:.1%}[/bold green]",
+                it.decision.evidence_type,
+                f"{it.decision.quality_score:.1f}/3.0",
+                it.decision.verdict_reason,
+            )
 
-    console.print(table)
-    console.print(f"\n[bold]Resumen:[/bold] [green]{len(conserved)} conservados[/green] | [red]{len(discarded)} descartados[/red] de un total de {len(conserved) + len(discarded)} revisados.\n")
+        for dp in discarded:
+            author_str = dp.authors[0].family_name if dp.authors else "Anónimo"
+            year_str = str(dp.year) if dp.year else "s.f."
+            table.add_row(
+                "[red]DESCARTAR[/red]",
+                f"{author_str} ({year_str})",
+                "[red]< umbral[/red]",
+                "[dim]No relevante[/dim]",
+                f"{dp.citation_count} citas",
+                "[dim]No alcanzó el umbral del 80%-85% exigido.[/dim]",
+            )
 
-    # Mostrar las citas en formato APA 7 para cada paper conservado
-    console.print(Panel("[bold yellow]📝 Párrafos para Fundamentos Teóricos y Referencias APA 7[/bold yellow]"))
+        console.print(table)
+        console.print(f"[bold]Balance:[/bold] [green]{len(conserved)} conservados[/green] | [red]{len(discarded)} descartados[/red]")
 
-    synthesizer = ThesisSynthesizer(language="es")
+        # 2. Síntesis Multi-Paper en Español
+        if synthesis and conserved:
+            console.print(Panel(
+                f"[bold yellow]📝 Síntesis Teórica Integrada (Múltiples Papers)[/bold yellow]\n\n"
+                f"[bold white]Opción A (Narrativa Dialéctica recomendada):[/bold white]\n{synthesis.integrated_narrative}\n\n"
+                f"[bold white]Opción B (Citación Parentética Agrupada APA 7):[/bold white]\n{synthesis.parenthetical_synthesis}",
+                border_style="yellow",
+            ))
 
-    for idx, item in enumerate(conserved, start=1):
-        console.print(f"\n[bold cyan]── Paper {idx}: {item.paper.title} ──[/bold cyan]")
-        console.print(f"[bold green]Cita Narrativa:[/bold green]   {item.apa7.narrative_citation}")
-        console.print(f"[bold green]Cita Parentética:[/bold green] {item.apa7.parenthetical_citation}")
-        console.print(f"[bold white]Texto sugerido para Marco Teórico:[/bold white]\n[italic]\"{item.narrative_paragraph}\"[/italic]")
-        console.print(f"[bold magenta]Referencia Completa (APA 7):[/bold magenta]\n{item.apa7.full_reference}")
-        if item.paper.doi:
-            console.print(f"[blue]DOI:[/blue] {item.paper.doi}")
+    # Exportar resultados estructurados
+    md_path = ThesisExporter.to_batch_markdown(batch, out_md)
+    bib_path = ThesisExporter.to_batch_bibtex(batch, out_bib)
 
-    # Exportar a archivos
-    md_path = ThesisExporter.to_markdown(conserved, topic, out_md, synthesizer)
-    console.print(f"\n[bold green]✔ Marco teórico exportado a:[/bold green] [underline]{md_path}[/underline]")
+    console.print("\n" + "#" * 80)
+    console.print(f"[bold green]✔ Reporte maestro de fundamentos teóricos generado en:[/bold green]\n👉 [underline]{md_path}[/underline]")
+    console.print(f"[bold green]✔ Bibliografía consolidada y deduplicada (BibTeX) en:[/bold green]\n👉 [underline]{bib_path}[/underline]")
+    console.print("#" * 80 + "\n")
 
-    if out_bib:
-        bib_path = ThesisExporter.to_bibtex(conserved, out_bib)
-        console.print(f"[bold green]✔ Entradas BibTeX exportadas a:[/bold green] [underline]{bib_path}[/underline]")
-
-    return conserved
+    return batch
 
 
 def interactive_menu() -> None:
-    """Modo interactivo para seleccionar o escribir preguntas de tesis."""
-    display_welcome_banner()
+    """Menú interactivo con soporte para múltiples preguntas."""
+    display_welcome_banner(DEFAULT_RELEVANCE_THRESHOLD, DEFAULT_LANGUAGE)
 
     predefined_topics = [
         "How is IT Service Management (ITSM) or ITIL implemented in higher education institutions and university help desks?",
@@ -129,21 +159,47 @@ def interactive_menu() -> None:
         "Impact of ITIL incident management and service level agreements (SLAs) on academic IT satisfaction",
     ]
 
-    console.print("[bold yellow]Seleccione una de las preguntas de tesis de prueba o escriba la suya:[/bold yellow]")
-    for i, t in enumerate(predefined_topics, start=1):
-        console.print(f"  [cyan][{i}][/cyan] {t}")
-    console.print("  [cyan][0][/cyan] Escribir una nueva afirmación / pregunta personalizada")
+    console.print("[bold yellow]Seleccione una modalidad de trabajo:[/bold yellow]")
+    console.print("  [cyan][1][/cyan] Evaluar preguntas precargadas de tesis en lote (Batch)")
+    console.print("  [cyan][2][/cyan] Ingresar múltiples preguntas personalizadas juntas")
+    console.print("  [cyan][3][/cyan] Cargar preguntas desde un archivo de texto")
 
-    choice = console.input("\n[bold green]Opción (1-3 o 0): [/bold green]").strip()
+    choice = console.input("\n[bold green]Opción (1-3): [/bold green]").strip()
 
-    if choice in ("1", "2", "3"):
-        selected_topic = predefined_topics[int(choice) - 1]
+    topics_to_process: List[str] = []
+
+    if choice == "1":
+        topics_to_process = predefined_topics
+    elif choice == "3":
+        filepath = console.input("[bold green]Ruta del archivo con preguntas (un tema por línea): [/bold green]").strip()
+        p = Path(filepath)
+        if p.exists():
+            topics_to_process = [line.strip() for line in p.read_text(encoding="utf-8").splitlines() if line.strip()]
+        else:
+            console.print(f"[red]Archivo {filepath} no encontrado. Usando preguntas de prueba.[/red]")
+            topics_to_process = predefined_topics
     else:
-        selected_topic = console.input("\n[bold green]Ingrese el tema o afirmación a buscar: [/bold green]").strip()
-        if not selected_topic:
-            selected_topic = predefined_topics[0]
+        console.print("[bold yellow]Ingrese sus preguntas de tesis (presione ENTER con línea vacía para terminar):[/bold yellow]")
+        while True:
+            t = console.input(f"  Tema {len(topics_to_process) + 1}: ").strip()
+            if not t:
+                break
+            topics_to_process.append(t)
+        if not topics_to_process:
+            topics_to_process = [predefined_topics[0]]
 
-    run_pipeline(topic=selected_topic)
+    # Preguntar umbral deseado
+    console.print(f"\n[bold yellow]Seleccione el umbral del Modelo de Decisión:[/bold yellow]")
+    console.print(f"  [cyan][1][/cyan] 80% (Recomendado estándar: {DEFAULT_RELEVANCE_THRESHOLD:.0%})")
+    console.print(f"  [cyan][2][/cyan] 85% (Alta rigurosidad estricta: {STRICT_RELEVANCE_THRESHOLD:.0%})")
+    u_choice = console.input("[bold green]Opción (1 o 2, por defecto 1): [/bold green]").strip()
+    threshold = STRICT_RELEVANCE_THRESHOLD if u_choice == "2" else DEFAULT_RELEVANCE_THRESHOLD
+
+    process_topics_batch(
+        topics=topics_to_process,
+        threshold=threshold,
+        language=DEFAULT_LANGUAGE,
+    )
 
 
 def main() -> None:
@@ -151,30 +207,45 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Thesis Consensus: Buscador y evaluador de literatura para marco teórico con APA 7."
     )
-    parser.add_argument("--topic", "-t", type=str, help="Tema o afirmación de tesis a fundamentar")
-    parser.add_argument("--limit", "-l", type=int, default=12, help="Cantidad de papers a buscar (default: 12)")
-    parser.add_argument("--min-year", "-y", type=int, default=2014, help="Año mínimo de publicación (default: 2014)")
-    parser.add_argument("--engine", "-e", choices=["auto", "laya", "openai", "heuristic"], default="auto", help="Motor de decisión a emplear")
-    parser.add_argument("--out-md", "-o", type=str, default="fundamentos_teoricos.md", help="Ruta del archivo Markdown a exportar")
-    parser.add_argument("--out-bib", "-b", type=str, default="referencias.bib", help="Ruta del archivo BibTeX a exportar")
+    parser.add_argument("--topic", "-t", type=str, nargs="+", help="Uno o más temas / preguntas de tesis")
+    parser.add_argument("--file", "-f", type=str, help="Archivo .txt con temas (uno por línea)")
+    parser.add_argument("--limit", "-l", type=int, default=DEFAULT_SEARCH_LIMIT, help="Papers por tema (default: 15)")
+    parser.add_argument("--min-year", "-y", type=int, default=DEFAULT_MIN_PUBLICATION_YEAR, help="Año mínimo de publicación")
+    parser.add_argument("--engine", "-e", choices=["auto", "laya", "openai", "heuristic"], default="auto", help="Motor de decisión")
+    parser.add_argument("--threshold", "-th", type=float, default=DEFAULT_RELEVANCE_THRESHOLD, help="Umbral de decisión (0.80 - 0.85)")
+    parser.add_argument("--lang", type=str, default=DEFAULT_LANGUAGE, help="Idioma de redacción (default: es)")
+    parser.add_argument("--out-md", "-o", type=str, default=DEFAULT_OUTPUT_MD, help="Ruta de exportación Markdown")
+    parser.add_argument("--out-bib", "-b", type=str, default=DEFAULT_OUTPUT_BIB, help="Ruta de exportación BibTeX")
     parser.add_argument("--interactive", "-i", action="store_true", help="Lanzar en modo interactivo")
 
     args = parser.parse_args()
 
-    if args.interactive or (len(sys.argv) == 1 and not args.topic):
+    if args.interactive or (len(sys.argv) == 1 and not args.topic and not args.file):
         interactive_menu()
-    elif args.topic:
-        display_welcome_banner()
-        run_pipeline(
-            topic=args.topic,
+    else:
+        topics: List[str] = []
+        if args.file:
+            path = Path(args.file)
+            if path.exists():
+                topics = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        if args.topic:
+            topics.extend(args.topic)
+
+        if not topics:
+            parser.print_help()
+            return
+
+        display_welcome_banner(args.threshold, args.lang)
+        process_topics_batch(
+            topics=topics,
             limit=args.limit,
             min_year=args.min_year,
             engine=args.engine,
+            threshold=args.threshold,
+            language=args.lang,
             out_md=args.out_md,
             out_bib=args.out_bib,
         )
-    else:
-        parser.print_help()
 
 
 if __name__ == "__main__":

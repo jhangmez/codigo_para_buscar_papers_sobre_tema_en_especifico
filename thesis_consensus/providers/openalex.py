@@ -8,6 +8,15 @@ from typing import List, Optional, Dict
 import httpx
 from thesis_consensus.models import Author, PaperMetadata
 from thesis_consensus.providers.base import BaseAcademicProvider
+from thesis_consensus.constants import (
+    OPENALEX_BASE_URL,
+    DEFAULT_USER_EMAIL,
+    DEFAULT_TIMEOUT_SECONDS,
+    DEFAULT_SEARCH_LIMIT,
+    DEFAULT_MIN_PUBLICATION_YEAR,
+    STOPWORDS_EN,
+    STOPWORDS_ES,
+)
 
 
 class OpenAlexProvider(BaseAcademicProvider):
@@ -16,9 +25,13 @@ class OpenAlexProvider(BaseAcademicProvider):
     Utiliza el 'polite pool' de OpenAlex especificando cabeceras de cortesía.
     """
 
-    BASE_URL = "https://api.openalex.org/works"
+    BASE_URL = OPENALEX_BASE_URL
 
-    def __init__(self, email: str = "thesis_researcher@university.edu", timeout_seconds: float = 15.0) -> None:
+    def __init__(
+        self,
+        email: str = DEFAULT_USER_EMAIL,
+        timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS,
+    ) -> None:
         self._email = email
         self._timeout_seconds = timeout_seconds
 
@@ -60,12 +73,7 @@ class OpenAlexProvider(BaseAcademicProvider):
         para maximizar la precisión de búsqueda en el motor de OpenAlex.
         """
         import re
-        stopwords = {
-            "how", "is", "what", "are", "the", "and", "or", "in", "of", "for", "with",
-            "to", "a", "an", "does", "do", "did", "can", "could", "would", "should",
-            "qué", "que", "cómo", "como", "cuáles", "cuales", "de", "la", "el", "en",
-            "un", "una", "los", "las", "por", "para", "con", "sobre", "entre"
-        }
+        stopwords = set(STOPWORDS_EN).union(set(STOPWORDS_ES))
         cleaned = re.sub(r"[^\w\s-]", " ", query)
         words = [w for w in cleaned.split() if w.lower() not in stopwords]
         # Conservar los términos más significativos

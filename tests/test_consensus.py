@@ -3,7 +3,8 @@ Pruebas unitarias para el sistema Thesis Consensus.
 Verifica:
 - Formato estricto de citas y referencias APA 7ma Edición.
 - Reconstrucción de abstracts invertidos sin malware.
-- Lógica de decisión (conservar vs descartar).
+- Lógica de decisión con umbrales altos (80% - 85%).
+- Redacción en español y síntesis multi-paper integrada.
 - Cero dependencias de Any.
 """
 
@@ -18,6 +19,7 @@ from thesis_consensus.apa7 import (
 from thesis_consensus.providers.openalex import OpenAlexProvider
 from thesis_consensus.decision.heuristic import HeuristicAcademicJudge
 from thesis_consensus.synthesizer import ThesisSynthesizer
+from thesis_consensus.constants import DEFAULT_RELEVANCE_THRESHOLD, STRICT_RELEVANCE_THRESHOLD
 
 
 class TestThesisConsensus(unittest.TestCase):
@@ -89,8 +91,8 @@ class TestThesisConsensus(unittest.TestCase):
         reconstructed = provider._reconstruct_abstract(inverted)
         self.assertEqual(reconstructed, "This paper evaluates ITIL implementation in universities.")
 
-    def test_decision_judge_relevance(self) -> None:
-        """Verifica que el evaluador distinga artículos relevantes de no relevantes."""
+    def test_decision_judge_relevance_with_high_threshold(self) -> None:
+        """Verifica que el evaluador distinga artículos relevantes con umbral alto (80%)."""
         judge = HeuristicAcademicJudge()
 
         relevant_paper = PaperMetadata(
@@ -115,37 +117,72 @@ class TestThesisConsensus(unittest.TestCase):
 
         topic = "What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?"
 
-        eval_rel = judge.evaluate(relevant_paper, topic)
+        eval_rel = judge.evaluate(relevant_paper, topic, threshold=DEFAULT_RELEVANCE_THRESHOLD)
         self.assertTrue(eval_rel.is_relevant)
+        self.assertGreaterEqual(eval_rel.relevance_score, DEFAULT_RELEVANCE_THRESHOLD)
         self.assertIn(eval_rel.evidence_type, ("case_study", "survey_or_data"))
 
-        eval_irrel = judge.evaluate(irrelevant_paper, topic)
+        eval_irrel = judge.evaluate(irrelevant_paper, topic, threshold=DEFAULT_RELEVANCE_THRESHOLD)
         self.assertFalse(eval_irrel.is_relevant)
         self.assertEqual(eval_irrel.evidence_type, "irrelevant")
 
-    def test_synthesizer_narrative_generation(self) -> None:
-        """Verifica que el sintetizador genere el párrafo narrativo académico."""
+    def test_spanish_translation_and_polish(self) -> None:
+        """Verifica que los hallazgos en inglés se traduzcan fluidamente al español académico."""
         synthesizer = ThesisSynthesizer(language="es")
-        paper = PaperMetadata(
+        raw_en = "The study found organisations adopting ITIL implemented more operational level processes than the tactical/strategic level processes."
+        translated = synthesizer._translate_and_polish_finding_to_spanish(raw_en)
+        self.assertIn("estudio evidenció que", translated.lower())
+        self.assertIn("organizaciones que adoptan", translated.lower())
+
+    def test_multi_paper_consensus_synthesis(self) -> None:
+        """Verifica la generación de la síntesis combinada de múltiples papers."""
+        synthesizer = ThesisSynthesizer(language="es")
+
+        paper1 = PaperMetadata(
             paper_id="P1",
-            title="Analysis of ticket bottlenecks in higher education IT services",
-            authors=[Author(full_name="Carlos Gomez", family_name="Gomez", given_name="Carlos")],
-            year=2022,
+            title="Adoption of ITIL in University Help Desk",
+            authors=[Author(full_name="Mauricio Marrone", family_name="Marrone", given_name="Mauricio")],
+            year=2020,
             abstract="Results demonstrate that automating ticket triage reduces resolution time by 35%.",
         )
-        decision = DecisionEvaluation(
+        dec1 = DecisionEvaluation(
             is_relevant=True,
-            relevance_score=0.85,
-            evidence_type="survey_or_data",
-            quality_score=2.2,
+            relevance_score=0.88,
+            threshold_applied=0.80,
+            evidence_type="case_study",
+            quality_score=2.5,
             verdict_reason="Alta relevancia empírica",
             decision_engine="heuristic_academic",
         )
+        item1 = synthesizer.synthesize_item(paper1, dec1, "ITIL en universidades", 0)
 
-        item = synthesizer.synthesize_item(paper, decision, "cuellos de botella en mesas de ayuda")
-        self.assertIn("Gomez (2022)", item.narrative_paragraph)
-        self.assertIn("(Gomez, 2022)", item.narrative_paragraph)
-        self.assertTrue(len(item.narrative_paragraph) > 50)
+        paper2 = PaperMetadata(
+            paper_id="P2",
+            title="Incident Management Performance in Higher Education",
+            authors=[Author(full_name="Verry Palilingan", family_name="Palilingan", given_name="Verry")],
+            year=2021,
+            abstract="We found that 84% of service requests are resolved within SLA boundaries.",
+        )
+        dec2 = DecisionEvaluation(
+            is_relevant=True,
+            relevance_score=0.86,
+            threshold_applied=0.80,
+            evidence_type="survey_or_data",
+            quality_score=2.2,
+            verdict_reason="Métricas empíricas sólidas",
+            decision_engine="heuristic_academic",
+        )
+        item2 = synthesizer.synthesize_item(paper2, dec2, "ITIL en universidades", 1)
+
+        multi_syn = synthesizer.synthesize_multi_paper_consensus(
+            topic_or_claim="Implementación de ITIL en universidades",
+            items=[item1, item2],
+        )
+
+        self.assertIn("Marrone (2020)", multi_syn.integrated_narrative)
+        self.assertIn("Palilingan (2021)", multi_syn.integrated_narrative)
+        self.assertIn("(Marrone, 2020; Palilingan, 2021)", multi_syn.parenthetical_synthesis)
+        self.assertEqual(multi_syn.papers_used_count, 2)
 
 
 if __name__ == "__main__":

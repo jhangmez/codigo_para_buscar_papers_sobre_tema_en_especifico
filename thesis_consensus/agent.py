@@ -1,30 +1,39 @@
 """
 Agente orquestador para búsqueda, evaluación por modelo de decisión y redacción APA 7.
+Soporta procesamiento individual y procesamiento en lote (batch) de múltiples preguntas de tesis.
 """
 
-from typing import List, Optional, Literal, Tuple, Callable
+from typing import List, Optional, Literal, Tuple, Callable, Dict
 from thesis_consensus.models import (
     PaperMetadata,
     ThesisEvidenceItem,
+    MultiPaperSynthesis,
+    TopicResearchBatch,
 )
 from thesis_consensus.providers.base import BaseAcademicProvider
 from thesis_consensus.providers.composite import CompositeAcademicProvider
 from thesis_consensus.decision.protocol import BaseDecisionJudge
 from thesis_consensus.decision import create_decision_judge
 from thesis_consensus.synthesizer import ThesisSynthesizer
+from thesis_consensus.constants import (
+    DEFAULT_RELEVANCE_THRESHOLD,
+    DEFAULT_MIN_PUBLICATION_YEAR,
+    DEFAULT_SEARCH_LIMIT,
+    DEFAULT_LANGUAGE,
+)
 
 
 class ThesisConsensusAgent:
     """
     Agente que orquesta el flujo completo de fundamentación teórica:
-    Búsqueda segura -> Evaluación por LLM de Decisión -> Filtrado -> Redacción APA 7.
+    Búsqueda segura -> Evaluación por LLM de Decisión (con umbral alto) -> Filtrado -> Síntesis Multi-Paper APA 7.
     """
 
     def __init__(
         self,
         provider: Optional[BaseAcademicProvider] = None,
         decision_judge: Optional[BaseDecisionJudge] = None,
-        language: Literal["es", "en"] = "es",
+        language: str = DEFAULT_LANGUAGE,
     ) -> None:
         self._provider: BaseAcademicProvider = provider or CompositeAcademicProvider()
         self._decision_judge: BaseDecisionJudge = decision_judge or create_decision_judge()
@@ -34,26 +43,20 @@ class ThesisConsensusAgent:
     def current_decision_engine(self) -> str:
         return self._decision_judge.engine_name
 
-    def research_and_fundament(
+    def research_single_topic(
         self,
         topic_or_claim: str,
-        limit_search: int = 15,
-        min_year: int = 2012,
+        limit_search: int = DEFAULT_SEARCH_LIMIT,
+        min_year: int = DEFAULT_MIN_PUBLICATION_YEAR,
+        threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
         progress_callback: Optional[Callable[[int, int, PaperMetadata, bool], None]] = None,
-    ) -> Tuple[List[ThesisEvidenceItem], List[PaperMetadata]]:
+    ) -> Tuple[List[ThesisEvidenceItem], List[PaperMetadata], MultiPaperSynthesis]:
         """
-        Ejecuta la fundamentación completa de una afirmación o pregunta de tesis.
-
-        Args:
-            topic_or_claim: La afirmación o pregunta a fundamentar.
-            limit_search: Cantidad de papers iniciales a recuperar de la base científica.
-            min_year: Año mínimo de publicación.
-            progress_callback: Función opcional para reportar progreso en tiempo real.
+        Ejecuta la fundamentación completa de una afirmación individual aplicando el umbral exigido.
 
         Returns:
-            Tupla de (items_conservados, papers_descartados).
+            Tupla de (items_conservados, papers_descartados, sintesis_multi_paper).
         """
-        # 1. Búsqueda de literatura
         raw_papers = self._provider.search(
             query=topic_or_claim,
             limit=limit_search,
@@ -63,12 +66,14 @@ class ThesisConsensusAgent:
         conserved_items: List[ThesisEvidenceItem] = []
         discarded_papers: List[PaperMetadata] = []
 
-        # 2. Evaluación mediante el modelo de decisión (Laya / LLM / Heurístico)
         for idx, paper in enumerate(raw_papers):
-            decision = self._decision_judge.evaluate(paper, topic_or_claim)
+            decision = self._decision_judge.evaluate(
+                paper=paper,
+                topic_or_claim=topic_or_claim,
+                threshold=threshold,
+            )
 
             if decision.is_relevant:
-                # "y si sirve se conserva"
                 item = self._synthesizer.synthesize_item(
                     paper=paper,
                     decision=decision,
@@ -77,10 +82,55 @@ class ThesisConsensusAgent:
                 )
                 conserved_items.append(item)
             else:
-                # "y si no pues se va"
                 discarded_papers.append(paper)
 
             if progress_callback:
                 progress_callback(idx + 1, len(raw_papers), paper, decision.is_relevant)
 
-        return conserved_items, discarded_papers
+        multi_synthesis = self._synthesizer.synthesize_multi_paper_consensus(
+            topic_or_claim=topic_or_claim,
+            items=conserved_items,
+        )
+
+        return conserved_items, discarded_papers, multi_synthesis
+
+    def research_batch(
+        self,
+        topics: List[str],
+        limit_per_topic: int = DEFAULT_SEARCH_LIMIT,
+        min_year: int = DEFAULT_MIN_PUBLICATION_YEAR,
+        threshold: float = DEFAULT_RELEVANCE_THRESHOLD,
+        topic_callback: Optional[Callable[[int, int, str], None]] = None,
+    ) -> TopicResearchBatch:
+        """
+        Procesa una lista de múltiples afirmaciones o preguntas de tesis de forma organizada.
+        """
+        conserved_dict: Dict[str, List[ThesisEvidenceItem]] = {}
+        discarded_dict: Dict[str, List[PaperMetadata]] = {}
+        syntheses_dict: Dict[str, MultiPaperSynthesis] = {}
+        all_conserved: List[ThesisEvidenceItem] = []
+
+        total_topics = len(topics)
+        for idx, topic in enumerate(topics, start=1):
+            if topic_callback:
+                topic_callback(idx, total_topics, topic)
+
+            conserved, discarded, multi_syn = self.research_single_topic(
+                topic_or_claim=topic,
+                limit_search=limit_per_topic,
+                min_year=min_year,
+                threshold=threshold,
+            )
+
+            conserved_dict[topic] = conserved
+            discarded_dict[topic] = discarded
+            syntheses_dict[topic] = multi_syn
+            all_conserved.extend(conserved)
+
+        return TopicResearchBatch(
+            topics=topics,
+            conserved_by_topic=conserved_dict,
+            discarded_by_topic=discarded_dict,
+            syntheses_by_topic=syntheses_dict,
+            all_conserved_items=all_conserved,
+        )
