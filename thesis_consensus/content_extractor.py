@@ -5,11 +5,17 @@ respetando el límite de contexto (1024 tokens de Laya) y previniendo cualquier 
 """
 
 import io
+import logging
 import re
+import warnings
 from typing import Tuple, Optional, List
 import httpx
 from thesis_consensus.models import PaperMetadata
 from thesis_consensus.constants import DEFAULT_TIMEOUT_SECONDS
+
+# Silenciar advertencias internas de fuentes, glifos y encoding de pypdf
+logging.getLogger("pypdf").setLevel(logging.ERROR)
+warnings.filterwarnings("ignore", module="pypdf")
 
 try:
     import pypdf
@@ -126,10 +132,15 @@ class SafeContentExtractor:
                     num_pages = len(reader.pages)
                     pages_to_read = min(num_pages, 6)
 
-                    for page_num in range(pages_to_read):
-                        page_text = reader.pages[page_num].extract_text() or ""
-                        if page_text.strip():
-                            extracted_pages_text.append(page_text)
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore")
+                        for page_num in range(pages_to_read):
+                            try:
+                                page_text = reader.pages[page_num].extract_text() or ""
+                                if page_text.strip():
+                                    extracted_pages_text.append(page_text)
+                            except Exception:
+                                continue
 
                     full_pdf_text = "\n".join(extracted_pages_text)
                     if len(full_pdf_text.strip()) > 150:
