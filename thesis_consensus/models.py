@@ -98,7 +98,7 @@ class DecisionEvaluation(BaseModel):
     quality_score: float    # Escala de rigor metodológico (p.ej. 0 a 3)
     verdict_reason: str     # Explicación resumida
     rationale_breakdown: Dict[str, str] = Field(default_factory=dict)  # Detalles para la tarjeta de decisión
-    decision_engine: Literal["unsloth_laya", "openai_compatible", "heuristic_academic"]
+    decision_engine: Literal["typesafe_jev", "unsloth_laya", "openai_compatible", "heuristic_academic"]
 
 
 class Apa7Citation(BaseModel):

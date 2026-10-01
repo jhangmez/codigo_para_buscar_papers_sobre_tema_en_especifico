@@ -25,8 +25,8 @@ class SafeContentExtractor:
     filtrando y priorizando secciones de Resultados, Discusión y Conclusiones.
     """
 
-    MAX_FILE_BYTES = 6 * 1024 * 1024  # Máximo 6 MB para evitar sobrecargas
-    MAX_EXTRACTED_WORDS = 650         # Calibrado para la ventana de 1024 tokens de Laya
+    MAX_FILE_BYTES = 10 * 1024 * 1024  # Máximo 10 MB para papers PDF de acceso abierto
+    MAX_EXTRACTED_WORDS = 2500         # Calibrado para la ventana de 32K tokens de TypeSafe Jev
 
     def __init__(self, timeout_seconds: float = 8.0) -> None:
         self._timeout_seconds = timeout_seconds

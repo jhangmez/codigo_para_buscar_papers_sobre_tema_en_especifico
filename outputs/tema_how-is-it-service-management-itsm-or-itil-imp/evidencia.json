@@ -1,50 +1,13 @@
 {
   "tema_investigacion": "How is IT Service Management (ITSM) or ITIL implemented in higher education institutions and university help desks?",
   "resumen_evaluacion": {
-    "total_candidatos_evaluados": 8,
-    "papers_aprobados_conservados": 5,
+    "total_candidatos_evaluados": 6,
+    "papers_aprobados_conservados": 3,
     "papers_descartados": 3,
     "umbral_minimo_exigido": 0.8
   },
   "instrucciones_para_agente_redactor": "Este archivo contiene la evidencia científica arbitrada y verificada para fundamentar este tema en la tesis. Utilice los datos de 'evidencias_conservadas' para redactar el marco teórico. Emplee las citas narrativas y parentéticas en formato APA 7 proporcionadas, cite textualmente o parafrasee basándose en 'cita_textual_literal' y 'contenido_sustantivo_extracto', y agregue las referencias en 'citacion_apa7.referencia_completa' a la bibliografía.",
   "evidencias_conservadas": [
-    {
-      "paper_id": "https://openalex.org/W4316660929",
-      "titulo": "Digital Transformation of Public Sector Governance With IT Service Management–A Pilot Study",
-      "autores": [
-        "Muhammad Imran Sarwar",
-        "Qaiser Abbas",
-        "Tahir Alyas",
-        "Ali Alzahrani",
-        "Turki Alghamdi",
-        "Yazed Alsaawy"
-      ],
-      "primer_autor": "Sarwar",
-      "año": 2023,
-      "revista_o_fuente": "IEEE Access",
-      "doi": "https://doi.org/10.1109/access.2023.3237550",
-      "enlace_url": "https://doi.org/10.1109/access.2023.3237550",
-      "citas_recibidas": 57,
-      "tipo_acceso": "open_access_pdf",
-      "citacion_apa7": {
-        "cita_narrativa": "Sarwar et al. (2023)",
-        "cita_parentetica": "(Sarwar et al., 2023)",
-        "referencia_completa": "Sarwar, M. I., Abbas, Q., Alyas, T., Alzahrani, A., Alghamdi, T., & Alsaawy, Y. (2023). Digital transformation of public sector governance with IT service management–a pilot study. *IEEE Access*, *11*, 6490–6512. https://doi.org/10.1109/access.2023.3237550",
-        "bibtex": "@article{sarwar_2023_digital,\n  title = {Digital Transformation of Public Sector Governance With IT Service Management–A Pilot Study},\n  author = {Sarwar, Muhammad Imran and Abbas, Qaiser and Alyas, Tahir and Alzahrani, Ali and Alghamdi, Turki and Alsaawy, Yazed},\n  year = {2023},\n  journal = {IEEE Access},\n  volume = {11},\n  pages = {6490–6512},\n  doi = {https://doi.org/10.1109/access.2023.3237550},\n  url = {https://doi.org/10.1109/access.2023.3237550},\n}"
-      },
-      "evaluacion_decision": {
-        "motor_decision": "unsloth_laya",
-        "probabilidad_relevancia": 0.916,
-        "umbral_aplicado": 0.8,
-        "tipo_evidencia": "theoretical",
-        "rigor_metodologico": 1.78,
-        "justificacion_decision": "Decisión Laya: P(relevancia)=91.6% (Umbral: 80%). Tipo=theoretical, Rigor=1.8/3.0. Aceptado con alta afinidad"
-      },
-      "cita_textual_literal": "A well-implemented ITSM delivery system improves the quality of IT services, which eventually enhances the organization’s overall capacity and output.",
-      "ubicacion_fuente": "Sección de Resultados / Hallazgos del Artículo Completo (Open Access PDF)",
-      "contenido_sustantivo_extracto": "Received 18 December 2022, accepted 13 January 2023, date of publication 16 January 2023, date of current version 23 January 2023. Digital Object Identifier 10.1 109/ACCESS.2023.3237550 Digital Transformation of Public Sector Governance With IT Service Management—A Pilot Study MUHAMMAD IMRAN SARWAR 1, (Member, IEEE), QAISER ABBAS 2,3, TAHIR AL YAS 4, (Member, IEEE), ALI ALZAHRANI 2, TURKI ALGHAMDI 2, AND YAZED ALSAAWY 2 1Department of Computer Science & IT, The Superior University, Lahore, Lahore 54500, Pakistan 2Faculty of Computer and Information Systems, Islamic University of Madinah, Medina 42351, Saudi Arabia 3Department of Computer Science and Information Technology, University of Sargodha, Sargodha 40100, Pakistan 4Department of Computer Science, Lahore Garrison University, Lahore 54810, Pakistan Corresponding author: Tahir Alyas (tahiralyas@lgu.edu.pk) ABSTRACT Information Technology or IT is a combination of technology itself and a collection of IT services that ensure the effective implementation of overall Information Technology in an organization. Like other services, Information Technology Service Management (ITSM) has become a global subject because managing IT is only possible through efficient and effective ITSM protocols. A well-implemented ITSM delivery system improves the quality of IT services, which eventually enhances the organization’s overall capacity and output. Public service delivery is closely dependent on the quality IT services that can be acquired through ITSM. This research study reviews some of the established ITSM standards and frameworks like FitSM, ITIL, CobiT, and ISO/IEC 20000 and proposes a most suitable and sustainable tool and its implementation roadmap for the digital transformation of public sector governance. For this pilot study, a public sector organization (PSO) working under the Government of Punjab (GoPb) was selected. This study focuses on an important area that has not yet been adequately addressed, where ITSM delivery can produce tremendous results. This study contributes to academics and researchers since it discusses the selection and implementation of a service management system (SMS) for a PSO while focusing on its needs, requirements, and available resources. In general, the qualitative analysis methodology is used in this research study, and specifically, it can be identified as applied research. The data is collected through a questionnaire, and the results are shown and discussed in the later sections. INDEX TERMS CobiT, FitSM, ISO/IEC 20000, IT service management, ITIL, ITSM in PSOs. I. INTRODUCTION Many organizations are facing IT regulatory issues in gover- nance, management, and IT service delivery. These issues are mostly concerned with revenue, the assessment of acceptable risks, and the use of enterprise resources [1]. Studying the issues requires a conceptual framework that clearly defines duties and responsibilities. Generally, the ITSM standards and frameworks are complicated, and their implementation is considered problematic because the expertise and required The associate editor coordinating the review of this manuscript and approving it for publication was Justin Zhang . competencies are not available to understand the processes and procedures, especially for SMEs [2]. There is still a perception that IT is a technology to run computers and networks, but this concept is far from reality. Organizations offering IT as an additional service have become the reason for developing and implementing ITSM systems [3]. Organizations are now dependent on IT and related services, and for this reason, ITSMs are in high demand to cater to businesses’ requirements and fulfil customers’ expectations [4]. ITSM has become more of a practise than a theory used in various flavours in the IT industry and still requires a great deal of understanding to 6490 This work is licensed under a Creative Commons Attribution 4.0 License. For more information, see https://creativecommons.org/licenses/by/4.0/ VOLUME 11, 2023 M. I. Sarwar et al.: Digital Transformation of Public Sector Governance With ITSM—A Pilot Study keep improving on the best practises [5]. Now, organisations are more interested in ITSM systems. Many companies focus on including IT services in their product line and provid- ing value-added and quality services to their customers [6]. ITSM, in general, is a set of guidelines for managing the delivery...",
-      "abstract_completo": "Information Technology or IT is a combination of technology itself and a collection of IT services that ensure the effective implementation of overall Information Technology in an organization. Like other services, Information Technology Service Management (ITSM) has become a global subject because managing IT is only possible through efficient and effective ITSM protocols. A well-implemented ITSM delivery system improves the quality of IT services, which eventually enhances the organization’s overall capacity and output. Public service delivery is closely dependent on the quality IT services that can be acquired through ITSM. This research study reviews some of the established ITSM standards and frameworks like FitSM, ITIL, CobiT, and ISO/IEC 20000 and proposes a most suitable and sustainable tool and its implementation roadmap for the digital transformation of public sector governance. For this pilot study, a public sector organization (PSO) working under the Government of Punjab (GoPb) was selected. This study focuses on an important area that has not yet been adequately addressed, where ITSM delivery can produce tremendous results. This study contributes to academics and researchers since it discusses the selection and implementation of a service management system (SMS) for a PSO while focusing on its needs, requirements, and available resources. In general, the qualitative analysis methodology is used in this research study, and specifically, it can be identified as applied research. The data is collected through a questionnaire, and the results are shown and discussed in the later sections."
-    },
     {
       "paper_id": "https://openalex.org/W2792033343",
       "titulo": "Incident Management in Academic Information System using ITIL Framework",
@@ -66,12 +29,12 @@
         "bibtex": "@article{palilingan_2018_incident,\n  title = {Incident Management in Academic Information System using ITIL Framework},\n  author = {Palilingan, Verry Ronny and Batmetan, Johan Reimon},\n  year = {2018},\n  journal = {IOP Conference Series Materials Science and Engineering},\n  volume = {306},\n  pages = {012110–012110},\n  doi = {https://doi.org/10.1088/1757-899x/306/1/012110},\n  url = {https://doi.org/10.1088/1757-899x/306/1/012110},\n}"
       },
       "evaluacion_decision": {
-        "motor_decision": "unsloth_laya",
-        "probabilidad_relevancia": 0.975,
+        "motor_decision": "typesafe_jev",
+        "probabilidad_relevancia": 0.94,
         "umbral_aplicado": 0.8,
-        "tipo_evidencia": "theoretical",
-        "rigor_metodologico": 1.77,
-        "justificacion_decision": "Decisión Laya: P(relevancia)=97.5% (Umbral: 80%). Tipo=theoretical, Rigor=1.8/3.0. Aceptado con alta afinidad"
+        "tipo_evidencia": "case_study",
+        "rigor_metodologico": 1.05,
+        "justificacion_decision": "Decisión TypeSafe Jev: P(relevancia)=94.0% (Umbral: 80%, Confianza: 1.00). Tipo=case_study, Rigor=1.1/3.0. Aceptado con alta afinidad"
       },
       "cita_textual_literal": "The technique used in this study is a technique adopted and developed from the service operations section of the ITIL framework.",
       "ubicacion_fuente": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Semantic Scholar)",
@@ -98,12 +61,12 @@
         "bibtex": "@article{rahmana_2025_evaluasi,\n  title = {EVALUASI PENERAPAN IT SERVICE MANAGEMENT (ITSM) DENGAN FRAMEWORK ITIL V3 DI UNIVERSITAS XYZ},\n  author = {Rahmana, Muhamad Yusuf},\n  year = {2025},\n  journal = {Jurnal Informatika dan Teknik Elektro Terapan},\n  volume = {13},\n  number = {3},\n  doi = {https://doi.org/10.23960/jitet.v13i3.7196},\n  url = {https://doi.org/10.23960/jitet.v13i3.7196},\n}"
       },
       "evaluacion_decision": {
-        "motor_decision": "unsloth_laya",
-        "probabilidad_relevancia": 0.985,
+        "motor_decision": "typesafe_jev",
+        "probabilidad_relevancia": 0.97,
         "umbral_aplicado": 0.8,
         "tipo_evidencia": "case_study",
-        "rigor_metodologico": 2.02,
-        "justificacion_decision": "Decisión Laya: P(relevancia)=98.5% (Umbral: 80%). Tipo=case_study, Rigor=2.0/3.0. Aceptado con alta afinidad"
+        "rigor_metodologico": 1.5,
+        "justificacion_decision": "Decisión TypeSafe Jev: P(relevancia)=97.0% (Umbral: 80%, Confianza: 1.00). Tipo=case_study, Rigor=1.5/3.0. Aceptado con alta afinidad"
       },
       "cita_textual_literal": "Penelitian ini bertujuan untuk mengevaluasi tingkat kematangan layanan Teknologi Informasi (TI) di Universitas XYZ melalui pendekatan IT Service Management (ITSM) dengan menggunakan framework ITIL V3 pada domain Service Operation.",
       "ubicacion_fuente": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Semantic Scholar)",
@@ -131,50 +94,17 @@
         "bibtex": "@article{ibrahim_2025_developing,\n  title = {Developing IT Service Management in Higher Education Institutions: A Case Study of ITIL Implementation in Universities in the Kurdistan Region of Iraq},\n  author = {Ibrahim, Haneen and Hamarash, Ibrahim I.},\n  year = {2025},\n  doi = {https://doi.org/10.31972/iceti2024.008},\n  url = {https://doi.org/10.31972/iceti2024.008},\n}"
       },
       "evaluacion_decision": {
-        "motor_decision": "unsloth_laya",
-        "probabilidad_relevancia": 0.933,
+        "motor_decision": "typesafe_jev",
+        "probabilidad_relevancia": 0.96,
         "umbral_aplicado": 0.8,
         "tipo_evidencia": "case_study",
-        "rigor_metodologico": 1.77,
-        "justificacion_decision": "Decisión Laya: P(relevancia)=93.3% (Umbral: 80%). Tipo=case_study, Rigor=1.8/3.0. Aceptado con alta afinidad"
+        "rigor_metodologico": 1.52,
+        "justificacion_decision": "Decisión TypeSafe Jev: P(relevancia)=96.0% (Umbral: 80%, Confianza: 1.00). Tipo=case_study, Rigor=1.5/3.0. Aceptado con alta afinidad"
       },
       "cita_textual_literal": "IT Service Management (ITSM) is defined as a collection of processes, documentation, and practices required to manage Information Technology (IT) services effectively.",
       "ubicacion_fuente": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Semantic Scholar)",
       "contenido_sustantivo_extracto": "IT Service Management (ITSM) is defined as a collection of processes, documentation, and practices required to manage Information Technology (IT) services effectively. Different frameworks based on industry best practices are available in the literature for designing and building an ITSM system, with the Information Technology Infrastructure Library (ITIL) being the most popular and widely accepted as the de facto standard. ITIL offers a systematic collection of best practices, but it does not provide a specific procedure for implementing an ITSM framework in enterprises and organizations. The core element of ITIL is the process (or practice in ITIL V4), and ITIL V4 includes 34 practices. Effective implementation of ITIL in an organization does not require the use of all these processes; the nature of the organization dictates the selection of necessary processes. However, official ITIL documents do not provide criteria for selecting the appropriate processes. In this study, a procedure focused on process selection and adaptation for managing ITSM using the ITIL framework in universities has been proposed. This method addresses Critical Success Factors (CSFs) to determine the most suitable ITIL processes for various business functions. Data was collected from university stakeholders, including academic leaders and students, through questionnaires. The proposed framework was applied in a case study involving five private universities in the Kurdistan Region of Iraq. Ultimately, a complete lifecycle for the implementation of the selected processes was designed. 1. Introduction Universities are among the largest, most complex, and multifaceted organizations that heavily rely on Information Technology (IT) for their operation and development. They view IT as a fundamental asset for their success ( The integration of IT and its sub-field Artificial Intelligence (AI) in teaching and educational sectors is crucial for enhancing learning quality. To achive this, universities need to deploy technology applications across all departments to deliver optimal services to both internal and external customers (Khan, 2012). Services provided by universities—such as online and recorded lectures, assignments, lecture schedules, student and faculty recruitment, infrastructure documentation, management and administration, stakeholder communication, and initiative management—are all managed through information systems (Palilingan and Batmetan, 2018). These services must be accurate, fast, and of high quality to meet customer satisfaction. Information Technology Service Management (ITSM) is a collection of processes, documentation, and practices essential for managing IT services. It is crucial for designing and delivering services to end users. Reviewing the best practices of ITSM has led to the development of various frameworks such as ITIL, DevOps, COBIT, Six Sigma, and others (Hertvik, 2017). Each ITSM framework has its own structure, lifecycle, processes, and modules, and many are supported by international bodies and recognized certifications. Implementing a complete framework like ITIL or COBIT in a large organization such as a university can be challenging, especially where the level of adoption is low or limited (Bianchi and Sousa, 2015). ITIL is applicable to organizations of all sizes, particularly large ones like universities and higher education institutions. It is the most popular IT Service Management (ITSM) framework in the IT industry and is considered a de facto standard. However, while ITIL provides a systematic description of best practices, it does not offer a specific procedure for implementing an ITSM framework in enterprises. This study investigates whether universities in the Kurdistan Region of Iraq need a standard ITSM framework and identifies the necessary processes for successfully implementing the ITIL framework on their campuses. This involves reviewing and evaluating the pros and cons of assessing the current status of ITSM at selected universities in the Kurdistan Region, and designing an institutionalized ITSM framework based on ITIL process management for these institutions.",
       "abstract_completo": "IT Service Management (ITSM) is defined as a collection of processes, documentation, and practices required to manage Information Technology (IT) services effectively. Different frameworks based on industry best practices are available in the literature for designing and building an ITSM system, with the Information Technology Infrastructure Library (ITIL) being the most popular and widely accepted as the de facto standard. ITIL offers a systematic collection of best practices, but it does not provide a specific procedure for implementing an ITSM framework in enterprises and organizations. The core element of ITIL is the process (or practice in ITIL V4), and ITIL V4 includes 34 practices. Effective implementation of ITIL in an organization does not require the use of all these processes; the nature of the organization dictates the selection of necessary processes. However, official ITIL documents do not provide criteria for selecting the appropriate processes. In this study, a procedure focused on process selection and adaptation for managing ITSM using the ITIL framework in universities has been proposed. This method addresses Critical Success Factors (CSFs) to determine the most suitable ITIL processes for various business functions. Data was collected from university stakeholders, including academic leaders and students, through questionnaires. The proposed framework was applied in a case study involving five private universities in the Kurdistan Region of Iraq. Ultimately, a complete lifecycle for the implementation of the selected processes was designed. 1. Introduction Universities are among the largest, most complex, and multifaceted organizations that heavily rely on Information Technology (IT) for their operation and development. They view IT as a fundamental asset for their success ( The integration of IT and its sub-field Artificial Intelligence (AI) in teaching and educational sectors is crucial for enhancing learning quality. To achive this, universities need to deploy technology applications across all departments to deliver optimal services to both internal and external customers (Khan, 2012). Services provided by universities—such as online and recorded lectures, assignments, lecture schedules, student and faculty recruitment, infrastructure documentation, management and administration, stakeholder communication, and initiative management—are all managed through information systems (Palilingan and Batmetan, 2018). These services must be accurate, fast, and of high quality to meet customer satisfaction. Information Technology Service Management (ITSM) is a collection of processes, documentation, and practices essential for managing IT services. It is crucial for designing and delivering services to end users. Reviewing the best practices of ITSM has led to the development of various frameworks such as ITIL, DevOps, COBIT, Six Sigma, and others (Hertvik, 2017). Each ITSM framework has its own structure, lifecycle, processes, and modules, and many are supported by international bodies and recognized certifications. Implementing a complete framework like ITIL or COBIT in a large organization such as a university can be challenging, especially where the level of adoption is low or limited (Bianchi and Sousa, 2015). ITIL is applicable to organizations of all sizes, particularly large ones like universities and higher education institutions. It is the most popular IT Service Management (ITSM) framework in the IT industry and is considered a de facto standard. However, while ITIL provides a systematic description of best practices, it does not offer a specific procedure for implementing an ITSM framework in enterprises. This study investigates whether universities in the Kurdistan Region of Iraq need a standard ITSM framework and identifies the necessary processes for successfully implementing the ITIL framework on their campuses. This involves reviewing and evaluating the pros and cons of assessing the current status of ITSM at selected universities in the Kurdistan Region, and designing an institutionalized ITSM framework based on ITIL process management for these institutions."
-    },
-    {
-      "paper_id": "https://doi.org/10.47467/edu.v5i3.10877",
-      "titulo": "Analisis IT Service Management (ITSM) Menggunakan Framework ITIL V4 pada Dinas Kependudukan dan Pencatatan Sipil Kota Palembang",
-      "autores": [
-        "Theresia Chintia Herawati",
-        "Dicky Pratama"
-      ],
-      "primer_autor": "Herawati",
-      "año": 2025,
-      "revista_o_fuente": "EduInovasi:  Journal of Basic Educational Studies",
-      "doi": "https://doi.org/10.47467/edu.v5i3.10877",
-      "enlace_url": "https://doi.org/10.47467/edu.v5i3.10877",
-      "citas_recibidas": 0,
-      "tipo_acceso": "abstract_only",
-      "citacion_apa7": {
-        "cita_narrativa": "Herawati y Pratama (2025)",
-        "cita_parentetica": "(Herawati y Pratama, 2025)",
-        "referencia_completa": "Herawati, T. C., & Pratama, D. (2025). Analisis IT service management (ITSM) menggunakan framework ITIL v4 pada dinas kependudukan dan pencatatan sipil kota palembang. *EduInovasi:  Journal of Basic Educational Studies*, *5*(3). https://doi.org/10.47467/edu.v5i3.10877",
-        "bibtex": "@article{herawati_2025_analisis,\n  title = {Analisis IT Service Management (ITSM) Menggunakan Framework ITIL V4 pada Dinas Kependudukan dan Pencatatan Sipil Kota Palembang},\n  author = {Herawati, Theresia Chintia and Pratama, Dicky},\n  year = {2025},\n  journal = {EduInovasi:  Journal of Basic Educational Studies},\n  volume = {5},\n  number = {3},\n  doi = {https://doi.org/10.47467/edu.v5i3.10877},\n  url = {https://doi.org/10.47467/edu.v5i3.10877},\n}"
-      },
-      "evaluacion_decision": {
-        "motor_decision": "unsloth_laya",
-        "probabilidad_relevancia": 0.87,
-        "umbral_aplicado": 0.8,
-        "tipo_evidencia": "theoretical",
-        "rigor_metodologico": 1.79,
-        "justificacion_decision": "Decisión Laya: P(relevancia)=87.0% (Umbral: 80%). Tipo=theoretical, Rigor=1.8/3.0. Aceptado con alta afinidad"
-      },
-      "cita_textual_literal": "The results indicate that the maturity level of IT service management in all three practices is at Level 4 (Managed), demonstrating that IT service processes have been implemented effectively and are systematically managed.",
-      "ubicacion_fuente": "Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Semantic Scholar)",
-      "contenido_sustantivo_extracto": "This study aims to analyze the management of information technology services at the Department of Population and Civil Registration of Palembang City using the Information Technology Service Management (ITSM) approach based on the ITIL V4 framework. The IT services analyzed include the Population Administration Information System (SIAK) and Digital Population Identity (IKD), which support public service delivery. This research employs a descriptive analytical method with a mixed methods approach, combining qualitative and quantitative techniques. Data were collected through literature studies, direct observation, interviews, and questionnaire distribution to relevant stakeholders determined through RACI mapping. Data analysis was conducted using SWOT analysis, fishbone analysis to identify root causes of problems, maturity level measurement, and gap analysis. The research focuses on the Service Management Practices domain of ITIL V4, namely Incident Management, Problem Management, and Service Continuity Management. The results indicate that the maturity level of IT service management in all three practices is at Level 4 (Managed), demonstrating that IT service processes have been implemented effectively and are systematically managed. However, minor gaps remain, particularly in documentation, root cause analysis, procedure standardization, and service continuity planning. Therefore, this study provides improvement recommendations to enhance sustainable IT service management and support the improvement of public service quality.",
-      "abstract_completo": "This study aims to analyze the management of information technology services at the Department of Population and Civil Registration of Palembang City using the Information Technology Service Management (ITSM) approach based on the ITIL V4 framework. The IT services analyzed include the Population Administration Information System (SIAK) and Digital Population Identity (IKD), which support public service delivery. This research employs a descriptive analytical method with a mixed methods approach, combining qualitative and quantitative techniques. Data were collected through literature studies, direct observation, interviews, and questionnaire distribution to relevant stakeholders determined through RACI mapping. Data analysis was conducted using SWOT analysis, fishbone analysis to identify root causes of problems, maturity level measurement, and gap analysis. The research focuses on the Service Management Practices domain of ITIL V4, namely Incident Management, Problem Management, and Service Continuity Management. The results indicate that the maturity level of IT service management in all three practices is at Level 4 (Managed), demonstrating that IT service processes have been implemented effectively and are systematically managed. However, minor gaps remain, particularly in documentation, root cause analysis, procedure standardization, and service continuity planning. Therefore, this study provides improvement recommendations to enhance sustainable IT service management and support the improvement of public service quality."
     }
   ],
   "papers_descartados": [
@@ -189,6 +119,20 @@
       "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
     },
     {
+      "titulo": "Digital Transformation of Public Sector Governance With IT Service Management–A Pilot Study",
+      "autores": [
+        "Muhammad Imran Sarwar",
+        "Qaiser Abbas",
+        "Tahir Alyas",
+        "Ali Alzahrani",
+        "Turki Alghamdi",
+        "Yazed Alsaawy"
+      ],
+      "año": 2023,
+      "citas": 57,
+      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
+    },
+    {
       "titulo": "Information Technology Governance for Higher Education Institutions: A Multi-Country Study",
       "autores": [
         "Isaías Scalabrin Bianchi",
@@ -197,16 +141,6 @@
       ],
       "año": 2021,
       "citas": 45,
-      "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
-    },
-    {
-      "titulo": "Analisis Information Technology Service Management (ITSM) LPSE Kota Palembang Berdasarkan Framework ITIL V3",
-      "autores": [
-        "Dwi Mardiana",
-        "Widya Cholil"
-      ],
-      "año": 2020,
-      "citas": 1,
       "motivo": "No superó el umbral mínimo exigido (80% - 85%)"
     }
   ]

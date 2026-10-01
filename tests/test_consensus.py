@@ -265,6 +265,20 @@ class TestThesisConsensus(unittest.TestCase):
             self.assertEqual(ev["citacion_apa7"]["cita_parentetica"], "(Doe, 2023)")
             self.assertEqual(ev["evaluacion_decision"]["motor_decision"], "unsloth_laya")
 
+    def test_typesafe_jev_judge_structure(self) -> None:
+        """Verifica la configuración y el nombre de motor del evaluador TypeSafe Jev."""
+        from thesis_consensus.decision.typesafe_jev import TypeSafeJevJudge
+
+        judge = TypeSafeJevJudge(api_key="test_key_abc")
+        self.assertEqual(judge.engine_name, "typesafe_jev")
+        self.assertEqual(judge._model_name, "jev-latest")
+
+        # Verificar generación de evaluación de respaldo ante errores controlados
+        fallback = judge._fallback_error_evaluation("Simulated error", 0.80)
+        self.assertFalse(fallback.is_relevant)
+        self.assertEqual(fallback.decision_engine, "typesafe_jev")
+        self.assertEqual(fallback.threshold_applied, 0.80)
+
 
 if __name__ == "__main__":
     unittest.main()

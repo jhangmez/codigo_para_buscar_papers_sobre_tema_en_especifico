@@ -60,11 +60,16 @@ def process_topics_batch(
     agent = ThesisConsensusAgent(decision_judge=judge, language=language)
 
     console.print(f"[bold]⚙️ Motor de Decisión activo:[/bold] [yellow]{judge.engine_name}[/yellow]")
-    if judge.engine_name == "unsloth_laya":
+    if judge.engine_name == "typesafe_jev":
+        if judge.is_available():
+            console.print("[green]✔ Servidor TypeSafe AI (Jev / System One API - 32K Context) autenticado y conectado[/green]")
+        else:
+            console.print("[yellow]ℹ TypeSafe Jev API no autenticó. Verifique TYPESAFE_API_KEY en .env[/yellow]")
+    elif judge.engine_name == "unsloth_laya":
         if judge.is_available():
             console.print("[green]✔ Servidor Unsloth Desktop (Laya / Jev API) conectado en localhost:8888[/green]")
         else:
-            console.print("[yellow]ℹ Servidor Unsloth Laya no detectado. Utilizando evaluador semántico con umbral estricto.[/yellow]")
+            console.print("[yellow]ℹ Servidor Unsloth Laya no detectado.[/yellow]")
     elif judge.engine_name == "heuristic_academic":
         console.print("[cyan]ℹ Evaluador semántico académico activo (umbral de corte calibrado al 80%-85%)[/cyan]")
 
@@ -218,7 +223,7 @@ def main() -> None:
     parser.add_argument(
         "--engine",
         "-e",
-        choices=["unsloth_laya", "laya", "heuristic", "openai", "auto"],
+        choices=["typesafe_jev", "jev", "unsloth_laya", "laya", "heuristic", "openai", "auto"],
         default=DEFAULT_DECISION_ENGINE,
         help=f"Motor de decisión (default: {DEFAULT_DECISION_ENGINE})",
     )
@@ -238,6 +243,9 @@ def main() -> None:
             path = Path(args.file)
             if path.exists():
                 topics = [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+            else:
+                console.print(f"[bold red]Error: El archivo especificado no existe: {args.file}[/bold red]")
+                return
         if args.topic:
             topics.extend(args.topic)
 

@@ -34,7 +34,7 @@ _load_env_file()
 # CONFIGURACIÓN DE IDIOMA Y MOTOR DE DECISIÓN POR DEFECTO
 # ==============================================================================
 DEFAULT_LANGUAGE: str = "es"
-DEFAULT_DECISION_ENGINE: str = "unsloth_laya"
+DEFAULT_DECISION_ENGINE: str = "typesafe_jev"
 
 # ==============================================================================
 # UMBRALES DEL MODELO DE DECISIÓN (Alta exigencia para tesis)
@@ -42,19 +42,21 @@ DEFAULT_DECISION_ENGINE: str = "unsloth_laya"
 # Umbral mínimo de afinidad/probabilidad para conservar un artículo (80% - 85%)
 DEFAULT_RELEVANCE_THRESHOLD: float = 0.80
 STRICT_RELEVANCE_THRESHOLD: float = 0.85
-MINIMUM_RIGOR_SCORE: float = 1.6  # Escala de 0.0 a 3.0
+MINIMUM_RIGOR_SCORE: float = 1.0  # Escala de 0.0 a 3.0 (Nivel 1: referencia académica aceptable)
 
 # ==============================================================================
 # ENDPOINTS Y SERVICIOS EXTERNOS
 # ==============================================================================
 OPENALEX_BASE_URL: str = "https://api.openalex.org/works"
 CROSSREF_BASE_URL: str = "https://api.crossref.org/works"
+TYPESAFE_DEFAULT_URL: str = "https://api.typesafe.ai/v1/systemone"
+DEFAULT_JEV_MODEL: str = "jev-latest"
 UNSLOTH_DEFAULT_URL: str = "http://localhost:8888/v1/systemone"
 OPENAI_DEFAULT_URL: str = "http://localhost:11434/v1"
 
 DEFAULT_USER_EMAIL: str = "thesis_researcher@university.edu"
 DEFAULT_DECISION_MODEL: str = "laya"
-DEFAULT_TIMEOUT_SECONDS: float = 15.0
+DEFAULT_TIMEOUT_SECONDS: float = 20.0
 
 # ==============================================================================
 # PARÁMETROS DE BÚSQUEDA BIBLIOGRÁFICA
@@ -81,7 +83,8 @@ EVIDENCE_TYPE_NAMES: Dict[str, str] = {
 }
 
 DECISION_ENGINE_NAMES: Dict[str, str] = {
-    "unsloth_laya": "Modelo de Decisión Neuronal (Unsloth Laya / Jev API)",
+    "typesafe_jev": "Modelo de Decisión TypeSafe Jev (System One / 32K context)",
+    "unsloth_laya": "Modelo de Decisión Neuronal (Unsloth Laya)",
     "openai_compatible": "Modelo LLM Generativo (OpenAI / Ollama)",
     "heuristic_academic": "Evaluador Semántico de Facetas Académicas",
 }
