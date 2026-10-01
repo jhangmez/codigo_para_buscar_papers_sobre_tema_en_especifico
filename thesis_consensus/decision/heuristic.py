@@ -47,8 +47,8 @@ class HeuristicAcademicJudge(BaseDecisionJudge):
         """
         topic_lower = topic_or_claim.lower()
         title_lower = paper.title.lower()
-        abstract_lower = paper.abstract.lower()
-        combined_text = f"{title_lower} {abstract_lower}"
+        abstract_or_deep = paper.content_excerpt.lower() if paper.content_excerpt else paper.abstract.lower()
+        combined_text = f"{title_lower} {abstract_or_deep}"
 
         # 1. Definición de facetas conceptuales clave para la tesis
         facet_definitions: Dict[str, Set[str]] = {

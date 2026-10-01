@@ -81,12 +81,14 @@ class UnslothLayaJudge(BaseDecisionJudge):
         Envía los metadatos y el resumen del paper a Unsloth Laya para tomar la decisión estructurada.
         Aplica el umbral alto exigido (80% - 85%).
         """
-        abstract_snippet = paper.abstract[:1500] if paper.abstract else "(Sin resumen disponible, evaluar por título)"
+        content_body = paper.content_excerpt if paper.content_excerpt else paper.abstract
+        content_snippet = content_body[:1500] if content_body else "(Sin resumen disponible, evaluar por título)"
         state_text = (
             f"Paper Title: {paper.title}\n"
             f"Venue/Journal: {paper.venue or 'Academic publication'}\n"
             f"Year: {paper.year or 'Recent'}\n"
-            f"Abstract: {abstract_snippet}"
+            f"Content Source: {paper.content_source}\n"
+            f"Content/Findings Excerpt:\n{content_snippet}"
         )
 
         headers: Dict[str, str] = {"Content-Type": "application/json"}

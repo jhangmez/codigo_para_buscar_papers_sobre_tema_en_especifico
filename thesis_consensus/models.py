@@ -59,6 +59,8 @@ class PaperMetadata(BaseModel):
     doi: Optional[str] = None
     url: Optional[str] = None
     abstract: str = ""
+    content_excerpt: str = ""
+    content_source: Literal["abstract_only", "open_access_pdf", "open_access_html"] = "abstract_only"
     citation_count: int = 0
     is_open_access: bool = False
     open_access_pdf_url: Optional[str] = None
