@@ -15,13 +15,13 @@
 ### 📝 Síntesis Teórica Integrada (Múltiples Papers - Redacción en Español)
 
 #### Opción A: Redacción Narrativa Dialéctica (Recomendada para abrir el marco teórico)
-> En el análisis de los fundamentos vinculados a *"What are the challenges, ticket volume overloads, and bottlenecks in university IT support and help desk services?"*, la literatura especializada converge en puntos críticos de gestión y operación. Por un lado, según destacan Babar et al. (2025), it investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness. En esta misma línea, Shaw et al. (2022) complementan esta perspectiva al demostrar que purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. De manera concordante, estos autores coinciden en que la estandarización y madurez de procesos constituyen elementos esenciales para mitigar fallas operativas y garantizar la continuidad del servicio.
+> En el análisis de los fundamentos vinculados a *los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario*, la literatura especializada converge en puntos críticos de gestión y operación. Por un lado, según destacan Babar et al. (2025), la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias. En esta misma línea, Shaw et al. (2022) complementan esta perspectiva al demostrar que la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención. De manera concordante, estos autores coinciden en que la estandarización, madurez de procesos y automatización constituyen elementos esenciales para mitigar fallas operativas y garantizar la continuidad del servicio.
 
 #### Opción B: Enfoque Complementario por Tipología de Evidencia
-> A nivel empírico en centros de educación superior, los estudios de caso desarrollados por Shaw et al. (2022) demuestran que la implementación práctica de estos modelos genera mejoras medibles en la capacidad de respuesta y satisfacción de los usuarios. Por otra parte, desde una aproximación de métricas de servicio y análisis de flujos, autores como Babar et al. (2025) subrayan que la delimitación clara de acuerdos de nivel de servicio (SLAs) previene cuellos de botella durante periodos de máxima demanda.
+> A nivel empírico en centros de educación superior, los estudios de caso desarrollados por Shaw et al. (2022) demuestran que la implementación práctica de estos modelos genera mejoras medibles en la capacidad de respuesta y satisfacción de los usuarios. Por otra parte, desde una aproximación de métricas de servicio y análisis de flujos, autores como Babar et al. (2025) subrayan que la delimitación clara de acuerdos de nivel de servicio (SLA) previene cuellos de botella durante periodos de máxima demanda.
 
 #### Opción C: Afirmación con Citas Parentéticas Agrupadas (APA 7)
-> La literatura científica reciente ratifica de manera concluyente que la adopción de buenas prácticas de gestión tecnológica y la automatización de flujos de soporte en instituciones educativas resultan determinantes para resolver la congestión operativa y optimizar la atención de incidencias (Babar, 2025; Shaw, 2022).
+> La literatura científica reciente ratifica de manera concluyente que la adopción de buenas prácticas de gestión tecnológica, la automatización de flujos y la mitigación de cuellos de botella en mesas de ayuda institucionales resultan determinantes para optimizar la atención de incidencias (Babar, 2025; Shaw, 2022).
 
 ### 📊 Evaluación y Criterios del Modelo de Decisión
 
@@ -40,13 +40,13 @@
 - **Cita narrativa:** `Babar et al. (2025)`
 - **Cita parentética:** `(Babar et al., 2025)`
 - **Párrafo sugerido para marco teórico:**
-> De acuerdo con Babar et al. (2025), it investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness. Este aporte respalda la fundamentación de este apartado sobre what are the challenges, ticket volume overloads, and bottlenecks in university it support and help desk services?, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Babar et al., 2025).
+> De acuerdo con Babar et al. (2025), la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Babar et al., 2025).
 
 > 🔍 **Auditoría de Veracidad y Respaldo Textual (Cero Alucinación):**
 > - **Cita Textual Literal del Artículo:** *"It investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness."*
 > - **Procedencia de la Cita:** `Sección de Resultados / Hallazgos del Artículo Completo (PDF en memoria)`
 > - **Tipo de Acceso:** `open_access_pdf` | **Citas Recibidas:** `18`
-> - **Traducción / Paráfrasis Aplicada:** *"it investigates the integration of AI tools—such as chatbots, NLP -based virtual assistants, and automated ticketing systems —and how these technologies work alongside human agents to improve efficiency, accu racy, and responsiveness"*
+> - **Traducción / Paráfrasis Aplicada:** *"la integración colaborativa de herramientas de inteligencia artificial —incluyendo agentes conversacionales, asistentes virtuales de lenguaje natural y enrutamiento automatizado de tickets— junto a operadores humanos incrementa drásticamente la eficiencia, precisión y rapidez en la atención y resolución de incidencias"*
 
 - **Referencia bibliográfica APA 7:** Babar, Z., Paul, R., Rahman, M. A., & Barua, T. (2025). A systematic review of human-ai collaboration in IT support services: Enhancing user experience and workflow automation. https://doi.org/10.63125/grqtf978
 - **DOI Verificable:** [https://doi.org/10.63125/grqtf978](https://doi.org/10.63125/grqtf978)
@@ -56,13 +56,13 @@
 - **Cita narrativa:** `Shaw et al. (2022)`
 - **Cita parentética:** `(Shaw et al., 2022)`
 - **Párrafo sugerido para marco teórico:**
-> Según señalan Shaw et al. (2022), purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact. Este aporte respalda la fundamentación de este apartado sobre what are the challenges, ticket volume overloads, and bottlenecks in university it support and help desk services?, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Shaw et al., 2022).
+> Según señalan Shaw et al. (2022), la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención. Este aporte respalda la fundamentación de este apartado sobre los desafíos operativos, la sobrecarga en el volumen de tickets y los cuellos de botella en mesas de ayuda y soporte técnico universitario, al evidenciar empíricamente la efectividad de estos enfoques en la gestión institucional (Shaw et al., 2022).
 
 > 🔍 **Auditoría de Veracidad y Respaldo Textual (Cero Alucinación):**
 > - **Cita Textual Literal del Artículo:** *"Purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact."*
 > - **Procedencia de la Cita:** `Resumen Oficial Indexado en Base de Datos Académica (OpenAlex/Crossref)`
 > - **Tipo de Acceso:** `abstract_only` | **Citas Recibidas:** `16`
-> - **Traducción / Paráfrasis Aplicada:** *"purpose Effective information management can help real estate operators improve asset performance during use, reducing environmental impact"*
+> - **Traducción / Paráfrasis Aplicada:** *"la administración centralizada y estructurada de la información operativa permite identificar con precisión prioridades de intervención, optimizar el desempeño del soporte técnico y prevenir la saturación de los canales de atención"*
 
 - **Referencia bibliográfica APA 7:** Shaw, C., Pereira, F. D. A., McNally, C., Farghaly, K., Hartmann, T., & O’Donnell, J. (2022). Information management in the facilities domain: Investigating practitioner priorities. *Facilities*, *41*(5/6), 285–305. https://doi.org/10.1108/f-02-2022-0033
 - **DOI Verificable:** [https://doi.org/10.1108/f-02-2022-0033](https://doi.org/10.1108/f-02-2022-0033)

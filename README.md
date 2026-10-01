@@ -205,19 +205,20 @@ Para evitar cualquier desorden al formular múltiples preguntas de tesis en lote
 
 ```
 outputs/
-├── tema_01_how-is-it-service-management-itsm-or-iti/
-│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría de la pregunta 1
+├── tema_how-is-it-service-management-itsm-or-itil-imp/
+│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría del tema 1
 │   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 1
-│   └── evidencia.json           # Datos JSON estructurados y decisiones de la pregunta 1
+│   └── evidencia.json           # Datos JSON estructurados y decisiones del tema 1
 │
-├── tema_02_what-are-the-challenges-ticket-volume-ov/
-│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría de la pregunta 2
+├── tema_what-are-the-challenges-ticket-volume-overloa/
+│   ├── fundamentos_teoricos.md   # Marco teórico específico, síntesis y auditoría del tema 2
 │   ├── referencias.bib          # Bibliografía BibTeX exclusiva de los papers aprobados del tema 2
-│   └── evidencia.json           # Datos JSON estructurados y decisiones de la pregunta 2
+│   └── evidencia.json           # Datos JSON estructurados y decisiones del tema 2
 │
-├── fundamentos_teoricos_tesis.md  # Reporte maestro consolidado con índice interactivo y todos los temas
-├── referencias_tesis.bib          # Bibliografía general consolidada y deduplicada para toda la tesis
-└── evidencia_academica.json       # Base de datos global en JSON de toda la revisión bibliográfica
+└── reporte_general_consolidado/  # Carpeta dedicada al reporte unificado (sin archivos sueltos)
+    ├── fundamentos_teoricos_tesis.md  # Reporte maestro consolidado con índice interactivo y todos los temas
+    ├── referencias_tesis.bib          # Bibliografía general consolidada y deduplicada para toda la tesis
+    └── evidencia_academica.json       # Base de datos global en JSON de toda la revisión bibliográfica
 ```
 
 ---

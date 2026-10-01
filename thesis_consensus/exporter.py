@@ -253,17 +253,18 @@ class ThesisExporter:
         master_bib_filename: str = "referencias_tesis.bib",
     ) -> Dict[str, str]:
         """
-        Organiza y exporta todos los resultados ordenados en subcarpetas por cada pregunta/tema.
-        Además genera el reporte consolidado maestro y la bibliografía unificada en la raíz de outputs/.
+        Organiza y exporta todos los resultados ordenados en subcarpetas temáticas limpias.
+        Sin prefijos numéricos molestos (como tema_01) y agrupando el reporte consolidado
+        en su propia subcarpeta 'reporte_general_consolidado' para que la raíz de outputs quede 100% limpia.
         """
         base_dir = Path(base_output_dir)
         base_dir.mkdir(parents=True, exist_ok=True)
         created_paths: Dict[str, str] = {}
 
-        # 1. Exportar subcarpeta individual por cada tema
+        # 1. Exportar subcarpeta individual por cada tema (sin prefijos numéricos)
         for idx, topic in enumerate(batch.topics, start=1):
-            topic_slug = cls._slugify(topic)[:40]
-            folder_name = f"tema_{idx:02d}_{topic_slug}".rstrip("-")
+            topic_slug = cls._slugify(topic)[:45]
+            folder_name = f"tema_{topic_slug}".rstrip("-")
             topic_dir = base_dir / folder_name
             topic_dir.mkdir(parents=True, exist_ok=True)
 
@@ -289,15 +290,27 @@ class ThesisExporter:
 
             created_paths[f"tema_{idx}"] = str(topic_dir.resolve())
 
-        # 2. Exportar reporte consolidado maestro en la raíz de outputs/
-        master_md = str(base_dir / master_md_filename)
-        master_bib = str(base_dir / master_bib_filename)
-        master_json = str(base_dir / "evidencia_academica.json")
+        # 2. Exportar reporte consolidado maestro en su propia subcarpeta 'reporte_general_consolidado'
+        consolidated_dir = base_dir / "reporte_general_consolidado"
+        consolidated_dir.mkdir(parents=True, exist_ok=True)
+        master_md = str(consolidated_dir / master_md_filename)
+        master_bib = str(consolidated_dir / master_bib_filename)
+        master_json = str(consolidated_dir / "evidencia_academica.json")
 
         cls.to_batch_markdown(batch, master_md)
         cls.to_batch_bibtex(batch, master_bib)
         cls.to_batch_json(batch, master_json)
 
+        # Limpiar cualquier archivo suelto que hubiera quedado en la raíz de outputs/
+        for loose_file in ("fundamentos_teoricos_tesis.md", "referencias_tesis.bib", "evidencia_academica.json"):
+            old_p = base_dir / loose_file
+            if old_p.is_file():
+                try:
+                    old_p.unlink()
+                except Exception:
+                    pass
+
+        created_paths["master_dir"] = str(consolidated_dir.resolve())
         created_paths["master_md"] = master_md
         created_paths["master_bib"] = master_bib
         created_paths["master_json"] = master_json

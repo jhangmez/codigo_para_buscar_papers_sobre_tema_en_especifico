@@ -159,8 +159,11 @@ def process_topics_batch(
             console.print("     ├── [white]referencias.bib[/white] (BibTeX específico del tema)")
             console.print("     └── [white]evidencia.json[/white] (JSON estructurado)")
 
-    console.print(f"\n[bold green]✔ Reporte maestro consolidado de tesis:[/bold green]\n👉 [underline]{export_paths.get('master_md')}[/underline]")
-    console.print(f"[bold green]✔ Bibliografía general consolidada y deduplicada (BibTeX):[/bold green]\n👉 [underline]{export_paths.get('master_bib')}[/underline]")
+    console.print(f"\n[bold green]✔ Reporte maestro consolidado agrupado en carpeta dedicada:[/bold green]")
+    console.print(f"  📂 [cyan]{export_paths.get('master_dir')}[/cyan]")
+    console.print("     ├── [white]fundamentos_teoricos_tesis.md[/white] (Reporte unificado)")
+    console.print("     ├── [white]referencias_tesis.bib[/white] (Bibliografía general consolidada)")
+    console.print("     └── [white]evidencia_academica.json[/white] (Base de datos JSON)")
     console.print("#" * 80 + "\n")
 
     return batch

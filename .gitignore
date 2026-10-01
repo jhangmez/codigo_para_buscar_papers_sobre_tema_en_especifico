@@ -26,3 +26,12 @@ Thumbs.db
 # IDEs
 .vscode/
 .idea/
+
+# Salidas de investigación: conservar únicamente las 2 carpetas de evidencia inicial y el consolidado
+outputs/*
+!outputs/tema_how-is-it-service-management-itsm-or-itil-imp/
+!outputs/tema_how-is-it-service-management-itsm-or-itil-imp/**
+!outputs/tema_what-are-the-challenges-ticket-volume-overloa/
+!outputs/tema_what-are-the-challenges-ticket-volume-overloa/**
+!outputs/reporte_general_consolidado/
+!outputs/reporte_general_consolidado/**
