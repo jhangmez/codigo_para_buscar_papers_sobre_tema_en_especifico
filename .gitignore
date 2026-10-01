@@ -1,0 +1,28 @@
+# Entornos virtuales
+.venv/
+env/
+venv/
+ENV/
+
+# Python cache y compilados
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Mypy y herramientas de tipado
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Archivos de entorno y claves
+.env
+*.local
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
