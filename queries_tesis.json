@@ -1,0 +1,230 @@
+[
+  {
+    "seccion": "2.2.1. Bases teóricas de Operaciones de TI en Educación Superior",
+    "query_en": "What is the role and operational impact of Information Technology Service Management (ITSM) in higher education institutions and university service desks?",
+    "carpeta_output": "outputs/tema_what-is-the-role-and-operational-impact-of-in",
+    "estado": "YA_EJECUTADO",
+    "conservados": 1,
+    "descartados": 5
+  },
+  {
+    "seccion": "2.2.1.1. Gestión de servicios e incidencias de TI (ITSM / Help Desk)",
+    "query_en": "How is the ITIL framework and incident management lifecycle implemented in university IT support services and help desks?",
+    "carpeta_output": "outputs/tema_how-is-it-service-management-itsm-or-itil-imp",
+    "estado": "YA_EJECUTADO"
+  },
+  {
+    "seccion": "2.2.1.2. Problemática de atención y demanda asistencial en la USS",
+    "query_en": "What are the primary operational challenges, ticket volume bottlenecks, and service delays in university IT help desks during peak academic periods?",
+    "carpeta_output": "outputs/tema_what-are-the-challenges-ticket-volume-overloa",
+    "estado": "YA_EJECUTADO"
+  },
+  {
+    "seccion": "2.2.1.3. Canales digitales de autoservicio estudiantil",
+    "query_en": "How do digital self-service technologies (SST) and conversational assistants improve student autonomy and support efficiency in higher education?",
+    "carpeta_output": "outputs/tema_how-do-digital-self-service-technologies-sst",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.1.4. Calidad del servicio de soporte y tiempos de respuesta",
+    "query_en": "How do First Response Time (FRT), Mean Time to Resolution (MTTR), and service quality models like SERVQUAL impact user satisfaction in university IT support?",
+    "carpeta_output": "outputs/tema_how-do-first-response-time-frt-mean-time-to-r",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.2. Bases teóricas de Inteligencia Artificial y Procesamiento de Lenguaje Natural",
+    "query_en": "How has Natural Language Processing (NLP) evolved from recurrent neural networks to modern generative artificial intelligence in conversational systems?",
+    "carpeta_output": "outputs/tema_how-has-natural-language-processing-nlp-evolv",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.2.1. Inteligencia Artificial y Machine Learning",
+    "query_en": "What are the architectural and algorithmic differences between classical machine learning, deep learning, and generative language modeling in natural language tasks?",
+    "carpeta_output": "outputs/tema_what-are-the-architectural-and-algorithmic-di",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.2.2. Métricas de Evaluación de Modelos de Lenguaje",
+    "query_en": "What are the standard quantitative and qualitative evaluation metrics for domain-specific conversational AI and task-oriented Large Language Models?",
+    "carpeta_output": "outputs/tema_what-are-the-standard-quantitative-and-qualit",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "a. Matriz de confusión y Exactitud Fáctica (C / P / I)",
+    "query_en": "How is a confusion matrix applied to categorical factual correctness grading (Correct, Partial, Incorrect) in natural language generation and domain QA?",
+    "carpeta_output": "outputs/tema_how-is-a-confusion-matrix-applied-to-categori",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "b. Métricas de Generación y Tasa de Alucinación",
+    "query_en": "How are hallucination rates, factual consistency, and generation fidelity quantified in domain-specific Large Language Models?",
+    "carpeta_output": "outputs/tema_how-are-hallucination-rates-factual-consisten",
+    "estado": "YA_EJECUTADO",
+    "conservados": 2,
+    "descartados": 4
+  },
+  {
+    "seccion": "c. Métricas de Recuperación de Información (Recall@K y Precisión)",
+    "query_en": "How are Recall@K, Precision@K, Mean Reciprocal Rank (MRR), and nDCG formulated and evaluated in modern information retrieval and RAG systems?",
+    "carpeta_output": "outputs/tema_how-are-recallk-precisionk-mean-reciprocal-ra",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.2.3. Arquitectura Transformer y Mecanismo de Autoatención",
+    "query_en": "How does the Scaled Dot-Product and Multi-Head Attention mechanism function in the original Transformer architecture (Vaswani et al.)?",
+    "carpeta_output": "outputs/tema_how-does-the-scaled-dot-product-and-multi-hea",
+    "estado": "YA_EJECUTADO",
+    "conservados": 2,
+    "descartados": 4
+  },
+  {
+    "seccion": "2.2.2.4. Modelos de Lenguaje de Gran Escala (LLMs) y Modo de Razonamiento",
+    "query_en": "How do modern reasoning Large Language Models and Chain-of-Thought (Thinking Mode) architectures enhance multi-step logical inference?",
+    "carpeta_output": "outputs/tema_how-do-modern-reasoning-large-language-models",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.2.5. Ajuste Fino Eficiente (PEFT) mediante LoRA y Cuantización GGUF",
+    "query_en": "How do Low-Rank Adaptation (LoRA / QLoRA) and GGUF quantization optimize memory footprint and parameter efficiency during LLM fine-tuning and edge deployment?",
+    "carpeta_output": "outputs/tema_how-do-low-rank-adaptation-lora-qlora-and-ggu",
+    "estado": "YA_EJECUTADO",
+    "conservados": 2,
+    "descartados": 4
+  },
+  {
+    "seccion": "2.2.2.6. Generación Aumentada por Recuperación (RAG)",
+    "query_en": "How does Retrieval-Augmented Generation (RAG) integrate parametric memory with non-parametric dense vector stores to reduce hallucinations?",
+    "carpeta_output": "outputs/tema_how-does-retrieval-augmented-generation-rag-i",
+    "estado": "YA_EJECUTADO",
+    "conservados": 5,
+    "descartados": 1
+  },
+  {
+    "seccion": "2.2.2.7. Arquitectura STAIR (Structure-Aware Information Retriever)",
+    "query_en": "How does structure-aware document retrieval utilizing Table of Contents (ToC) hierarchies and two-stage routing mitigate lost-in-the-middle problems in RAG?",
+    "carpeta_output": "outputs/tema_how-does-structure-aware-document-retrieval-u",
+    "estado": "YA_EJECUTADO",
+    "conservados": 1,
+    "descartados": 5
+  },
+  {
+    "seccion": "2.2.2.8. Metodología Reference-Guided LLM-as-a-Judge",
+    "query_en": "How does Reference-Guided LLM-as-a-Judge evaluate chatbot answer quality and achieve human-expert agreement (Zheng et al., NeurIPS 2023)?",
+    "carpeta_output": "outputs/tema_how-does-reference-guided-llm-as-a-judge-eval",
+    "estado": "YA_EJECUTADO",
+    "conservados": 1,
+    "descartados": 5
+  },
+  {
+    "seccion": "2.2.3. Bases teóricas de Hardware y Entorno de Inferencia",
+    "query_en": "What are the architectural paradigms of edge AI and local Large Language Model inference versus centralized cloud compute?",
+    "carpeta_output": "outputs/tema_what-are-the-architectural-paradigms-of-edge",
+    "estado": "YA_EJECUTADO",
+    "conservados": 1,
+    "descartados": 5
+  },
+  {
+    "seccion": "2.2.3.1. Unidad de cómputo local: Apple Silicon M4 y Memoria Unificada",
+    "query_en": "How does Apple Silicon Unified Memory Architecture (UMA) and Metal Performance Shaders (MPS) optimize local LLM training and quantized inference?",
+    "carpeta_output": "outputs/tema_how-does-apple-silicon-unified-memory-archite",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.3.2. Motor de inferencia local: Ollama y Llama.cpp",
+    "query_en": "How do llama.cpp and Ollama achieve low-latency cross-platform GGUF model execution on consumer hardware?",
+    "carpeta_output": "outputs/tema_how-do-llamacpp-and-ollama-achieve-low-latenc",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.3.3. Plataforma de Fine-Tuning: Unsloth",
+    "query_en": "How does Unsloth accelerate open-source LLM fine-tuning and backpropagation while minimizing VRAM consumption?",
+    "carpeta_output": "outputs/tema_how-does-unsloth-accelerate-open-source-llm-f",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4. Bases teóricas de desarrollo de software",
+    "query_en": "What software architecture patterns best support scalable, real-time AI-powered web applications and microservices?",
+    "carpeta_output": "outputs/tema_what-software-architecture-patterns-best-supp",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.1. Arquitectura de Software y Clean Architecture",
+    "query_en": "How do Clean Architecture and Separation of Concerns principles decouple business logic from AI inference frameworks in modern web systems?",
+    "carpeta_output": "outputs/tema_how-do-clean-architecture-and-separation-of-c",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.2. API REST y Protocolo SSE (Server-Sent Events)",
+    "query_en": "How does Server-Sent Events (SSE) protocol enable real-time reactive token streaming in conversational web applications compared to WebSockets?",
+    "carpeta_output": "outputs/tema_how-does-server-sent-events-sse-protocol-enab",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.3. Control de Acceso Basado en Roles (RBAC)",
+    "query_en": "How is Role-Based Access Control (RBAC) designed and secured in enterprise web applications and academic management systems?",
+    "carpeta_output": "outputs/tema_how-is-role-based-access-control-rbac-designe",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.4. Next.js y React",
+    "query_en": "How does Next.js App Router and React Server Components (RSC) optimize hybrid server-client rendering and streaming performance?",
+    "carpeta_output": "outputs/tema_how-does-nextjs-app-router-and-react-server-c",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.5. PostgreSQL y Extensión pgvector",
+    "query_en": "How does the pgvector extension enable exact and approximate nearest neighbor (HNSW/IVFFlat) cosine similarity search inside PostgreSQL?",
+    "carpeta_output": "outputs/tema_how-does-the-pgvector-extension-enable-exact",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.6. Prisma ORM",
+    "query_en": "How does Prisma ORM provide type-safe database access, schema migrations, and connection pooling in TypeScript applications?",
+    "carpeta_output": "outputs/tema_how-does-prisma-orm-provide-type-safe-databas",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  },
+  {
+    "seccion": "2.2.4.7. Integración y Despliegue Continuos (CI/CD con Vercel y Neon)",
+    "query_en": "How do serverless CI/CD platforms like Vercel and serverless database architectures like Neon optimize deployment pipelines and zero-downtime scalability?",
+    "carpeta_output": "outputs/tema_how-do-serverless-cicd-platforms-like-vercel",
+    "estado": "YA_EJECUTADO",
+    "conservados": 0,
+    "descartados": 6
+  }
+]

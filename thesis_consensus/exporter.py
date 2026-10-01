@@ -66,10 +66,15 @@ class ThesisExporter:
             anchor = f"tema-{idx}"
             conserved = batch.conserved_by_topic.get(topic, [])
             discarded = batch.discarded_by_topic.get(topic, [])
+            sec_title = batch.topic_sections.get(topic)
+
+            header_line = f"## {sec_title}" if sec_title else f"## {idx}. Tema: {topic}"
+            sub_line = f"> **Pregunta de investigación:** *{topic}*\n" if sec_title else ""
 
             lines.extend([
                 f"<a id=\"{anchor}\"></a>",
-                f"## {idx}. Tema: {topic}",
+                header_line,
+                sub_line,
                 f"**Balance de revisión:** `{len(conserved)} fuentes conservadas` | `{len(discarded)} descartadas por umbral`",
                 "",
                 "### 📊 Evaluación y Criterios del Modelo de Decisión",
@@ -230,6 +235,7 @@ class ThesisExporter:
         conserved: List[ThesisEvidenceItem],
         discarded: List[PaperMetadata],
         output_filepath: str,
+        section_title: Optional[str] = None,
     ) -> str:
         """
         Exporta los datos estructurados en un formato JSON listo para ser consumido
@@ -242,6 +248,7 @@ class ThesisExporter:
 
         data = {
             "tema_investigacion": topic,
+            "seccion_tesis": section_title or topic,
             "resumen_evaluacion": {
                 "total_candidatos_evaluados": len(conserved) + len(discarded),
                 "papers_aprobados_conservados": len(conserved),
@@ -327,6 +334,7 @@ class ThesisExporter:
 
             conserved = batch.conserved_by_topic.get(topic, [])
             discarded = batch.discarded_by_topic.get(topic, [])
+            sec_title = batch.topic_sections.get(topic)
 
             single_batch = TopicResearchBatch(
                 topics=[topic],
@@ -334,6 +342,7 @@ class ThesisExporter:
                 discarded_by_topic={topic: discarded},
                 syntheses_by_topic={},
                 all_conserved_items=conserved,
+                topic_sections={topic: sec_title} if sec_title else {},
             )
 
             topic_md = str(topic_dir / "fundamentos_teoricos.md")
@@ -342,7 +351,7 @@ class ThesisExporter:
 
             cls.to_batch_markdown(single_batch, topic_md)
             cls.to_batch_bibtex(single_batch, topic_bib)
-            cls.to_topic_json(topic, conserved, discarded, topic_json)
+            cls.to_topic_json(topic, conserved, discarded, topic_json, section_title=sec_title)
 
             created_paths[f"tema_{idx}"] = str(topic_dir.resolve())
 

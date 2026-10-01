@@ -138,3 +138,4 @@ class TopicResearchBatch(BaseModel):
     discarded_by_topic: Dict[str, List[PaperMetadata]]
     syntheses_by_topic: Dict[str, MultiPaperSynthesis] = Field(default_factory=dict)
     all_conserved_items: List[ThesisEvidenceItem]
+    topic_sections: Dict[str, str] = Field(default_factory=dict)
