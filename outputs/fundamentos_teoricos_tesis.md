@@ -28,15 +28,16 @@
 
 | Estado | Autor y Año | P(Relevancia) | Umbral | Tipo Evidencia | Rigor Metodológico | Justificación de Elección |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
-| ✅ **CONSERVADO** | Bianchi (2016) | `93.0%` | `>=80%` | `case_study` | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo (en título), Operacion Y Soporte (3/3). Tipo: case_study. Rigor: 2.8/3.0. Se conserva para fundamentación |
-| ✅ **CONSERVADO** | Sarwar (2023) | `93.0%` | `>=80%` | `case_study` | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo, Operacion Y Soporte (3/3). Tipo: case_study. Rigor: 2.8/3.0. Se conserva para fundamentación |
-| ✅ **CONSERVADO** | Palilingan (2018) | `93.0%` | `>=80%` | `theoretical` | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo (en título), Operacion Y Soporte (en título) (3/3). Tipo: theoretical. Rigor: 2.8/3.0. Se conserva para fundamentación |
-| ❌ *Descartado* | Bianchi (2021) | `< umbral` | `exigido` | `no relevante` | `45 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Rahmana (2025) | `< umbral` | `exigido` | `no relevante` | `3 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Ibrahim (2025) | `< umbral` | `exigido` | `no relevante` | `2 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ✅ **CONSERVADO** | Bianchi (2016) | `93.0%` | `>=80%` | Estudio de Caso Real (Universidad / Mesa de Ayuda) | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo (en título), Operacion Y Soporte (3/3). Tipo: case_study. Rigor: 2.8/3.0. Se conserva para fundamentación |
+| ✅ **CONSERVADO** | Sarwar (2023) | `93.0%` | `>=80%` | Estudio de Caso Real (Universidad / Mesa de Ayuda) | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo, Operacion Y Soporte (3/3). Tipo: case_study. Rigor: 2.8/3.0. Se conserva para fundamentación |
+| ✅ **CONSERVADO** | Palilingan (2018) | `93.0%` | `>=80%` | Marco Teórico / Conceptual (Normas y Mejores Prácticas) | `2.8/3.0` | Afinidad: 93.0% (Umbral: 80%). Facetas validadas: Marco O Dominio (en título), Contexto Educativo (en título), Operacion Y Soporte (en título) (3/3). Tipo: theoretical. Rigor: 2.8/3.0. Se conserva para fundamentación |
+| ❌ *Descartado* | Bianchi (2021) | `< umbral` | `exigido` | No relevante | `45 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Rahmana (2025) | `< umbral` | `exigido` | No relevante | `3 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Ibrahim (2025) | `< umbral` | `exigido` | No relevante | `2 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
 
 ### 📚 Evidencias Específicas por Artículo y Auditoría Textual (Cero Alucinación)
 #### 1.1. IT Governance Mechanisms in Higher Education
+- **Motor de Decisión:** `Evaluador Semántico de Facetas Académicas` | **Tipología:** `Estudio de Caso Real (Universidad / Mesa de Ayuda)`
 - **Cita narrativa:** `Bianchi y Sousa (2016)`
 - **Cita parentética:** `(Bianchi y Sousa, 2016)`
 - **Párrafo sugerido para marco teórico:**
@@ -52,6 +53,7 @@
 - **DOI Verificable:** [https://doi.org/10.1016/j.procs.2016.09.253](https://doi.org/10.1016/j.procs.2016.09.253)
 
 #### 1.2. Digital Transformation of Public Sector Governance With IT Service Management–A Pilot Study
+- **Motor de Decisión:** `Evaluador Semántico de Facetas Académicas` | **Tipología:** `Estudio de Caso Real (Universidad / Mesa de Ayuda)`
 - **Cita narrativa:** `Sarwar et al. (2023)`
 - **Cita parentética:** `(Sarwar et al., 2023)`
 - **Párrafo sugerido para marco teórico:**
@@ -67,6 +69,7 @@
 - **DOI Verificable:** [https://doi.org/10.1109/access.2023.3237550](https://doi.org/10.1109/access.2023.3237550)
 
 #### 1.3. Incident Management in Academic Information System using ITIL Framework
+- **Motor de Decisión:** `Evaluador Semántico de Facetas Académicas` | **Tipología:** `Marco Teórico / Conceptual (Normas y Mejores Prácticas)`
 - **Cita narrativa:** `Palilingan y Batmetan (2018)`
 - **Cita parentética:** `(Palilingan y Batmetan, 2018)`
 - **Párrafo sugerido para marco teórico:**
@@ -102,12 +105,12 @@
 
 | Estado | Autor y Año | P(Relevancia) | Umbral | Tipo Evidencia | Rigor Metodológico | Justificación de Elección |
 | :---: | :--- | :---: | :---: | :---: | :---: | :--- |
-| ❌ *Descartado* | Zuech (2015) | `< umbral` | `exigido` | `no relevante` | `329 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Jaton (2021) | `< umbral` | `exigido` | `no relevante` | `102 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Brown (2025) | `< umbral` | `exigido` | `no relevante` | `48 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Babar (2025) | `< umbral` | `exigido` | `no relevante` | `18 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Shaw (2022) | `< umbral` | `exigido` | `no relevante` | `16 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
-| ❌ *Descartado* | Lakshya Sharma, Sharik Ahmad (2023) | `< umbral` | `exigido` | `no relevante` | `1 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Zuech (2015) | `< umbral` | `exigido` | No relevante | `329 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Jaton (2021) | `< umbral` | `exigido` | No relevante | `102 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Brown (2025) | `< umbral` | `exigido` | No relevante | `48 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Babar (2025) | `< umbral` | `exigido` | No relevante | `18 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Shaw (2022) | `< umbral` | `exigido` | No relevante | `16 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
+| ❌ *Descartado* | Lakshya Sharma, Sharik Ahmad (2023) | `< umbral` | `exigido` | No relevante | `1 citas` | No superó el umbral de afinidad temática exigido para la tesis. |
 
 ### 📚 Evidencias Específicas por Artículo y Auditoría Textual (Cero Alucinación)
 ---

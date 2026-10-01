@@ -45,6 +45,22 @@ DEFAULT_OUTPUT_BIB: str = "outputs/referencias_tesis.bib"
 DEFAULT_OUTPUT_JSON: str = "outputs/evidencia_academica.json"
 
 # ==============================================================================
+# ETIQUETAS DESCRIPTIVAS EN ESPAÑOL PARA EL MARCO TEÓRICO
+# ==============================================================================
+EVIDENCE_TYPE_NAMES: Dict[str, str] = {
+    "case_study": "Estudio de Caso Real (Universidad / Mesa de Ayuda)",
+    "survey_or_data": "Estudio Cuantitativo (Datos de Tickets / Métricas)",
+    "theoretical": "Marco Teórico / Conceptual (Normas y Mejores Prácticas)",
+    "irrelevant": "No Relevante / Fuera de foco",
+}
+
+DECISION_ENGINE_NAMES: Dict[str, str] = {
+    "unsloth_laya": "Modelo de Decisión Neuronal (Unsloth Laya / Jev API)",
+    "openai_compatible": "Modelo LLM Generativo (OpenAI / Ollama)",
+    "heuristic_academic": "Evaluador Semántico de Facetas Académicas",
+}
+
+# ==============================================================================
 # LÉXICO ACADÉMICO, ACRÓNIMOS Y STOPWORDS
 # ==============================================================================
 ACADEMIC_ACRONYMS: Tuple[str, ...] = (

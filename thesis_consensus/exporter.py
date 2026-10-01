@@ -13,6 +13,7 @@ from thesis_consensus.models import (
     MultiPaperSynthesis,
     TopicResearchBatch,
 )
+from thesis_consensus.constants import EVIDENCE_TYPE_NAMES, DECISION_ENGINE_NAMES
 
 
 class ThesisExporter:
@@ -100,9 +101,10 @@ class ThesisExporter:
             for item in conserved:
                 first_author = item.paper.authors[0].family_name if item.paper.authors else "Anónimo"
                 year_str = str(item.paper.year) if item.paper.year else "s.f."
+                ev_label = EVIDENCE_TYPE_NAMES.get(item.decision.evidence_type, item.decision.evidence_type)
                 lines.append(
                     f"| ✅ **CONSERVADO** | {first_author} ({year_str}) | `{item.decision.relevance_score:.1%}` | "
-                    f"`>={item.decision.threshold_applied:.0%}` | `{item.decision.evidence_type}` | "
+                    f"`>={item.decision.threshold_applied:.0%}` | {ev_label} | "
                     f"`{item.decision.quality_score:.1f}/3.0` | {item.decision.verdict_reason} |"
                 )
 
@@ -111,7 +113,7 @@ class ThesisExporter:
                 year_str = str(p.year) if p.year else "s.f."
                 lines.append(
                     f"| ❌ *Descartado* | {first_author} ({year_str}) | `< umbral` | `exigido` | "
-                    f"`no relevante` | `{p.citation_count} citas` | No superó el umbral de afinidad temática exigido para la tesis. |"
+                    f"No relevante | `{p.citation_count} citas` | No superó el umbral de afinidad temática exigido para la tesis. |"
                 )
 
             lines.append("")
@@ -120,8 +122,11 @@ class ThesisExporter:
             lines.append("### 📚 Evidencias Específicas por Artículo y Auditoría Textual (Cero Alucinación)")
             for p_idx, item in enumerate(conserved, start=1):
                 p = item.paper
+                engine_label = DECISION_ENGINE_NAMES.get(item.decision.decision_engine, item.decision.decision_engine)
+                ev_type_label = EVIDENCE_TYPE_NAMES.get(item.decision.evidence_type, item.decision.evidence_type)
                 lines.extend([
                     f"#### {idx}.{p_idx}. {p.title}",
+                    f"- **Motor de Decisión:** `{engine_label}` | **Tipología:** `{ev_type_label}`",
                     f"- **Cita narrativa:** `{item.apa7.narrative_citation}`",
                     f"- **Cita parentética:** `{item.apa7.parenthetical_citation}`",
                     f"- **Párrafo sugerido para marco teórico:**",

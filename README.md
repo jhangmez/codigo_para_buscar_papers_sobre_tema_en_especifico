@@ -94,6 +94,21 @@ Si Unsloth no está activo en ese instante, entra en acción el motor heurístic
 - **Regla:** Solo se conserva un artículo si su probabilidad calculada es **mayor o igual al 80% (o al 85% en modo estricto)** y su tipología no es irrelevante.
 - Si un artículo habla solo de educación sin TI, o habla de ITIL en la banca sin tocar universidades, su puntaje no alcanza el 80% y se descarta automáticamente.
 
+### D. Glosario de Etiquetas y Tipologías en los Reportes
+
+En los reportes Markdown generados (`outputs/fundamentos_teoricos_tesis.md`), cada paper analizado incluye metadatos de auditoría para garantizar transparencia científica:
+
+#### 1. Motores de Decisión (`Motor de Decisión`)
+- **`heuristic_academic` (Evaluador Semántico de Facetas Académicas):** Algoritmo determinístico calibrado que analiza la presencia y congruencia de los 3 pilares conceptuales de la tesis (marco metodológico, contexto universitario y problemática operativa). Se activa como motor por defecto para garantizar funcionamiento 100% autónomo y rápido sin depender de servicios externos o GPUs pesadas.
+- **`unsloth_laya` (Modelo de Decisión Neuronal Unsloth Laya / Jev API):** Modelo de lenguaje especializado en toma de decisiones probabilísticas ejecutado localmente vía Unsloth Desktop (`POST /v1/systemone`).
+- **`openai_compatible` (Modelo LLM Generativo):** Evaluación asistida por modelos como GPT-4o o modelos locales mediante Ollama / vLLM.
+
+#### 2. Tipologías de Evidencia (`Tipo de Evidencia / Tipología`)
+- **`theoretical` (Marco Teórico / Conceptual):** Artículos dedicados a fundamentos teóricos, normas formales, principios de marcos de trabajo (ITIL v3/4, COBIT, ISO/IEC 20000) o revisiones sistemáticas de literatura. Indispensables para definir conceptos clave en la tesis.
+- **`case_study` (Estudio de Caso Real):** Investigaciones que documentan la aplicación práctica de ITSM, Help Desk o gestión de incidentes en universidades, facultades o centros educativos específicos. Aportan evidencia empírica directa de campo.
+- **`survey_or_data` (Estudio Cuantitativo / Métricas):** Artículos basados en encuestas estadísticas, análisis cuantitativo de volúmenes de tickets, cuellos de botella, tiempos de respuesta (MTTR) o acuerdos de nivel de servicio (SLA).
+- **`irrelevant` (No Relevante):** Documentos descartados por pertenecer a otros dominios o no aportar a las preguntas de investigación.
+
 ---
 
 ## 4. Seguridad y Cero Riesgo de Malware
